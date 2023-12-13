@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx7d44nv7sg0"]
+
+[ext_resource type="Script" path="res://UI/personrecord.gd" id="1_sr8eu"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_las2a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hb6pm"]
+font = ExtResource("2_las2a")
+font_size = 25
+
+[node name="Person" type="Button"]
+custom_minimum_size = Vector2(340, 100)
+layout_direction = 1
+offset_right = 340.0
+offset_bottom = 100.0
+size_flags_vertical = 4
+script = ExtResource("1_sr8eu")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -12.5
+offset_right = 320.0
+offset_bottom = 12.5
+grow_vertical = 2
+size_flags_vertical = 6
+label_settings = SubResource("LabelSettings_hb6pm")
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

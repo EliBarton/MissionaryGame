@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://mttlqjya5838"]
+
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="1_6g1ih"]
+
+[resource]
+default_font = ExtResource("1_6g1ih")

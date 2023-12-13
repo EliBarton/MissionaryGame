@@ -1,0 +1,133 @@
+[gd_scene load_steps=7 format=3 uid="uid://deeyop52cptim"]
+
+[ext_resource type="Script" path="res://TeachingScreen.gd" id="1_f07b8"]
+[ext_resource type="LabelSettings" uid="uid://dncpotspoqgth" path="res://UI/title_label_settings.tres" id="2_02j4s"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_xhnxj"]
+
+[sub_resource type="Theme" id="Theme_gh8c2"]
+default_font = ExtResource("3_xhnxj")
+default_font_size = 24
+/fonts/disabledlineedit = ExtResource("3_xhnxj")
+
+[sub_resource type="Theme" id="Theme_yqi4q"]
+default_font = ExtResource("3_xhnxj")
+default_font_size = 19
+
+[sub_resource type="Theme" id="Theme_opnq8"]
+default_font = ExtResource("3_xhnxj")
+default_font_size = 16
+
+[node name="TeachingScreen" type="ColorRect"]
+offset_right = 804.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_f07b8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1178.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+
+[node name="Reference" type="Label" parent="."]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 94.0
+offset_right = 613.0
+offset_bottom = 136.0
+text = "Teaching in progress..."
+label_settings = ExtResource("2_02j4s")
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 280.0
+offset_top = -228.0
+offset_right = -204.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 4
+
+[node name="TextContainer" type="HFlowContainer" parent="."]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 178.0
+offset_right = 658.0
+offset_bottom = 294.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="TextContainer"]
+custom_minimum_size = Vector2(50, 35)
+layout_mode = 2
+theme = SubResource("Theme_gh8c2")
+text = "Men"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="position" type="Marker2D" parent="TextContainer/Label2"]
+
+[node name="Invitation" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = 66.0
+offset_right = 39.5
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yqi4q")
+text = "Invitation:"
+
+[node name="ButtonContainer" type="GridContainer" parent="Invitation"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = 4.0
+offset_right = 252.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 2
+
+[node name="pamphlet" type="Button" parent="Invitation/ButtonContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+theme = SubResource("Theme_opnq8")
+text = "Read a pamphlet"
+
+[node name="bom" type="Button" parent="Invitation/ButtonContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+theme = SubResource("Theme_opnq8")
+text = "Read and pray about
+the Book of Mormon"
+
+[node name="church" type="Button" parent="Invitation/ButtonContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+theme = SubResource("Theme_opnq8")
+text = "Attend a church service"
+
+[node name="baptized" type="Button" parent="Invitation/ButtonContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+theme = SubResource("Theme_opnq8")
+text = "Be baptized and confirmed"
+
+[connection signal="pressed" from="Invitation/ButtonContainer/pamphlet" to="." method="_on_pamphlet_pressed"]
+[connection signal="pressed" from="Invitation/ButtonContainer/bom" to="." method="_on_bom_pressed"]
+[connection signal="pressed" from="Invitation/ButtonContainer/church" to="." method="_on_church_pressed"]
+[connection signal="pressed" from="Invitation/ButtonContainer/baptized" to="." method="_on_baptized_pressed"]

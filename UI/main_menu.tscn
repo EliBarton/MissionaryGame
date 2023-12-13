@@ -1,0 +1,473 @@
+[gd_scene load_steps=14 format=3 uid="uid://6a3dyyopqbmh"]
+
+[ext_resource type="Script" path="res://UI/main_menu.gd" id="1_a2r4d"]
+[ext_resource type="FontFile" uid="uid://djbye0tl13oo1" path="res://fonts/bpdots.unicasesquare-bold.otf" id="1_nfssn"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_7cp34"]
+[ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="4_fcdbp"]
+[ext_resource type="Texture2D" uid="uid://dgn34qtfff0cb" path="res://Player2.png" id="5_jakhi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0bfwx"]
+font = ExtResource("1_nfssn")
+font_size = 40
+
+[sub_resource type="Animation" id="Animation_ghncp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(556, 304)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../newScreen:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(556, 304)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../newScreen:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../newScreen/ColorRect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../newScreen/ColorRect:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../newScreen:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../newScreen/ColorRect:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_6iy81"]
+resource_name = "main2new"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(556, 304), Vector2(556, 1250)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../newScreen:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dwscb"]
+resource_name = "startnewgame"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../newScreen:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(556, 304), Vector2(556, -1300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../newScreen:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(6, 6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../newScreen/ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../newScreen/ColorRect:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../newScreen/ColorRect:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03tbn"]
+_data = {
+"RESET": SubResource("Animation_ghncp"),
+"main2new": SubResource("Animation_6iy81"),
+"startnewgame": SubResource("Animation_dwscb")
+}
+
+[sub_resource type="Theme" id="Theme_3tjo8"]
+default_font = ExtResource("3_7cp34")
+default_font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_eelp0"]
+font = ExtResource("3_7cp34")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_arilv"]
+font = ExtResource("3_7cp34")
+font_size = 20
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -768.0
+offset_bottom = -432.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.667, 1.667)
+script = ExtResource("1_a2r4d")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+text = "PREACH HIS GOSPEL"
+label_settings = SubResource("LabelSettings_0bfwx")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Main")
+libraries = {
+"": SubResource("AnimationLibrary_03tbn")
+}
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="newGame" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = -119.59
+offset_top = -147.852
+offset_right = 130.41
+offset_bottom = -87.8517
+theme = SubResource("Theme_3tjo8")
+text = "New Game"
+
+[node name="loadGame" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = -125.0
+offset_top = -50.0
+offset_right = 125.0
+offset_bottom = 10.0
+theme = SubResource("Theme_3tjo8")
+text = "Load Saved Game"
+
+[node name="settings" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = -125.0
+offset_top = 50.0
+offset_right = 125.0
+offset_bottom = 110.0
+theme = SubResource("Theme_3tjo8")
+text = "Settings"
+
+[node name="quit" type="Button" parent="Main"]
+layout_mode = 0
+offset_left = -125.0
+offset_top = 150.0
+offset_right = 125.0
+offset_bottom = 210.0
+theme = SubResource("Theme_3tjo8")
+text = "Quit"
+
+[node name="newScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="newScreen"]
+layout_mode = 0
+offset_left = -300.0
+offset_top = -125.0
+offset_right = -84.0
+offset_bottom = -102.0
+text = "Missionary 1 Name:"
+label_settings = SubResource("LabelSettings_eelp0")
+
+[node name="LineEdit" type="LineEdit" parent="newScreen/Label"]
+layout_mode = 0
+offset_left = 65.3869
+offset_top = 30.6139
+offset_right = 215.387
+offset_bottom = 61.6139
+placeholder_text = "Last Name..."
+
+[node name="Label" type="Label" parent="newScreen/Label"]
+layout_mode = 0
+offset_top = 38.3923
+offset_right = 60.0
+offset_bottom = 64.3923
+text = "Elder"
+label_settings = SubResource("LabelSettings_arilv")
+
+[node name="Sprite2D" type="Sprite2D" parent="newScreen/Label"]
+position = Vector2(106.779, 177.564)
+scale = Vector2(6, 6)
+texture = ExtResource("4_fcdbp")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Label2" type="Label" parent="newScreen"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = -125.0
+offset_right = 400.0
+offset_bottom = -102.0
+text = "Missionary 2 Name:"
+label_settings = SubResource("LabelSettings_eelp0")
+
+[node name="LineEdit2" type="LineEdit" parent="newScreen/Label2"]
+layout_mode = 0
+offset_left = 65.3869
+offset_top = 30.6139
+offset_right = 215.387
+offset_bottom = 61.6139
+placeholder_text = "Last Name..."
+
+[node name="Label" type="Label" parent="newScreen/Label2"]
+layout_mode = 0
+offset_top = 38.3923
+offset_right = 60.0
+offset_bottom = 64.3923
+text = "Elder"
+label_settings = SubResource("LabelSettings_arilv")
+
+[node name="Sprite2D" type="Sprite2D" parent="newScreen/Label2"]
+position = Vector2(106.779, 177.564)
+scale = Vector2(6, 6)
+texture = ExtResource("5_jakhi")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="startButton" type="Button" parent="newScreen"]
+layout_mode = 0
+offset_left = -112.089
+offset_top = 235.292
+offset_right = 105.911
+offset_bottom = 304.292
+theme = SubResource("Theme_3tjo8")
+text = "Start Game"
+
+[node name="ColorRect" type="ColorRect" parent="newScreen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -557.0
+offset_top = -305.0
+offset_right = 609.0
+offset_bottom = 359.0
+scale = Vector2(1e-05, 1e-05)
+color = Color(0, 0, 0, 1)
+
+[node name="loadScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="settingsScreen" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Main/newGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Main/quit" to="." method="_on_quit_pressed"]
+[connection signal="text_changed" from="newScreen/Label/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_changed" from="newScreen/Label2/LineEdit2" to="." method="_on_line_edit_2_text_changed"]
+[connection signal="pressed" from="newScreen/startButton" to="." method="_on_start_button_pressed"]

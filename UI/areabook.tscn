@@ -1,0 +1,454 @@
+[gd_scene load_steps=18 format=3 uid="uid://cr86dmeiels6i"]
+
+[ext_resource type="Script" path="res://UI/areabook.gd" id="1_k23jo"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_g5n52"]
+[ext_resource type="Theme" uid="uid://mttlqjya5838" path="res://UI/Areabookbuttons.tres" id="2_vkiqm"]
+[ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="3_j2wdf"]
+[ext_resource type="Script" path="res://UI/Commitments.gd" id="3_kwb5d"]
+[ext_resource type="Texture2D" uid="uid://dgn34qtfff0cb" path="res://Player2.png" id="6_e4fi0"]
+[ext_resource type="Texture2D" uid="uid://tpbb0vgn85j1" path="res://icon.svg" id="7_vxfbh"]
+[ext_resource type="PackedScene" uid="uid://by2uqjg3q3c37" path="res://level_world.tscn" id="7_xn8oo"]
+[ext_resource type="PackedScene" uid="uid://p5lb2wfiiu7v" path="res://UI/dot.tscn" id="8_o7tap"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ausxq"]
+font = ExtResource("2_g5n52")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_05v3t"]
+font = ExtResource("2_g5n52")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_q0hfd"]
+font = ExtResource("2_g5n52")
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_ev6ia"]
+font = ExtResource("2_g5n52")
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_a6jna"]
+font = ExtResource("2_g5n52")
+font_size = 33
+
+[sub_resource type="LabelSettings" id="LabelSettings_5y7n6"]
+font = ExtResource("2_g5n52")
+
+[sub_resource type="Theme" id="Theme_kcqk0"]
+default_font = ExtResource("2_g5n52")
+default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_rk78g"]
+default_font = ExtResource("2_g5n52")
+default_font_size = 22
+
+[node name="Areabook" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -348.0
+offset_bottom = 648.0
+grow_horizontal = 0
+pivot_offset = Vector2(348, 0)
+script = ExtResource("1_k23jo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 341.0
+offset_bottom = 648.0
+grow_vertical = 2
+color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Buttons" type="Control" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="ButtonProgress" type="Button" parent="ColorRect/Buttons"]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 84.0
+offset_bottom = 40.0
+theme = ExtResource("2_vkiqm")
+text = "Progress"
+
+[node name="ButtonPeople" type="Button" parent="ColorRect/Buttons"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = -10.0
+offset_right = 169.0
+offset_bottom = 40.0
+theme = ExtResource("2_vkiqm")
+text = "People"
+
+[node name="ButtonMap" type="Button" parent="ColorRect/Buttons"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = -10.0
+offset_right = 254.0
+offset_bottom = 40.0
+theme = ExtResource("2_vkiqm")
+text = "Map"
+
+[node name="ButtonMenu" type="Button" parent="ColorRect/Buttons"]
+layout_mode = 0
+offset_left = 255.0
+offset_top = -10.0
+offset_right = 339.0
+offset_bottom = 40.0
+theme = ExtResource("2_vkiqm")
+text = "Menu"
+
+[node name="PersonRecord" type="Control" parent="ColorRect"]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="BackToPeopleButton" type="Button" parent="ColorRect/PersonRecord"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+text = "<--"
+
+[node name="TopBar" type="ColorRect" parent="ColorRect/PersonRecord"]
+layout_mode = 0
+offset_left = 50.0
+offset_right = 348.0
+offset_bottom = 50.0
+color = Color(0.156863, 0.156863, 0.156863, 1)
+
+[node name="Name" type="Label" parent="ColorRect/PersonRecord/TopBar"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 15.0
+offset_right = 127.0
+offset_bottom = 41.0
+text = "Testy McTester"
+
+[node name="PersonInfo" type="GridContainer" parent="ColorRect/PersonRecord"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 101.0
+offset_right = 330.0
+offset_bottom = 600.0
+
+[node name="CurrentLevel" type="GridContainer" parent="ColorRect/PersonRecord/PersonInfo"]
+custom_minimum_size = Vector2(320, 50)
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="ColorRect/PersonRecord/PersonInfo/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Current Level"
+label_settings = SubResource("LabelSettings_ausxq")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="ColorRect/PersonRecord/PersonInfo/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "1"
+label_settings = SubResource("LabelSettings_05v3t")
+horizontal_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="ColorRect/PersonRecord/PersonInfo"]
+layout_mode = 2
+
+[node name="A_Factor" type="Label" parent="ColorRect/PersonRecord/PersonInfo"]
+layout_mode = 2
+
+[node name="Commitments" type="VBoxContainer" parent="ColorRect/PersonRecord/PersonInfo"]
+layout_mode = 2
+script = ExtResource("3_kwb5d")
+
+[node name="Label" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Commitments"
+label_settings = SubResource("LabelSettings_q0hfd")
+
+[node name="ReadPamphlet" type="GridContainer" parent="ColorRect/PersonRecord/PersonInfo/Commitments"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/ReadPamphlet"]
+layout_mode = 2
+text = "Read a Pamphlet:"
+label_settings = SubResource("LabelSettings_ev6ia")
+
+[node name="Status" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/ReadPamphlet"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Not Invited"
+label_settings = SubResource("LabelSettings_ev6ia")
+
+[node name="ReadBom" type="GridContainer" parent="ColorRect/PersonRecord/PersonInfo/Commitments"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/ReadBom"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+text = "Read from the Book of Mormon"
+label_settings = SubResource("LabelSettings_ev6ia")
+autowrap_mode = 2
+
+[node name="Status" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/ReadBom"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Not Invited"
+label_settings = SubResource("LabelSettings_ev6ia")
+
+[node name="AttendChurch" type="GridContainer" parent="ColorRect/PersonRecord/PersonInfo/Commitments"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/AttendChurch"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Attend Church"
+label_settings = SubResource("LabelSettings_ev6ia")
+autowrap_mode = 2
+
+[node name="Status" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/AttendChurch"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Not Invited"
+label_settings = SubResource("LabelSettings_ev6ia")
+
+[node name="BeBaptized" type="GridContainer" parent="ColorRect/PersonRecord/PersonInfo/Commitments"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/BeBaptized"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Be Baptized and Confirmed"
+label_settings = SubResource("LabelSettings_ev6ia")
+autowrap_mode = 2
+
+[node name="Status" type="Label" parent="ColorRect/PersonRecord/PersonInfo/Commitments/BeBaptized"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Not Invited"
+label_settings = SubResource("LabelSettings_ev6ia")
+
+[node name="People" type="ScrollContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 348.0
+offset_bottom = 598.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="PeopleContainer" type="VBoxContainer" parent="ColorRect/People"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Progress" type="Control" parent="ColorRect"]
+anchors_preset = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Progress"]
+layout_mode = 0
+offset_right = 339.0
+offset_bottom = 261.0
+
+[node name="BoxContainer" type="BoxContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="NewPeeps" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/NewPeeps"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "New People To Teach:      "
+label_settings = SubResource("LabelSettings_ausxq")
+
+[node name="Number" type="Label" parent="ColorRect/Progress/VBoxContainer/NewPeeps"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_a6jna")
+
+[node name="AtChurch" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/AtChurch"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "People at Church:         "
+label_settings = SubResource("LabelSettings_ausxq")
+
+[node name="Number" type="Label" parent="ColorRect/Progress/VBoxContainer/AtChurch"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_a6jna")
+
+[node name="OnDate" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/OnDate"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Scheduled Baptisms:       "
+label_settings = SubResource("LabelSettings_ausxq")
+
+[node name="Number" type="Label" parent="ColorRect/Progress/VBoxContainer/OnDate"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_a6jna")
+
+[node name="Baptized" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/Baptized"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "People Baptized:          "
+label_settings = SubResource("LabelSettings_ausxq")
+
+[node name="Number" type="Label" parent="ColorRect/Progress/VBoxContainer/Baptized"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_a6jna")
+
+[node name="Missionaries" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+layout_mode = 2
+
+[node name="Missionary1" type="Sprite2D" parent="ColorRect/Progress/VBoxContainer/Missionaries"]
+position = Vector2(143, 39.94)
+scale = Vector2(2, 2)
+texture = ExtResource("3_j2wdf")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Missionary2" type="Sprite2D" parent="ColorRect/Progress/VBoxContainer/Missionaries"]
+position = Vector2(183, 39.94)
+scale = Vector2(2, 2)
+texture = ExtResource("6_e4fi0")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Control" type="Control" parent="ColorRect/Progress/VBoxContainer/Missionaries"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/Missionaries"]
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+text = "Elder Barton & Elder Anderson"
+label_settings = SubResource("LabelSettings_5y7n6")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CurrentLevel" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+custom_minimum_size = Vector2(320, 50)
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="ColorRect/Progress/VBoxContainer/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Current Level"
+label_settings = SubResource("LabelSettings_ausxq")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="ColorRect/Progress/VBoxContainer/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "1"
+label_settings = SubResource("LabelSettings_05v3t")
+horizontal_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="ColorRect/Progress/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_kcqk0")
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+layout_mode = 0
+offset_right = 341.0
+offset_bottom = 27.0
+max_value = 30.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ColorRect/ProgressBar"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_rk78g")
+text = "Day 1"
+horizontal_alignment = 1
+
+[node name="Map" type="SubViewportContainer" parent="ColorRect"]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 340.0
+offset_bottom = 578.0
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/Map"]
+handle_input_locally = false
+size = Vector2i(340, 512)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="ColorRect/Map/SubViewport"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect/Map/SubViewport/Camera2D"]
+z_index = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_vxfbh")
+
+[node name="LevelWorld" parent="ColorRect/Map/SubViewport" instance=ExtResource("7_xn8oo")]
+
+[node name="Dot" parent="ColorRect/Map/SubViewport" instance=ExtResource("8_o7tap")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 40.0
+one_shot = true
+
+[connection signal="pressed" from="ColorRect/Buttons/ButtonProgress" to="." method="_on_button_progress_pressed"]
+[connection signal="pressed" from="ColorRect/Buttons/ButtonPeople" to="." method="_on_button_people_pressed"]
+[connection signal="pressed" from="ColorRect/PersonRecord/BackToPeopleButton" to="." method="_on_back_to_people_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

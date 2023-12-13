@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bx1teg28se4nd"]
+
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="1_2j3jt"]
+
+[resource]
+line_spacing = 16.0
+font = ExtResource("1_2j3jt")
+font_size = 24

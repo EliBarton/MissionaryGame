@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://p5lb2wfiiu7v"]
+
+[node name="Dot" type="ColorRect"]
+z_index = 1
+offset_left = -1.95
+offset_top = 23.99
+offset_right = 18.05
+offset_bottom = 43.99

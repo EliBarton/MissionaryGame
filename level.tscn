@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://brh5b86bi1h3g"]
+
+[ext_resource type="PackedScene" uid="uid://by2uqjg3q3c37" path="res://level_world.tscn" id="1_6xoiv"]
+[ext_resource type="PackedScene" uid="uid://cg0norsmfpqk1" path="res://characters/missionary.tscn" id="2_q6nps"]
+[ext_resource type="PackedScene" uid="uid://baaxp17io44eh" path="res://characters/man1.tscn" id="3_fox35"]
+[ext_resource type="PackedScene" uid="uid://d36x0wls3lxw0" path="res://characters/missionary2.tscn" id="3_nvd5i"]
+
+[node name="Level" type="Node2D"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+
+[node name="LevelWorld" parent="." instance=ExtResource("1_6xoiv")]
+
+[node name="Missionary" parent="." instance=ExtResource("2_q6nps")]
+position = Vector2(834.5, 793.5)
+
+[node name="Camera2D" type="Camera2D" parent="Missionary"]
+editor_draw_limits = true
+metadata/_edit_lock_ = true
+
+[node name="Missionary2" parent="." instance=ExtResource("3_nvd5i")]
+position = Vector2(878.5, 824.5)
+
+[node name="Man" parent="." instance=ExtResource("3_fox35")]
+position = Vector2(646, 459)
+first_name = "Howard"
+last_name = "Chuckles"
+
+[node name="Man2" parent="." instance=ExtResource("3_fox35")]
+position = Vector2(936.5, 716)
+first_name = "Jarren"
+last_name = "Bearfoos"
+
+[node name="Man3" parent="." instance=ExtResource("3_fox35")]
+position = Vector2(650, 871.5)
+first_name = "General"
+last_name = "Leefoos"
+
+[node name="Man4" parent="." instance=ExtResource("3_fox35")]
+position = Vector2(885.5, 215.5)
+first_name = "Dan"
+last_name = "Doooger"
+
+[node name="Man5" parent="." instance=ExtResource("3_fox35")]
+position = Vector2(225.5, 538.5)
+first_name = "Shrip"
+last_name = "Fisher"

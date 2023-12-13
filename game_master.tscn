@@ -1,0 +1,392 @@
+[gd_scene load_steps=18 format=3 uid="uid://b5dbnf6nbdrsj"]
+
+[ext_resource type="Script" path="res://GLOBAL.gd" id="1_yuev6"]
+[ext_resource type="PackedScene" uid="uid://brh5b86bi1h3g" path="res://level.tscn" id="3_bs4ii"]
+[ext_resource type="PackedScene" uid="uid://deeyop52cptim" path="res://UI/teaching_screen.tscn" id="3_cphjp"]
+[ext_resource type="FontFile" uid="uid://djbye0tl13oo1" path="res://fonts/bpdots.unicasesquare-bold.otf" id="4_3whva"]
+[ext_resource type="PackedScene" uid="uid://cr86dmeiels6i" path="res://UI/areabook.tscn" id="4_gbqqo"]
+[ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="5_2jxr4"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="6_yw2y6"]
+[ext_resource type="PackedScene" uid="uid://df82w04hqqvbf" path="res://UI/skill_screen.tscn" id="7_ahiwf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gosn4"]
+font = ExtResource("4_3whva")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcqke"]
+font = ExtResource("6_yw2y6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gxmh1"]
+font = ExtResource("6_yw2y6")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhh28"]
+font = ExtResource("6_yw2y6")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_86xx1"]
+font = ExtResource("6_yw2y6")
+font_size = 35
+
+[sub_resource type="Animation" id="Animation_hnee7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/DayScreen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/DayScreen:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/DayScreen/Control:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/DayScreen/Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/DayScreen/Control:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/DayScreen/Label:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nkei1"]
+resource_name = "beginning"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/DayScreen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/DayScreen:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/DayScreen/Control:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/DayScreen/Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/DayScreen/Label:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1d81b"]
+resource_name = "new_day"
+length = 7.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UI/DayScreen:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/DayScreen:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 6.5, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/DayScreen/Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/DayScreen/Control:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/DayScreen/Control:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(4, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UI/DayScreen/Label:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(4, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjls4"]
+_data = {
+"RESET": SubResource("Animation_hnee7"),
+"beginning": SubResource("Animation_nkei1"),
+"new_day": SubResource("Animation_1d81b")
+}
+
+[node name="Game Master" type="Node2D"]
+process_mode = 3
+y_sort_enabled = true
+scale = Vector2(1.667, 1.667)
+script = ExtResource("1_yuev6")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Areabook" parent="UI" instance=ExtResource("4_gbqqo")]
+top_level = true
+offset_left = -349.0
+scale = Vector2(1.667, 1.667)
+
+[node name="TeachingScreen" parent="UI" instance=ExtResource("3_cphjp")]
+visible = false
+scale = Vector2(1.667, 1.667)
+
+[node name="DayScreen" type="ColorRect" parent="UI"]
+offset_right = 1152.0
+offset_bottom = 648.0
+scale = Vector2(1.667, 1.667)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="UI/DayScreen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "DAY "
+label_settings = SubResource("LabelSettings_gosn4")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="UI/DayScreen"]
+visible = false
+custom_minimum_size = Vector2(0, 93.165)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = -106.0
+offset_right = -140.0
+offset_bottom = 106.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/DayScreen/Control"]
+position = Vector2(163, 45)
+scale = Vector2(2, 2)
+texture = ExtResource("5_2jxr4")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Label" type="Label" parent="UI/DayScreen/Control"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 103.0
+text = "Elder Nielson"
+label_settings = SubResource("LabelSettings_wcqke")
+
+[node name="CurrentLevel" type="GridContainer" parent="UI/DayScreen/Control"]
+custom_minimum_size = Vector2(320, 50)
+layout_mode = 0
+offset_top = 98.0
+offset_right = 320.0
+offset_bottom = 148.0
+columns = 2
+
+[node name="Label2" type="Label" parent="UI/DayScreen/Control/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Current Level"
+label_settings = SubResource("LabelSettings_gxmh1")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="UI/DayScreen/Control/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "1"
+label_settings = SubResource("LabelSettings_rhh28")
+horizontal_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="UI/DayScreen/Control"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 0
+offset_top = 138.0
+offset_right = 320.0
+offset_bottom = 165.0
+
+[node name="Lessons" type="Label" parent="UI/DayScreen/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -610.0
+offset_top = -19.0
+offset_right = -226.0
+offset_bottom = 19.0
+grow_vertical = 2
+text = "Day _ Lessons: 0"
+label_settings = SubResource("LabelSettings_86xx1")
+
+[node name="SkillScreen" parent="UI" instance=ExtResource("7_ahiwf")]
+visible = false
+scale = Vector2(1.667, 1.667)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 804.0
+offset_bottom = 648.0
+mouse_filter = 0
+stretch = true
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+physics_object_picking = true
+size = Vector2i(804, 648)
+render_target_update_mode = 4
+
+[node name="Level" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_bs4ii")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gjls4")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1mvxlul6ub6r"]
+
+[ext_resource type="Texture2D" uid="uid://d2o6n1n72ej6t" path="res://church.png" id="1_ehqah"]
+[ext_resource type="Script" path="res://church_screen.gd" id="1_wpwwy"]
+[ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="2_y00sy"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_4uw4y"]
+
+[sub_resource type="Theme" id="Theme_ehn1k"]
+default_font = ExtResource("3_4uw4y")
+default_font_size = 29
+
+[sub_resource type="LabelSettings" id="LabelSettings_wxl2y"]
+font = ExtResource("3_4uw4y")
+font_size = 77
+font_color = Color(0.984314, 0.152941, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k5qos"]
+font = ExtResource("3_4uw4y")
+font_size = 77
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v81oo"]
+font = ExtResource("3_4uw4y")
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_7nlst"]
+font = ExtResource("3_4uw4y")
+font_size = 50
+
+[node name="ChurchScreen" type="Node2D"]
+z_index = 10
+script = ExtResource("1_wpwwy")
+
+[node name="Church" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_ehqah")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Missionary1" type="Sprite2D" parent="."]
+position = Vector2(969, 340)
+scale = Vector2(4, 4)
+texture = ExtResource("2_y00sy")
+region_enabled = true
+region_rect = Rect2(112, 0, 16, 32)
+
+[node name="Missionary2" type="Sprite2D" parent="."]
+position = Vector2(919, 340)
+scale = Vector2(4, 4)
+texture = ExtResource("2_y00sy")
+region_enabled = true
+region_rect = Rect2(112, 0, 16, 32)
+
+[node name="continueButton" type="Button" parent="."]
+offset_left = 949.0
+offset_top = 508.0
+offset_right = 1115.0
+offset_bottom = 579.0
+theme = SubResource("Theme_ehn1k")
+text = "Continue"
+
+[node name="zeroLabel" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 492.0
+offset_right = 883.0
+offset_bottom = 563.0
+text = "Maybe Next Time..."
+label_settings = SubResource("LabelSettings_wxl2y")
+
+[node name="oneLabel" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 492.0
+offset_right = 883.0
+offset_bottom = 563.0
+text = "You are a Winner!!"
+label_settings = SubResource("LabelSettings_k5qos")
+
+[node name="PeoplePresent" type="GridContainer" parent="."]
+offset_left = 784.0
+offset_top = 52.0
+offset_right = 1054.0
+offset_bottom = 92.0
+columns = 2
+
+[node name="Label" type="Label" parent="PeoplePresent"]
+layout_mode = 2
+text = "People at Church: "
+label_settings = SubResource("LabelSettings_v81oo")
+
+[node name="amount" type="Label" parent="PeoplePresent"]
+layout_mode = 2
+text = "0
+"
+label_settings = SubResource("LabelSettings_7nlst")
+
+[connection signal="pressed" from="continueButton" to="." method="_on_continue_button_pressed"]

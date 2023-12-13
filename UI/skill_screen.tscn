@@ -1,0 +1,179 @@
+[gd_scene load_steps=9 format=3 uid="uid://df82w04hqqvbf"]
+
+[ext_resource type="Script" path="res://SkillScreen.gd" id="1_14nfs"]
+[ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="2_moees"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_6wium"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcqke"]
+font = ExtResource("3_6wium")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gxmh1"]
+font = ExtResource("3_6wium")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_4c3ue"]
+font = ExtResource("3_6wium")
+font_size = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_86xx1"]
+font = ExtResource("3_6wium")
+font_size = 35
+
+[sub_resource type="LabelSettings" id="LabelSettings_xe5ic"]
+font = ExtResource("3_6wium")
+font_size = 30
+
+[node name="SkillScreen" type="ColorRect"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_14nfs")
+
+[node name="RightSide" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 93.165)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -378.0
+offset_top = -122.0
+offset_right = -43.0
+offset_bottom = 90.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="RightSide"]
+position = Vector2(163, 45)
+scale = Vector2(2, 2)
+texture = ExtResource("2_moees")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Label" type="Label" parent="RightSide"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 80.0
+offset_right = 226.0
+offset_bottom = 103.0
+text = "Elder Nielson"
+label_settings = SubResource("LabelSettings_wcqke")
+
+[node name="CurrentLevel" type="GridContainer" parent="RightSide"]
+custom_minimum_size = Vector2(320, 50)
+layout_mode = 0
+offset_top = 98.0
+offset_right = 320.0
+offset_bottom = 148.0
+
+[node name="Label2" type="Label" parent="RightSide/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Current Level:"
+label_settings = SubResource("LabelSettings_gxmh1")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="RightSide/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "1"
+label_settings = SubResource("LabelSettings_4c3ue")
+horizontal_alignment = 1
+
+[node name="Day" type="Label" parent="RightSide"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -250.0
+offset_right = 313.0
+offset_bottom = -212.0
+grow_vertical = 2
+text = "Day _"
+label_settings = SubResource("LabelSettings_86xx1")
+horizontal_alignment = 1
+
+[node name="LeftSide" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="LeftSide"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 60.0
+offset_right = 677.0
+offset_bottom = 94.0
+text = "You have a skill point to use!"
+label_settings = SubResource("LabelSettings_86xx1")
+
+[node name="Cardio" type="Label" parent="LeftSide"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 145.0
+offset_right = 87.0
+offset_bottom = 168.0
+text = "Cardio "
+label_settings = SubResource("LabelSettings_xe5ic")
+
+[node name="ProgressBar" type="ProgressBar" parent="LeftSide/Cardio"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 29.0
+offset_right = 433.0
+offset_bottom = 56.0
+max_value = 5.0
+show_percentage = false
+
+[node name="cardioButton" type="Button" parent="LeftSide/Cardio"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 6.0
+offset_right = 509.0
+offset_bottom = 55.0
+tooltip_text = "Increased Speed"
+text = "Use"
+
+[node name="GetOut" type="Label" parent="LeftSide"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 219.0
+offset_right = 479.0
+offset_bottom = 249.0
+text = "Get Out Earlier"
+label_settings = SubResource("LabelSettings_xe5ic")
+
+[node name="ProgressBar" type="ProgressBar" parent="LeftSide/GetOut"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 29.0
+offset_right = 433.0
+offset_bottom = 56.0
+max_value = 5.0
+show_percentage = false
+
+[node name="getOutButton" type="Button" parent="LeftSide/GetOut"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 6.0
+offset_right = 509.0
+offset_bottom = 55.0
+tooltip_text = "More Time Per Day"
+text = "Use"
+
+[node name="continueButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 888.0
+offset_top = 512.0
+offset_right = 1071.0
+offset_bottom = 588.0
+disabled = true
+text = "Continue"
+
+[connection signal="pressed" from="LeftSide/Cardio/cardioButton" to="." method="_on_cardio_button_pressed"]
+[connection signal="pressed" from="LeftSide/GetOut/getOutButton" to="." method="_on_get_out_button_pressed"]
+[connection signal="pressed" from="continueButton" to="." method="_on_continue_button_pressed"]

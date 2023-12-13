@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dncpotspoqgth"]
+
+[ext_resource type="FontFile" uid="uid://djbye0tl13oo1" path="res://fonts/bpdots.unicasesquare-bold.otf" id="1_ymt5p"]
+
+[resource]
+font = ExtResource("1_ymt5p")
+font_size = 32
