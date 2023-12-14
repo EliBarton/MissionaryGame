@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://didmsr7pkxpdo"]
+
+[ext_resource type="Texture2D" uid="uid://dfrc3qdqwfy5o" path="res://dialogbox.png" id="1_m8y5f"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_7dxf4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yyofm"]
+font = ExtResource("2_7dxf4")
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.290196)
+shadow_offset = Vector2(1.42, 1)
+
+[node name="DialogBox" type="NinePatchRect"]
+offset_right = 669.0
+offset_bottom = 132.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_m8y5f")
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -21.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " To share the gospel, simply put your mouse cursor over an unsuspecting gentile and shoot them with your book and they will be loveing it very fast if you let them think about it!"
+label_settings = SubResource("LabelSettings_yyofm")
+autowrap_mode = 3

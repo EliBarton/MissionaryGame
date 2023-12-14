@@ -250,6 +250,33 @@ _data = {
 "new_day": SubResource("Animation_1d81b")
 }
 
+[sub_resource type="Animation" id="Animation_pdmfe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(804, 648)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UI/Areabook:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1571, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_08x0s"]
 resource_name = "close_areabook"
 length = 0.5
@@ -278,33 +305,6 @@ tracks/1/keys = {
 "values": [Vector2(1571, 0), Vector2(2152, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_pdmfe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewportContainer:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(804, 648)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("UI/Areabook:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1571, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gqlux"]
 _data = {
 "RESET": SubResource("Animation_pdmfe"),
@@ -321,8 +321,8 @@ script = ExtResource("1_yuev6")
 
 [node name="Areabook" parent="UI" instance=ExtResource("4_gbqqo")]
 top_level = true
-offset_left = -349.0
-offset_right = -0.000976562
+offset_left = 1571.0
+offset_right = 1920.0
 scale = Vector2(1.667, 1.667)
 
 [node name="TeachingScreen" parent="UI" instance=ExtResource("3_cphjp")]
