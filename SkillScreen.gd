@@ -13,11 +13,11 @@ func _process(delta):
 
 func initialize():
 	$continueButton.disabled = true
-	if global.cardio >= 5:
+	if Worldwide.cardio >= 5:
 		$LeftSide/Cardio/cardioButton.disabled = true
 	else:
 		$LeftSide/Cardio/cardioButton.disabled = false
-	if global.getout >= 5:
+	if Worldwide.getout >= 5:
 		$LeftSide/GetOut/getOutButton.disabled = true
 	else:
 		$LeftSide/GetOut/getOutButton.disabled = false
@@ -26,13 +26,13 @@ func initialize():
 	$RightSide/CurrentLevel/Level.set_text(str(global.level))
 
 func _on_cardio_button_pressed():
-	global.cardio += 1
-	$LeftSide/Cardio/ProgressBar.value  = global.cardio
+	Worldwide.cardio += 1
+	$LeftSide/Cardio/ProgressBar.value  = Worldwide.cardio
 	button_pressed()
 
 func _on_get_out_button_pressed():
-	global.getout += 1
-	$LeftSide/GetOut/ProgressBar.value  = global.getout
+	Worldwide.getout += 1
+	$LeftSide/GetOut/ProgressBar.value  = Worldwide.getout
 	
 	button_pressed()
 

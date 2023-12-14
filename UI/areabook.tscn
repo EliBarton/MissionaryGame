@@ -42,7 +42,6 @@ default_font = ExtResource("2_g5n52")
 default_font_size = 22
 
 [node name="Areabook" type="Control"]
-clip_contents = true
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -104,6 +103,18 @@ offset_right = 339.0
 offset_bottom = 40.0
 theme = ExtResource("2_vkiqm")
 text = "Menu"
+
+[node name="ButtonToggle" type="Button" parent="ColorRect/Buttons"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -385.0
+offset_right = 2.0
+offset_bottom = -262.0
+text = "c
+l
+o
+s
+e"
 
 [node name="PersonRecord" type="Control" parent="ColorRect"]
 visible = false
@@ -250,6 +261,7 @@ text = "Not Invited"
 label_settings = SubResource("LabelSettings_ev6ia")
 
 [node name="People" type="ScrollContainer" parent="ColorRect"]
+visible = false
 layout_mode = 0
 offset_right = 348.0
 offset_bottom = 598.0
@@ -422,27 +434,30 @@ text = "Day 1"
 horizontal_alignment = 1
 
 [node name="Map" type="SubViewportContainer" parent="ColorRect"]
+visible = false
 layout_mode = 0
-offset_top = 66.0
-offset_right = 340.0
-offset_bottom = 578.0
+offset_left = 17.0
+offset_top = 86.0
+offset_right = 327.0
+offset_bottom = 536.0
 
 [node name="SubViewport" type="SubViewport" parent="ColorRect/Map"]
 handle_input_locally = false
-size = Vector2i(340, 512)
-render_target_update_mode = 4
+size = Vector2i(310, 450)
+render_target_update_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="ColorRect/Map/SubViewport"]
 zoom = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="ColorRect/Map/SubViewport/Camera2D"]
-z_index = 2
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_vxfbh")
 
 [node name="LevelWorld" parent="ColorRect/Map/SubViewport" instance=ExtResource("7_xn8oo")]
+z_index = -2
 
 [node name="Dot" parent="ColorRect/Map/SubViewport" instance=ExtResource("8_o7tap")]
+visible = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 40.0
@@ -450,5 +465,7 @@ one_shot = true
 
 [connection signal="pressed" from="ColorRect/Buttons/ButtonProgress" to="." method="_on_button_progress_pressed"]
 [connection signal="pressed" from="ColorRect/Buttons/ButtonPeople" to="." method="_on_button_people_pressed"]
+[connection signal="pressed" from="ColorRect/Buttons/ButtonMap" to="." method="_on_button_map_pressed"]
+[connection signal="pressed" from="ColorRect/Buttons/ButtonToggle" to="." method="_on_button_toggle_pressed"]
 [connection signal="pressed" from="ColorRect/PersonRecord/BackToPeopleButton" to="." method="_on_back_to_people_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

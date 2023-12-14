@@ -6,6 +6,7 @@ var location = Vector2()
 var level = 1
 var acceptance_factor = 0.8
 var xp = 0
+var dot = null
 
 var pamphletInvite = 0
 var bomInvite = 0

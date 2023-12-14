@@ -25,8 +25,6 @@ var atchurch = 0
 var ondate = 0
 var baptized = 0
 
-var cardio = 0
-var getout = 0
 
 var person_taught = null
 signal update_commitments
@@ -46,9 +44,11 @@ func create_new_person_record(first_name, last_name, location):
 	new_person.connect("picked", $UI/Areabook._on_person_record_pressed)
 	person_records.append(new_person)
 	var new_dot = dot.instantiate()
-	new_dot.position = location
 	$UI/Areabook/ColorRect/Map/SubViewport.add_child(new_dot)
-	new_dot.color = Color("yellow")
+	new_dot.update_position(location)
+	print(new_dot.position)
+	new_dot.update_color(Color("yellow"))
+	new_person.dot = new_dot
 	return new_person
 
 func person_being_taught(person):
@@ -86,7 +86,7 @@ func new_day():
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	$UI/DayScreen/Control/Lessons.set_text("Day " + str(day) + " Lessons: " + str(lessons))
 	$UI/Areabook/ColorRect/ProgressBar/Label.set_text("DAY " + str(day))
-	$UI/Areabook/Timer.start($UI/Areabook.BASE_DAY_LENGTH + (getout  * 5))
+	$UI/Areabook/Timer.start($UI/Areabook.BASE_DAY_LENGTH + (Worldwide.getout  * 5))
 	$SubViewportContainer/SubViewport/Level/Missionary.new_day()
 	day += 1
 	$UI/Areabook/Timer.paused = true
@@ -167,3 +167,8 @@ func _on_animation_player_animation_finished(anim_name):
 func wait(duration):  #Duration in seconds
 	await get_tree().create_timer(duration).timeout
 
+func close_areabook():
+	$BookTogglePlayer.play("close_areabook")
+
+func open_areabook():
+	$BookTogglePlayer.play_backwards("close_areabook")

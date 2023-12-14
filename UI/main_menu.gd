@@ -52,7 +52,7 @@ func _on_line_edit_text_changed(new_text):
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "startnewgame":
-		get_tree().change_scene_to_file("res://game_master.tscn")
+		get_tree().change_scene_to_file("res://tutorial.tscn")
 
 
 func _on_line_edit_2_text_changed(new_text):

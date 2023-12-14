@@ -139,7 +139,7 @@ func _on_hitbox_input_event(viewport, event, shape_idx):
 	if talkmode:
 		if (event is InputEventMouseButton && event.pressed):
 			person_record = global.create_new_person_record(
-				first_name, last_name, global_position)
+				first_name, last_name, position)
 			$Name.set_text(first_name + " " + last_name)
 			talkmode = false
 			teachmode = true
@@ -155,6 +155,7 @@ func lesson_over():
 		if not new_person:
 			global.new_person_found()
 			new_person = true
+			person_record.dot.update_color(Color("008c00"))
 	last_taught_day = global.day
 	teachmode = false
 	newicon.speed_scale = 0.2

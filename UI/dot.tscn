@@ -1,8 +1,10 @@
-[gd_scene format=3 uid="uid://p5lb2wfiiu7v"]
+[gd_scene load_steps=3 format=3 uid="uid://p5lb2wfiiu7v"]
 
-[node name="Dot" type="ColorRect"]
+[ext_resource type="Texture2D" uid="uid://egs1th0ltsbb" path="res://dot.png" id="1_pofla"]
+[ext_resource type="Script" path="res://UI/dot.gd" id="1_rpgjm"]
+
+[node name="Dot" type="Sprite2D"]
 z_index = 1
-offset_left = -1.95
-offset_top = 23.99
-offset_right = 18.05
-offset_bottom = 43.99
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_pofla")
+script = ExtResource("1_rpgjm")

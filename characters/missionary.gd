@@ -17,7 +17,7 @@ func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("east") - Input.get_action_strength("west")
 	input_vector.y = Input.get_action_strength("south") - Input.get_action_strength("north")
 	input_vector = input_vector.normalized()
-	var movementspeed = SPEED + (500*global.cardio)
+	var movementspeed = SPEED + (500*Worldwide.cardio)
 	if input_vector:
 		velocity = input_vector * movementspeed * delta
 	else:

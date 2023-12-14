@@ -1,17 +1,19 @@
 extends Control
 
 @onready var global = get_node("/root/Game Master")
-
+var open = true
 const BASE_DAY_LENGTH = 40
 
 var personrecord
 var people
 var progress
+var map
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	people = $ColorRect/People
 	personrecord = $ColorRect/PersonRecord
 	progress = $ColorRect/Progress
+	map = $ColorRect/Map
 	$Timer.start(BASE_DAY_LENGTH)
 	$ColorRect/Progress/VBoxContainer/Missionaries/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
@@ -40,6 +42,7 @@ func change_screen():
 	people.visible = false
 	personrecord.visible = false
 	progress.visible = false
+	map.visible = false
 
 
 func _on_button_progress_pressed():
@@ -51,6 +54,9 @@ func _on_button_people_pressed():
 	change_screen()
 	people.visible = true
 
+func _on_button_map_pressed():
+	change_screen()
+	map.visible = true
 
 func _on_timer_timeout():
 	global.new_day()
@@ -60,3 +66,17 @@ func pause_day():
 
 func unpause_day():
 	$Timer.paused = false
+
+
+
+
+
+func _on_button_toggle_pressed():
+	if open:
+		global.close_areabook()
+		open = false
+		$ColorRect/Buttons/ButtonToggle.set_text("o\np\ne\nn")
+	else:
+		global.open_areabook()
+		open = true
+		$ColorRect/Buttons/ButtonToggle.set_text("c\nl\no\ns\ne")
