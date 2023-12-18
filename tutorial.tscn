@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0f03jt3scj07"]
+[gd_scene load_steps=9 format=3 uid="uid://d0f03jt3scj07"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_5wa53"]
 [ext_resource type="Texture2D" uid="uid://dx3rv48gk5ale" path="res://ground.png" id="1_di5op"]
 [ext_resource type="PackedScene" uid="uid://cg0norsmfpqk1" path="res://characters/missionary.tscn" id="2_lc236"]
 [ext_resource type="Texture2D" uid="uid://bg5otd3q154mi" path="res://plane.png" id="4_832m0"]
+[ext_resource type="PackedScene" uid="uid://d36x0wls3lxw0" path="res://characters/missionary2.tscn" id="5_dg048"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gt4vy"]
 texture = ExtResource("1_di5op")
@@ -18,6 +19,7 @@ sources/0 = SubResource("TileSetAtlasSource_gt4vy")
 size = Vector2(20, 78)
 
 [node name="Tutorial" type="Node2D"]
+y_sort_enabled = true
 scale = Vector2(2, 2)
 script = ExtResource("1_5wa53")
 
@@ -58,4 +60,13 @@ shape = SubResource("RectangleShape2D_ish38")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-1, 1, -1.5, 402, 642.5, 399.5, 641, 0.5, 0, 0, 0, -10, 653.5, -12, 653.5, 415.5, -13.5, 415.5, -8.5, 0.5)
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Missionary2" parent="." instance=ExtResource("5_dg048")]
+position = Vector2(89, 75.5)
+
 [connection signal="body_entered" from="Plane" to="." method="_on_plane_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

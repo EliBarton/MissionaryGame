@@ -10,7 +10,6 @@ y_sort_enabled = true
 scale = Vector2(2, 2)
 
 [node name="LevelWorld" parent="." instance=ExtResource("1_6xoiv")]
-z_index = -2
 
 [node name="Missionary" parent="." instance=ExtResource("2_q6nps")]
 position = Vector2(834.5, 793.5)
@@ -23,12 +22,12 @@ metadata/_edit_lock_ = true
 position = Vector2(878.5, 824.5)
 
 [node name="Man" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(669, 455.5)
+position = Vector2(779, 475.5)
 first_name = "Howard"
 last_name = "Chuckles"
 
 [node name="Man2" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(936.5, 716)
+position = Vector2(1146.5, 865)
 first_name = "Jarren"
 last_name = "Bearfoos"
 

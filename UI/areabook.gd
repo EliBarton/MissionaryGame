@@ -59,7 +59,8 @@ func _on_button_map_pressed():
 	map.visible = true
 
 func _on_timer_timeout():
-	global.new_day()
+	pass
+	#global.new_day()
 
 func pause_day():
 	$Timer.paused = true

@@ -83,12 +83,12 @@ func person_done_being_taught(invitation):
 
 
 func new_day():
+	day += 1
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
-	$UI/DayScreen/Control/Lessons.set_text("Day " + str(day) + " Lessons: " + str(lessons))
+	$UI/DayScreen/Control/Lessons.set_text("Day " + str(day-1) + " Lessons: " + str(lessons))
 	$UI/Areabook/ColorRect/ProgressBar/Label.set_text("DAY " + str(day))
 	$UI/Areabook/Timer.start($UI/Areabook.BASE_DAY_LENGTH + (Worldwide.getout  * 5))
 	$SubViewportContainer/SubViewport/Level/Missionary.new_day()
-	day += 1
 	$UI/Areabook/Timer.paused = true
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("new_day")
@@ -97,15 +97,11 @@ func new_day():
 	await wait(1)
 	emit_signal("update_commitments")
 	$SubViewportContainer/SubViewport/Level/Missionary.position = STARTPLACE
+	$SubViewportContainer/SubViewport/Level/Missionary2.position = STARTPLACE
 	
 	if day % 7 == 0:
-		print("Time to go to church Elders")
-		var newChurchScreen = church_screen.instantiate()
-		add_child(newChurchScreen)
-		newChurchScreen.set_people_present(atchurch)
 		$UI.visible = false
 		$SubViewportContainer/SubViewport/Level.visible = false
-		$AnimationPlayer.pause()
 
 func gain_experience(amount):
 	xp_total += amount
@@ -162,6 +158,13 @@ func _on_animation_player_animation_finished(anim_name):
 		if day % 7 != 0:
 			$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_INHERIT
 			$UI/Areabook/Timer.paused = false
+			$SubViewportContainer/SubViewport/Level/Missionary.new_day()
+		else:
+			print("Time to go to church Elders")
+			var newChurchScreen = church_screen.instantiate()
+			add_child(newChurchScreen)
+			newChurchScreen.set_people_present(atchurch)
+			$AnimationPlayer.pause()
 		lessons = 0
 
 func wait(duration):  #Duration in seconds

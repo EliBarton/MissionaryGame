@@ -509,8 +509,7 @@ script = ExtResource("1_gkf5x")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sg4e5")
-animation = &"6"
-frame_progress = 0.627131
+animation = &"2"
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -537,3 +536,9 @@ value = 50.0
 texture_under = ExtResource("3_qsya1")
 texture_progress = ExtResource("3_qsya1")
 tint_under = Color(0.294118, 0.294118, 0.294118, 1)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

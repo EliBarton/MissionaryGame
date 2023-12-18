@@ -53,19 +53,20 @@ region_rect = Rect2(0, 0, 16, 32)
 
 [node name="Label" type="Label" parent="RightSide"]
 layout_mode = 0
-offset_left = 101.0
+offset_left = 34.0
 offset_top = 80.0
-offset_right = 226.0
+offset_right = 293.0
 offset_bottom = 103.0
 text = "Elder Nielson"
 label_settings = SubResource("LabelSettings_wcqke")
+horizontal_alignment = 1
 
 [node name="CurrentLevel" type="GridContainer" parent="RightSide"]
 custom_minimum_size = Vector2(320, 50)
 layout_mode = 0
-offset_top = 98.0
+offset_top = 108.0
 offset_right = 320.0
-offset_bottom = 148.0
+offset_bottom = 277.0
 
 [node name="Label2" type="Label" parent="RightSide/CurrentLevel"]
 layout_mode = 2
@@ -165,6 +166,33 @@ offset_bottom = 55.0
 tooltip_text = "More Time Per Day"
 text = "Use"
 
+[node name="Diligence" type="Label" parent="LeftSide"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 301.0
+offset_right = 479.0
+offset_bottom = 331.0
+text = "Diligence"
+label_settings = SubResource("LabelSettings_xe5ic")
+
+[node name="ProgressBar" type="ProgressBar" parent="LeftSide/Diligence"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = 29.0
+offset_right = 433.0
+offset_bottom = 56.0
+max_value = 5.0
+show_percentage = false
+
+[node name="diligenceButton" type="Button" parent="LeftSide/Diligence"]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 6.0
+offset_right = 509.0
+offset_bottom = 55.0
+tooltip_text = "More Time Per Day"
+text = "Use"
+
 [node name="continueButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 888.0
@@ -176,4 +204,5 @@ text = "Continue"
 
 [connection signal="pressed" from="LeftSide/Cardio/cardioButton" to="." method="_on_cardio_button_pressed"]
 [connection signal="pressed" from="LeftSide/GetOut/getOutButton" to="." method="_on_get_out_button_pressed"]
+[connection signal="pressed" from="LeftSide/Diligence/diligenceButton" to="." method="_on_diligence_button_pressed"]
 [connection signal="pressed" from="continueButton" to="." method="_on_continue_button_pressed"]

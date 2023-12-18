@@ -547,7 +547,6 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_c3n2t")
-text = "test"
 label_settings = SubResource("LabelSettings_cev8r")
 horizontal_alignment = 1
 

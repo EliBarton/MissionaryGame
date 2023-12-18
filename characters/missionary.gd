@@ -2,14 +2,20 @@ extends CharacterBody2D
 
 
 const SPEED = 6000.0
-const BASE_SPIRITUAL_RESILIENCE = 50
+const BASE_SPIRITUAL_RESILIENCE = 70
 
 var book = preload("res://book.tscn")
 var talkmode = false
 var mouse_in_viewport = true
+var negative_sr = false
+var movable = true
 @onready var global = get_node("/root/Game Master")
-@onready var spiritual_resilience = BASE_SPIRITUAL_RESILIENCE
+var spiritual_resilience = 0
 
+func _ready():
+	spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + 5
+	$RSBar.max_value = spiritual_resilience
+	$RSBar.value = spiritual_resilience
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -18,8 +24,9 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("south") - Input.get_action_strength("north")
 	input_vector = input_vector.normalized()
 	var movementspeed = SPEED + (500*Worldwide.cardio)
-	if input_vector:
+	if input_vector and movable:
 		velocity = input_vector * movementspeed * delta
+		lose_sr(Vector2(0, 0).distance_to(velocity)/2000.0)
 	else:
 		velocity -= velocity*10 * delta
 	
@@ -48,7 +55,11 @@ func missionary():
 	pass
 
 func new_day():
-	$RSBar.value = BASE_SPIRITUAL_RESILIENCE
+	spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + (5*global.day) + (10*Worldwide.diligence)
+	$RSBar.max_value = spiritual_resilience
+	$RSBar.value = spiritual_resilience
+	negative_sr = false
+	movable = true
 
 func received_material(type):
 	if type == 1:
@@ -60,7 +71,18 @@ func lose_sr(amount):
 	spiritual_resilience -= amount
 	var tween = get_tree().create_tween()
 	if spiritual_resilience <= 0:
+		movable = false
 		await tween.tween_property($RSBar, "value", 0, .5).set_ease(Tween.EASE_OUT).finished
-		global.new_day()
+		if negative_sr == false:
+			global.new_day()
+			negative_sr = true
 	else:
-		tween.tween_property($RSBar, "value", spiritual_resilience, .5).set_ease(Tween.EASE_OUT)
+		tween.tween_property($RSBar, "value", spiritual_resilience, .1*amount).set_ease(Tween.EASE_OUT)
+
+
+
+
+
+func _on_timer_timeout():
+	lose_sr(1)
+	$Timer.start()

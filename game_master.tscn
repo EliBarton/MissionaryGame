@@ -321,8 +321,8 @@ script = ExtResource("1_yuev6")
 
 [node name="Areabook" parent="UI" instance=ExtResource("4_gbqqo")]
 top_level = true
-offset_left = 1571.0
-offset_right = 1920.0
+offset_left = -349.0
+offset_right = -0.000976562
 scale = Vector2(1.667, 1.667)
 
 [node name="TeachingScreen" parent="UI" instance=ExtResource("3_cphjp")]

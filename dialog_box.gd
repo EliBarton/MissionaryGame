@@ -1,11 +1,29 @@
 extends NinePatchRect
 
+var dialog_file = "res://UI/dialog.json"
+var in_progress = false
+var selected_text = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+signal finished
 
+func initialize(text_code):
+	var file = FileAccess.open(dialog_file, FileAccess.READ)
+	var dialog_library = JSON.parse_string(file.get_as_text())
+	selected_text = dialog_library[text_code].duplicate()
+	get_tree().paused = true
+	$Timer.start(1)
+	show_next_line()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func show_next_line():
+	if selected_text.size() > 0:
+		$Label.set_text(selected_text.pop_front())
+	else:
+		get_tree().paused = false
+		emit_signal("finished")
+		queue_free()
+
 func _process(delta):
-	pass
+	if $Timer.is_stopped():
+		if Input.is_action_just_pressed("shoot"):
+			show_next_line()
+			$Timer.start(1)

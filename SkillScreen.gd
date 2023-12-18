@@ -21,6 +21,10 @@ func initialize():
 		$LeftSide/GetOut/getOutButton.disabled = true
 	else:
 		$LeftSide/GetOut/getOutButton.disabled = false
+	if Worldwide.diligence >= 5:
+		$LeftSide/Diligence/diligenceButton.disabled = true
+	else:
+		$LeftSide/Diligence/diligenceButton.disabled = false
 	visible = true
 	$RightSide/Day.set_text("Day " + str(global.day))
 	$RightSide/CurrentLevel/Level.set_text(str(global.level))
@@ -40,9 +44,17 @@ func button_pressed():
 	$continueButton.disabled = false
 	$LeftSide/GetOut/getOutButton.disabled = true
 	$LeftSide/Cardio/cardioButton.disabled = true
+	$LeftSide/Diligence/diligenceButton.disabled = true
 
 func _on_continue_button_pressed():
 	visible = false
 	emit_signal("finished")
 
 
+
+
+func _on_diligence_button_pressed():
+	Worldwide.diligence += 1
+	$LeftSide/Diligence/ProgressBar.value  = Worldwide.diligence
+	
+	button_pressed()
