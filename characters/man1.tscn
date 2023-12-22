@@ -549,5 +549,3 @@ grow_vertical = 2
 theme = SubResource("Theme_c3n2t")
 label_settings = SubResource("LabelSettings_cev8r")
 horizontal_alignment = 1
-
-[connection signal="input_event" from="Hitbox" to="." method="_on_hitbox_input_event"]

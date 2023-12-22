@@ -10,9 +10,8 @@ const STARTPLACE = Vector2(1450, 580)
 
 var day = 1
 
-var is_dragging = false
-var selected_draggable = null
-var numwrong = 0
+
+
 
 var level = 1
 var xp = 0
@@ -33,6 +32,7 @@ func _ready():
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("beginning")
+	$UI/TeachingScreen.visible = false
 	$UI/DayScreen/Control/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
 func create_new_person_record(first_name, last_name, location):
@@ -57,9 +57,9 @@ func person_being_taught(person):
 	$UI/Areabook.pause_day()
 	$UI/Areabook.visible = false
 	$UI/TeachingScreen.visible = true
-	$UI/TeachingScreen.reset_text()
-	$UI/TeachingScreen.load_file(lesson1file)
-	$UI/TeachingScreen.create_game()
+	$UI/TeachingScreen.reset()
+	#$UI/TeachingScreen.load_file(lesson1file)
+	#$UI/TeachingScreen.create_game()
 	person_taught.update_record()
 
 func person_done_being_taught(invitation):

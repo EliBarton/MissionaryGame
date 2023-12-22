@@ -9,25 +9,6 @@
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="6_yw2y6"]
 [ext_resource type="PackedScene" uid="uid://df82w04hqqvbf" path="res://UI/skill_screen.tscn" id="7_ahiwf"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_gosn4"]
-font = ExtResource("4_3whva")
-font_size = 50
-
-[sub_resource type="LabelSettings" id="LabelSettings_wcqke"]
-font = ExtResource("6_yw2y6")
-
-[sub_resource type="LabelSettings" id="LabelSettings_gxmh1"]
-font = ExtResource("6_yw2y6")
-font_size = 30
-
-[sub_resource type="LabelSettings" id="LabelSettings_rhh28"]
-font = ExtResource("6_yw2y6")
-font_size = 50
-
-[sub_resource type="LabelSettings" id="LabelSettings_86xx1"]
-font = ExtResource("6_yw2y6")
-font_size = 35
-
 [sub_resource type="Animation" id="Animation_hnee7"]
 length = 0.001
 tracks/0/type = "value"
@@ -311,22 +292,47 @@ _data = {
 "close_areabook": SubResource("Animation_08x0s")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_gosn4"]
+font = ExtResource("4_3whva")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcqke"]
+font = ExtResource("6_yw2y6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gxmh1"]
+font = ExtResource("6_yw2y6")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhh28"]
+font = ExtResource("6_yw2y6")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_86xx1"]
+font = ExtResource("6_yw2y6")
+font_size = 35
+
 [node name="Game Master" type="Node2D"]
 process_mode = 3
 y_sort_enabled = true
 scale = Vector2(1.667, 1.667)
 script = ExtResource("1_yuev6")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gjls4")
+}
+
+[node name="BookTogglePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gqlux")
+}
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Areabook" parent="UI" instance=ExtResource("4_gbqqo")]
-top_level = true
+z_index = 0
 offset_left = -349.0
 offset_right = -0.000976562
-scale = Vector2(1.667, 1.667)
-
-[node name="TeachingScreen" parent="UI" instance=ExtResource("3_cphjp")]
-visible = false
 scale = Vector2(1.667, 1.667)
 
 [node name="DayScreen" type="ColorRect" parent="UI"]
@@ -430,6 +436,9 @@ label_settings = SubResource("LabelSettings_86xx1")
 visible = false
 scale = Vector2(1.667, 1.667)
 
+[node name="TeachingScreen" parent="UI" instance=ExtResource("3_cphjp")]
+scale = Vector2(1.667, 1.667)
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 804.0
 offset_bottom = 648.0
@@ -445,15 +454,5 @@ size = Vector2i(804, 648)
 render_target_update_mode = 4
 
 [node name="Level" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_bs4ii")]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gjls4")
-}
-
-[node name="BookTogglePlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gqlux")
-}
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

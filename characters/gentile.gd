@@ -19,7 +19,7 @@ var xp = 0
 var xp_total = 0
 var person_record
 var location = Vector2()
-var acceptance_factor = 0.7
+var acceptance_factor = 0.99
 var new_person = false
 var last_taught_day = 0
 var levelformula = (level * 10) + 7.7
@@ -109,6 +109,7 @@ func loved_it():
 		add_child(newtalkrange)
 		newtalkrange.connect("body_shape_entered", talk_to_player_in_range)
 		newtalkrange.connect("body_shape_exited", player_left)
+		newtalkrange.connect("input_event", _on_talkrange_input_event)
 	else:
 		teachmode = true
 		talkmode = false
@@ -135,7 +136,7 @@ func player_left(body_id, body, body_shape, area_shape):
 		teachmode = false
 
 
-func _on_hitbox_input_event(viewport, event, shape_idx):
+func _on_talkrange_input_event(viewport, event, shape_idx):
 	if talkmode:
 		if (event is InputEventMouseButton && event.pressed):
 			person_record = global.create_new_person_record(

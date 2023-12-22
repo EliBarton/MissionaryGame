@@ -23,7 +23,7 @@ Worldwide="*res://worldwide.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 
 [input]
 
@@ -64,10 +64,6 @@ shoot={
 [internationalization]
 
 locale/translations_pot_files=PackedStringArray("res://Dialouge/interested.dialogue")
-
-[layer_names]
-
-2d_render/layer_2="Shadows"
 
 [rendering]
 

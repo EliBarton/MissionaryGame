@@ -1,0 +1,26 @@
+{
+	"tutorial1": [
+		"Hello! Welcome to the MTC.",
+		"Here you will learn how to be effective in the missionary field.",
+		"Start by using WASD to move around."
+	],
+	"tutorial2": [
+		"Great! Now you must learn how to share the gospel.",
+		"Point your mouse at whoever you want to share with, then press the left mouse button."
+	],
+	"tutorial3": [
+		"If you hit someone, they will think about it then decide if they like it.",
+		"If they like it, you can get thier information and start teaching them!",
+		"If they don't like it, it's best to leave them alone for a while."
+	],
+	"tutorial4": [
+		"That's all for now, you will continue to learn in the field.",
+		"Get in the plane to leave for your mission. God Bless!"
+	],
+	"followup1": [
+		"Hello! This thing that you gave me is really cool. Could you tell me more?"
+	],
+	"followup2": [
+		"Hey Elders, I did that thing that you asked me to, it was great! What's next?"
+	]
+}

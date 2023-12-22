@@ -3,6 +3,8 @@ extends NinePatchRect
 var dialog_file = "res://UI/dialog.json"
 var in_progress = false
 var selected_text = []
+@export var closable = true
+var disabled = false
 
 signal finished
 
@@ -15,6 +17,7 @@ func initialize(text_code):
 	show_next_line()
 
 func show_next_line():
+	$Timer.start(1)
 	if selected_text.size() > 0:
 		$Label.set_text(selected_text.pop_front())
 	else:
@@ -24,6 +27,11 @@ func show_next_line():
 
 func _process(delta):
 	if $Timer.is_stopped():
-		if Input.is_action_just_pressed("shoot"):
-			show_next_line()
-			$Timer.start(1)
+		if closable:
+			if Input.is_action_just_pressed("shoot"):
+				show_next_line()
+		else:
+			if not disabled:
+				if Input.is_action_just_pressed("shoot"):
+					print("next screen")
+					emit_signal("finished")

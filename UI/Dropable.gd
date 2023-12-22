@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if get_node("/root/Game Master").is_dragging:
+	if Worldwide.is_dragging:
 		if not occupied:
 			visible = true
 	else:
