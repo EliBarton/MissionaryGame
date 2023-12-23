@@ -44,4 +44,4 @@ func create_dialog_box(text_code):
 	$UI.add_child(new_dialog)
 	#new_dialog.scale = new_dialog.scale / $Missionary/Camera2D.zoom
 	new_dialog.connect("finished", on_dialog_finished)
-	new_dialog.initialize(text_code)
+	new_dialog.initialize(text_code, true)

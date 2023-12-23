@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx7d44nv7sg0"]
+[gd_scene load_steps=7 format=3 uid="uid://cx7d44nv7sg0"]
 
 [ext_resource type="Script" path="res://UI/personrecord.gd" id="1_sr8eu"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_las2a"]
@@ -6,6 +6,42 @@
 [sub_resource type="LabelSettings" id="LabelSettings_hb6pm"]
 font = ExtResource("2_las2a")
 font_size = 25
+
+[sub_resource type="Animation" id="Animation_ihl10"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flat")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_p6lic"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flat")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqvei"]
+_data = {
+"RESET": SubResource("Animation_p6lic"),
+"appear": SubResource("Animation_ihl10")
+}
 
 [node name="Person" type="Button"]
 custom_minimum_size = Vector2(340, 100)
@@ -28,5 +64,10 @@ grow_vertical = 2
 size_flags_vertical = 6
 label_settings = SubResource("LabelSettings_hb6pm")
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rqvei")
+}
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

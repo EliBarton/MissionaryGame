@@ -1,5 +1,6 @@
-[gd_scene load_steps=75 format=3 uid="uid://by2uqjg3q3c37"]
+[gd_scene load_steps=76 format=3 uid="uid://by2uqjg3q3c37"]
 
+[ext_resource type="Script" path="res://level_world.gd" id="1_beyf0"]
 [ext_resource type="Texture2D" uid="uid://dx3rv48gk5ale" path="res://ground.png" id="1_l3yom"]
 [ext_resource type="Texture2D" uid="uid://cyrwibtjfytxf" path="res://levelassets.png" id="2_gktgd"]
 [ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="3_eoumx"]
@@ -23,7 +24,7 @@ sources/0 = SubResource("TileSetAtlasSource_r38ne")
 pattern_0 = SubResource("TileMapPattern_167mm")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m00da"]
-radius = 2.0
+radius = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0fn8n"]
 size = Vector2(50, 12)
@@ -520,10 +521,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gc7tv"]
-size = Vector2(217.5, 121)
+size = Vector2(216.5, 121)
 
 [node name="LevelWorld" type="Node2D"]
+process_mode = 3
 y_sort_enabled = true
+script = ExtResource("1_beyf0")
 
 [node name="Ground" type="TileMap" parent="."]
 z_index = -2
@@ -543,8 +546,144 @@ texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
 region_rect = Rect2(80, 8, 32, 56)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree2" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(1382.91, 770.456)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree2"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 56)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree2"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree3" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(1408.91, 417.456)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree3"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 56)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree3"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree4" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(1140.91, 366.456)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree4"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 56)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree4"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree5" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(881.909, 543.456)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree5"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 56)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree5"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree6" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(569, 783)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree6"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(-0.435, -35.125)
+region_enabled = true
+region_rect = Rect2(160, 0, 48, 80)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree6"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree7" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(711, 783)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree7"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(-0.435, -35.125)
+region_enabled = true
+region_rect = Rect2(160, 0, 48, 80)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree7"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree9" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(506, 603)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree9"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(-0.435, -35.125)
+region_enabled = true
+region_rect = Rect2(112, 0, 48, 64)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree9"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree10" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(747, 604)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree10"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(-0.435, -35.125)
+region_enabled = true
+region_rect = Rect2(112, 0, 48, 64)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree10"]
+shape = SubResource("CircleShape2D_m00da")
+metadata/_edit_lock_ = true
+
+[node name="Tree8" type="StaticBody2D" parent="Trees"]
+y_sort_enabled = true
+position = Vector2(1473, 740)
+
+[node name="Sprite2D" type="Sprite2D" parent="Trees/Tree8"]
+texture = ExtResource("2_gktgd")
+offset = Vector2(-0.435, -35.125)
+region_enabled = true
+region_rect = Rect2(160, 0, 48, 80)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trees/Tree8"]
 shape = SubResource("CircleShape2D_m00da")
 metadata/_edit_lock_ = true
 
@@ -569,10 +708,21 @@ visibility_layer = 2
 
 [node name="Shadows" type="CanvasGroup" parent="."]
 self_modulate = Color(1, 1, 1, 0.392157)
+fit_margin = 10000.0
+clear_margin = 10000.0
 
 [node name="PlayerShadow" type="AnimatedSprite2D" parent="Shadows"]
 self_modulate = Color(0, 0, 0, 1)
-position = Vector2(1041.11, 619.21)
+position = Vector2(781.375, 827)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+sprite_frames = SubResource("SpriteFrames_3x5hb")
+animation = &"2"
+offset = Vector2(0, -15)
+
+[node name="CompanionShadow" type="AnimatedSprite2D" parent="Shadows"]
+self_modulate = Color(0, 0, 0, 1)
+position = Vector2(813, 827)
 scale = Vector2(1, 0.9)
 skew = 0.785398
 sprite_frames = SubResource("SpriteFrames_3x5hb")
@@ -599,51 +749,258 @@ offset = Vector2(2, -24)
 region_enabled = true
 region_rect = Rect2(80, 8, 32, 54)
 
-[node name="Sprite2D3" type="Sprite2D" parent="Shadows"]
+[node name="Sprite2D8" type="Sprite2D" parent="Shadows"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(914, 763)
-scale = Vector2(1, 1.33)
+position = Vector2(576, 776)
+scale = Vector2(1, 0.9)
 skew = 0.785398
 texture = ExtResource("2_gktgd")
-offset = Vector2(0, -70)
+offset = Vector2(2, -24)
 region_enabled = true
-region_rect = Rect2(208, 0, 224, 160)
+region_rect = Rect2(160, 0, 48, 78)
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1480, 733)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(160, 0, 48, 78)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(718, 776)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(160, 0, 48, 78)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Shadows"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1384.91, 770.456)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 54)
 
 [node name="Sprite2D4" type="Sprite2D" parent="Shadows"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(642, 763)
-scale = Vector2(1, 1.33)
+position = Vector2(1410.91, 417.456)
+scale = Vector2(1, 0.9)
 skew = 0.785398
 texture = ExtResource("2_gktgd")
-offset = Vector2(0, -70)
+offset = Vector2(2, -24)
 region_enabled = true
-region_rect = Rect2(208, 0, 224, 160)
+region_rect = Rect2(80, 8, 32, 54)
 
 [node name="Sprite2D5" type="Sprite2D" parent="Shadows"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(642, 539)
-scale = Vector2(1, 1.33)
+position = Vector2(1142.91, 366.456)
+scale = Vector2(1, 0.9)
 skew = 0.785398
 texture = ExtResource("2_gktgd")
-offset = Vector2(0, -70)
+offset = Vector2(2, -24)
 region_enabled = true
-region_rect = Rect2(208, 0, 224, 160)
+region_rect = Rect2(80, 8, 32, 54)
 
 [node name="Sprite2D6" type="Sprite2D" parent="Shadows"]
 modulate = Color(0, 0, 0, 1)
-position = Vector2(914, 475)
-scale = Vector2(1, 1.33)
+position = Vector2(883.909, 543.456)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 54)
+
+[node name="Sprite2D7" type="Sprite2D" parent="Shadows"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(883.909, 543.456)
+scale = Vector2(1, 0.9)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(2, -24)
+region_enabled = true
+region_rect = Rect2(80, 8, 32, 54)
+
+[node name="building5" type="Node2D" parent="Shadows"]
+position = Vector2(400, 785)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building5"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building5"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.785)
 skew = 0.785398
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -70)
 region_enabled = true
-region_rect = Rect2(208, 0, 224, 160)
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
 
-[node name="Building" type="StaticBody2D" parent="."]
+[node name="building6" type="Node2D" parent="Shadows"]
+position = Vector2(400, 514)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building6"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building6"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.785)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
+
+[node name="building7" type="Node2D" parent="Shadows"]
+position = Vector2(584, 488)
+rotation = -1.5708
+scale = Vector2(1, -1)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building7"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building7"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.75)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
+
+[node name="building8" type="Node2D" parent="Shadows"]
+position = Vector2(856, 424)
+rotation = -1.5708
+scale = Vector2(1, -1)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building8"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building8"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.75)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
+
+[node name="building9" type="Node2D" parent="Shadows"]
+position = Vector2(856, 713)
+rotation = -1.5708
+scale = Vector2(1, -1)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building9"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building9"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.75)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
+
+[node name="building10" type="Node2D" parent="Shadows"]
+position = Vector2(584, 713)
+rotation = -1.5708
+scale = Vector2(1, -1)
+
+[node name="Sprite2D9" type="Sprite2D" parent="Shadows/building10"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(60.15, -57.198)
+rotation = 1.5708
+scale = Vector2(1, 1.25)
+skew = -0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(208, 0, 224, 160)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D10" type="Sprite2D" parent="Shadows/building10"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(34.015, -193.5)
+scale = Vector2(1, 0.75)
+skew = 0.785398
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(448, 16, 128, 248)
+metadata/_edit_lock_ = true
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Building" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
 position = Vector2(912, 763)
 
-[node name="Sprite2D" type="Sprite2D" parent="Building"]
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building"]
 y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -70)
@@ -651,16 +1008,16 @@ region_enabled = true
 region_rect = Rect2(208, 0, 224, 160)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building"]
 position = Vector2(0.25, -58.5)
 shape = SubResource("RectangleShape2D_gc7tv")
 metadata/_edit_lock_ = true
 
-[node name="Building2" type="StaticBody2D" parent="."]
+[node name="Building2" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
 position = Vector2(640, 763)
 
-[node name="Sprite2D" type="Sprite2D" parent="Building2"]
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building2"]
 y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -70)
@@ -668,16 +1025,16 @@ region_enabled = true
 region_rect = Rect2(208, 0, 224, 160)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building2"]
 position = Vector2(0.25, -58.5)
 shape = SubResource("RectangleShape2D_gc7tv")
 metadata/_edit_lock_ = true
 
-[node name="Building3" type="StaticBody2D" parent="."]
+[node name="Building3" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
 position = Vector2(640, 539)
 
-[node name="Sprite2D" type="Sprite2D" parent="Building3"]
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building3"]
 y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -70)
@@ -685,16 +1042,16 @@ region_enabled = true
 region_rect = Rect2(208, 0, 224, 160)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building3"]
 position = Vector2(0.25, -58.5)
 shape = SubResource("RectangleShape2D_gc7tv")
 metadata/_edit_lock_ = true
 
-[node name="Building4" type="StaticBody2D" parent="."]
+[node name="Building4" type="StaticBody2D" parent="Buildings"]
 y_sort_enabled = true
 position = Vector2(912, 475)
 
-[node name="Sprite2D" type="Sprite2D" parent="Building4"]
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building4"]
 y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -70)
@@ -702,7 +1059,39 @@ region_enabled = true
 region_rect = Rect2(208, 0, 224, 160)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Building4"]
 position = Vector2(0.25, -58.5)
 shape = SubResource("RectangleShape2D_gc7tv")
 metadata/_edit_lock_ = true
+
+[node name="Building5" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(400, 785)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building5"]
+y_sort_enabled = true
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(432, 16, 160, 248)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/Building5"]
+visible = false
+polygon = PackedVector2Array(-58, 54, 58, 54, 58, -21, 75, -21, 75, -77, 63, -77, 63, -157, -62, -157, -63, -76, -75, -76, -75, -21, -58, -21)
+
+[node name="Building6" type="StaticBody2D" parent="Buildings"]
+y_sort_enabled = true
+position = Vector2(400, 514)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings/Building6"]
+y_sort_enabled = true
+texture = ExtResource("2_gktgd")
+offset = Vector2(0, -70)
+region_enabled = true
+region_rect = Rect2(432, 16, 160, 248)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/Building6"]
+visible = false
+polygon = PackedVector2Array(-58, 54, 58, 54, 58, -21, 75, -21, 75, -77, 63, -77, 63, -157, -62, -157, -63, -76, -75, -76, -75, -21, -58, -21)

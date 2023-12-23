@@ -17,10 +17,11 @@
 		"That's all for now, you will continue to learn in the field.",
 		"Get in the plane to leave for your mission. God Bless!"
 	],
-	"followup1": [
-		"Hello! This thing that you gave me is really cool. Could you tell me more?"
+	"newperson1": [
+		"Hello! This thing that you gave me is really cool. Could you tell me more?",
+		"Here is my contact information."
 	],
-	"followup2": [
+	"followup1": [
 		"Hey Elders, I did that thing that you asked me to, it was great! What's next?"
 	]
 }

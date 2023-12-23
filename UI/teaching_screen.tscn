@@ -41,8 +41,9 @@ metadata/_edit_lock_ = true
 [node name="Top" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.652778
+anchor_top = 0.16358
 anchor_right = 1.00087
-anchor_bottom = 1.0
+anchor_bottom = 0.720679
 grow_horizontal = 0
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -91,7 +92,7 @@ region_rect = Rect2(80, 0, 16, 32)
 [node name="DialogBox" parent="Top" instance=ExtResource("8_h2ow2")]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.846422
+anchor_top = 0.786301
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0

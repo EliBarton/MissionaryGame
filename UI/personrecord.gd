@@ -17,6 +17,7 @@ signal picked
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Name.set_text(first_name + " " + last_name)
+	$AnimationPlayer.play("appear")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

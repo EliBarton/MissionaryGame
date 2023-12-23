@@ -8,11 +8,11 @@ var disabled = false
 
 signal finished
 
-func initialize(text_code):
+func initialize(text_code, pausegame):
 	var file = FileAccess.open(dialog_file, FileAccess.READ)
 	var dialog_library = JSON.parse_string(file.get_as_text())
 	selected_text = dialog_library[text_code].duplicate()
-	get_tree().paused = true
+	get_tree().paused = pausegame
 	$Timer.start(1)
 	show_next_line()
 
@@ -26,12 +26,12 @@ func show_next_line():
 		queue_free()
 
 func _process(delta):
-	if $Timer.is_stopped():
-		if closable:
-			if Input.is_action_just_pressed("shoot"):
-				show_next_line()
-		else:
-			if not disabled:
+	if not disabled:
+		if $Timer.is_stopped():
+			if closable:
+				if Input.is_action_just_pressed("shoot"):
+					show_next_line()
+			else:
 				if Input.is_action_just_pressed("shoot"):
 					print("next screen")
 					emit_signal("finished")

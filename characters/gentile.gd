@@ -24,6 +24,8 @@ var new_person = false
 var last_taught_day = 0
 var levelformula = (level * 10) + 7.7
 
+var dialog_box = preload("res://UI/dialog_box.tscn")
+
 var pamphletInvite = 0
 var bomInvite = 0
 var churchInvite = 0
@@ -141,11 +143,12 @@ func _on_talkrange_input_event(viewport, event, shape_idx):
 		if (event is InputEventMouseButton && event.pressed):
 			person_record = global.create_new_person_record(
 				first_name, last_name, position)
-			$Name.set_text(first_name + " " + last_name)
 			talkmode = false
 			teachmode = true
 			newicon.play("teach")
 			global.connect("update_commitments", new_day)
+			create_dialog_box("newperson1")
+			$Name.set_text(first_name + " " + last_name)
 	elif teachmode:
 		if (event is InputEventMouseButton && event.pressed):
 			emit_signal("being_taught", self)
@@ -161,7 +164,7 @@ func lesson_over():
 	teachmode = false
 	newicon.speed_scale = 0.2
 	newicon.play("thinking")
-	add_xp(50)
+	add_xp(randi_range(10, 20))
 	
 
 func update_record():
@@ -177,6 +180,7 @@ func update_record():
 		person_record._on_pressed()
 
 func new_day():
+	newicon.play("love")
 	randomize()
 	var randnum = randf_range(0, level/2.0)
 	if pamphletInvite == 1:
@@ -184,13 +188,13 @@ func new_day():
 			pamphletInvite = 3
 		else:
 			pamphletInvite = 2
-			add_xp(25)
+			add_xp(randi_range(15, 25))
 	elif bomInvite == 1:
 		if randnum < 2:
 			bomInvite = 3
 		else:
 			bomInvite = 2
-			add_xp(50)
+			add_xp(randi_range(25, 35))
 	elif churchInvite == 1:
 		if global.day % 7 == 0:
 			if randnum < 3:
@@ -198,7 +202,7 @@ func new_day():
 			else:
 				churchInvite = 2
 				emit_signal("attended_church")
-				add_xp(100)
+				add_xp(randi_range(40, 75))
 	elif baptismInvite == 1:
 		pass
 	update_record()
@@ -228,3 +232,15 @@ func add_xp(amount):
 func level_up():
 	level += 1
 	areabook.get_node("ColorRect/PersonRecord/PersonInfo/CurrentLevel/Level").set_text(str(level))
+
+func create_dialog_box(text_code):
+	var new_dialog = dialog_box.instantiate()
+	global.get_node("UI").add_child(new_dialog)
+	#new_dialog.scale = new_dialog.scale / $Missionary/Camera2D.zoom
+	new_dialog.connect("finished", on_dialog_finished)
+	new_dialog.initialize(text_code, true)
+	global.process_mode = Node.PROCESS_MODE_DISABLED
+
+func on_dialog_finished():
+	global.process_mode = Node.PROCESS_MODE_ALWAYS
+	areabook._on_button_people_pressed()

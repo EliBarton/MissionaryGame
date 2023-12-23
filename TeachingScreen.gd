@@ -25,8 +25,9 @@ func _process(delta):
 
 func follow_up():
 	$Top/DialogBox.disabled = false
-	$Top/DialogBox.initialize("followup1")
+	$Top/DialogBox.initialize("followup1", false)
 	$Top/DialogBox.connect("finished", end_follow_up)
+	$LessonWith.set_text("Lesson with " + global.person_taught.first_name + " " + global.person_taught.last_name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func load_file(file):
@@ -61,7 +62,7 @@ func create_game():
 	$DragandDrop/Invitation.visible = false
 	checkifcorrect = true
 	difficulty = base_difficulty
-	difficulty = difficulty + global.person_taught.level
+	difficulty = difficulty + global.person_taught.level/3.0
 	var removed_words = []
 	var text = $DragandDrop/TextContainer/Label2.get_text()
 	text = text.replace("\n", " ")
@@ -118,6 +119,7 @@ func reset():
 	$DragandDrop/Invitation.visible = false
 	$DragandDrop/Reference.visible = false
 	$DragandDrop/TextContainer.visible = false
+	follow_up()
 
 func reset_text():
 	for label in labels:

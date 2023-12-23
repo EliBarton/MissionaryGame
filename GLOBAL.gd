@@ -129,6 +129,8 @@ func _process(delta):
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/XPBar.value = $UI/DayScreen/Control/XPBar.value
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/XPBar.max_value = $UI/DayScreen/Control/XPBar.max_value
 	$UI/Areabook/ColorRect/Map/SubViewport/Camera2D.position = $SubViewportContainer/SubViewport/Level/Missionary.position
+	$SubViewportContainer/SubViewport/Level/LevelWorld.update_shadow("player",$SubViewportContainer/SubViewport/Level/Missionary/Sprite.animation, $SubViewportContainer/SubViewport/Level/Missionary/Sprite.frame, $SubViewportContainer/SubViewport/Level/Missionary.global_position)
+	$SubViewportContainer/SubViewport/Level/LevelWorld.update_shadow("companion",$SubViewportContainer/SubViewport/Level/Missionary2/Sprite.animation, $SubViewportContainer/SubViewport/Level/Missionary2/Sprite.frame, $SubViewportContainer/SubViewport/Level/Missionary2.global_position)
 		#$UI/Areabook._on_person_record_pressed(
 		#person_taught.first_name, person_taught.last_name, person_taught.location,
 		#person_taught.level, person_taught.xp, person_taught.acceptance_factor)
