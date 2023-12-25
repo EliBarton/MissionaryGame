@@ -1,6 +1,7 @@
 extends Control
 
 @onready var lesson1file = "res://Scriptures/lesson1scriptures.txt"
+@onready var lesson2file = "res://Scriptures/lesson2scriptures.txt"
 var dragable = preload("res://UI/dragable.tscn")
 var dropable = preload("res://UI/dropable.tscn")
 @onready var global = get_node("/root/Game Master")
@@ -14,9 +15,6 @@ var checkifcorrect = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Top/DialogBox.disabled = true
-	#load_file(lesson1file)
-	#create_game()
-	#visible = false
 
 func _process(delta):
 	if checkifcorrect:
@@ -24,9 +22,15 @@ func _process(delta):
 			all_words_correct()
 
 func follow_up():
-	$Top/DialogBox.disabled = false
-	$Top/DialogBox.initialize("followup1", false)
-	$Top/DialogBox.connect("finished", end_follow_up)
+	if global.person_taught.last_taught_day != 0:
+		$Top/DialogBox.disabled = false
+		if global.person_taught.kept_last_commitment:
+			$Top/DialogBox.initialize("followup1", false)
+		else:
+			$Top/DialogBox.initialize("followup2", false)
+		$Top/DialogBox.connect("finished", end_follow_up)
+	else:
+		$Top/DialogBox.disabled = true
 	$LessonWith.set_text("Lesson with " + global.person_taught.first_name + " " + global.person_taught.last_name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -167,6 +171,8 @@ func start_lesson(lesson):
 	match lesson:
 		0:
 			load_file(lesson1file)
+		1:
+			load_file(lesson2file)
 	create_game()
 
 func _on_restoration_pressed():

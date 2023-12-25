@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var global = get_node("/root/Game Master")
 @onready var areabook = get_node("/root/Game Master/UI/Areabook")
+@onready var player = get_node("/root/Game Master/SubViewportContainer/SubViewport/Level/Missionary")
 var icons = preload("res://characters/character supplements/conversion_icon.tscn")
 var rejectionrange = preload("res://characters/character supplements/rejection_range.tscn")
 var talkrange = preload("res://characters/character supplements/talk_range.tscn")
@@ -23,6 +24,7 @@ var acceptance_factor = 0.99
 var new_person = false
 var last_taught_day = 0
 var levelformula = (level * 10) + 7.7
+var kept_last_commitment = false
 
 var dialog_box = preload("res://UI/dialog_box.tscn")
 
@@ -43,6 +45,10 @@ func _ready():
 
 func _process(delta):
 	if person_record:
+		var look_vector = -(global_position - player.global_position).normalized()
+		var angle = wrapi(int(look_vector.angle() / (PI/4)), 0, 8)
+		$Sprite.play(str(angle))
+		$Sprite.frame = 0
 		person_record.xp = xp
 		person_record.level = level
 		person_record.acceptance_factor = acceptance_factor
@@ -186,21 +192,27 @@ func new_day():
 	if pamphletInvite == 1:
 		if randnum < 1:
 			pamphletInvite = 3
+			kept_last_commitment = false
 		else:
 			pamphletInvite = 2
+			kept_last_commitment = true
 			add_xp(randi_range(15, 25))
 	elif bomInvite == 1:
 		if randnum < 2:
+			kept_last_commitment = false
 			bomInvite = 3
 		else:
 			bomInvite = 2
+			kept_last_commitment = true
 			add_xp(randi_range(25, 35))
 	elif churchInvite == 1:
 		if global.day % 7 == 0:
 			if randnum < 3:
+				kept_last_commitment = false
 				churchInvite = 3
 			else:
 				churchInvite = 2
+				kept_last_commitment = true
 				emit_signal("attended_church")
 				add_xp(randi_range(40, 75))
 	elif baptismInvite == 1:

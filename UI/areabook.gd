@@ -20,7 +20,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$ColorRect/ProgressBar.value = $Timer.time_left
+	#$ColorRect/ProgressBar.value = $Timer.time_left
 	pass
 
 

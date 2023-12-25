@@ -44,14 +44,13 @@ default_font_size = 22
 [node name="Areabook" type="Control"]
 z_index = 5
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -348.0
-offset_bottom = 648.0
+anchor_bottom = 1.0
+offset_left = 1572.0
+offset_bottom = -432.0
 grow_horizontal = 0
-pivot_offset = Vector2(348, 0)
 script = ExtResource("1_k23jo")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -415,10 +414,11 @@ theme = SubResource("Theme_kcqk0")
 
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
 layout_mode = 0
-offset_right = 341.0
-offset_bottom = 27.0
+anchor_right = 1.0
+anchor_bottom = 0.0416667
 max_value = 30.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="ColorRect/ProgressBar"]
 layout_mode = 1

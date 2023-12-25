@@ -4,14 +4,11 @@ var blank_record = preload("res://UI/personrecord.tscn")
 var person_records = []
 var dot = preload("res://UI/dot.tscn")
 var dots = []
-@onready var lesson1file = "res://Scriptures/lesson1scriptures.txt"
+#@onready var lesson1file = "res://Scriptures/lesson1scriptures.txt"
 var church_screen = preload("res://church_screen.tscn")
 const STARTPLACE = Vector2(1450, 580)
 
 var day = 1
-
-
-
 
 var level = 1
 var xp = 0
@@ -55,7 +52,7 @@ func person_being_taught(person):
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	person_taught = person
 	$UI/Areabook.pause_day()
-	$UI/Areabook.visible = false
+	#$UI/Areabook.visible = false
 	$UI/TeachingScreen.visible = true
 	$UI/TeachingScreen.reset()
 	#$UI/TeachingScreen.load_file(lesson1file)
@@ -92,6 +89,7 @@ func new_day():
 	$UI/Areabook/Timer.paused = true
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("new_day")
+	$UI/DayScreen.new_day()
 	await wait(1)
 	gain_experience(lessons*15)
 	await wait(1)

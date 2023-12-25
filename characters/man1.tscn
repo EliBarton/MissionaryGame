@@ -518,7 +518,6 @@ first_name = "Elder"
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sg4e5")
 animation = &"7"
-frame_progress = 0.0963117
 offset = Vector2(0, -15)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

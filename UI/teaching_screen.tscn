@@ -31,6 +31,7 @@ grow_vertical = 2
 script = ExtResource("1_f07b8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.862745)
 z_index = -1
 layout_mode = 0
 offset_right = 1152.0
@@ -39,6 +40,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
 [node name="Top" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchor_left = 0.652778
 anchor_top = 0.16358
@@ -133,11 +135,10 @@ metadata/_edit_use_anchors_ = true
 [node name="TextContainer" type="HFlowContainer" parent="DragandDrop"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.23766
-anchor_right = 1.0
-anchor_bottom = 0.527772
-offset_top = -0.0039978
-offset_bottom = 0.0039978
+anchor_left = 0.066313
+anchor_top = 0.237654
+anchor_right = 0.933687
+anchor_bottom = 0.623457
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
