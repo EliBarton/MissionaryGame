@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1mvxlul6ub6r"]
+[gd_scene load_steps=17 format=3 uid="uid://d1mvxlul6ub6r"]
 
+[ext_resource type="Script" path="res://church_screen.gd" id="1_d7hd3"]
 [ext_resource type="Texture2D" uid="uid://d2o6n1n72ej6t" path="res://church.png" id="1_ehqah"]
 [ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="2_y00sy"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_4uw4y"]
+[ext_resource type="Texture2D" uid="uid://dgn34qtfff0cb" path="res://Player2.png" id="4_gj8wu"]
 
 [sub_resource type="Theme" id="Theme_ehn1k"]
 default_font = ExtResource("3_4uw4y")
@@ -26,22 +28,39 @@ font_size = 25
 font = ExtResource("3_4uw4y")
 font_size = 50
 
-[sub_resource type="LabelSettings" id="LabelSettings_sky0w"]
+[sub_resource type="LabelSettings" id="LabelSettings_3xkkf"]
 font = ExtResource("3_4uw4y")
-font_size = 18
+font_size = 30
 
-[sub_resource type="LabelSettings" id="LabelSettings_ji82x"]
+[sub_resource type="LabelSettings" id="LabelSettings_g1oyl"]
 font = ExtResource("3_4uw4y")
-font_size = 33
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_q808v"]
+font = ExtResource("3_4uw4y")
+font_size = 100
+
+[sub_resource type="Theme" id="Theme_wfy26"]
+default_font = ExtResource("3_4uw4y")
+default_font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_45tlh"]
+font = ExtResource("3_4uw4y")
+font_size = 100
+
+[sub_resource type="Theme" id="Theme_icn7h"]
+default_font = ExtResource("3_4uw4y")
+default_font_size = 50
+/fonts/disabledlineedit = ExtResource("3_4uw4y")
 
 [node name="ChurchScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 624.0
+script = ExtResource("1_d7hd3")
 
 [node name="Church" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -67,6 +86,7 @@ region_enabled = true
 region_rect = Rect2(112, 0, 16, 32)
 
 [node name="continueButton" type="Button" parent="Church"]
+layout_mode = 0
 offset_left = 949.0
 offset_top = 508.0
 offset_right = 1115.0
@@ -75,6 +95,7 @@ theme = SubResource("Theme_ehn1k")
 text = "Continue"
 
 [node name="zeroLabel" type="Label" parent="Church"]
+layout_mode = 0
 offset_left = 55.0
 offset_top = 492.0
 offset_right = 883.0
@@ -83,6 +104,7 @@ text = "Maybe Next Time..."
 label_settings = SubResource("LabelSettings_wxl2y")
 
 [node name="oneLabel" type="Label" parent="Church"]
+layout_mode = 0
 offset_left = 55.0
 offset_top = 492.0
 offset_right = 883.0
@@ -91,6 +113,7 @@ text = "You are a Winner!!"
 label_settings = SubResource("LabelSettings_k5qos")
 
 [node name="PeoplePresent" type="GridContainer" parent="Church"]
+layout_mode = 0
 offset_left = 784.0
 offset_top = 52.0
 offset_right = 1088.0
@@ -116,25 +139,157 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Accounting"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "PEEOPOLS FOUND!!! "
+[node name="VBoxContainer2" type="VBoxContainer" parent="Accounting"]
+layout_mode = 2
+offset_left = 1155.0
+offset_top = 159.0
+offset_right = 1655.0
+offset_bottom = 797.0
 
-[node name="NewPeeps" type="GridContainer" parent="Accounting"]
-custom_minimum_size = Vector2(0, 50)
+[node name="Missionaries" type="GridContainer" parent="Accounting/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Accounting/VBoxContainer2/Missionaries"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Missionary1" type="Sprite2D" parent="Accounting/VBoxContainer2/Missionaries/Control"]
+position = Vector2(200, 182)
+scale = Vector2(5, 5)
+texture = ExtResource("2_y00sy")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Missionary2" type="Sprite2D" parent="Accounting/VBoxContainer2/Missionaries/Control"]
+position = Vector2(300, 182)
+scale = Vector2(5, 5)
+texture = ExtResource("4_gj8wu")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
+[node name="Label" type="Label" parent="Accounting/VBoxContainer2/Missionaries"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Elder Barton & Elder Anderson"
+label_settings = SubResource("LabelSettings_3xkkf")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CurrentLevel" type="GridContainer" parent="Accounting/VBoxContainer2"]
+custom_minimum_size = Vector2(320, 50)
+layout_mode = 2
+columns = 2
+
+[node name="Label2" type="Label" parent="Accounting/VBoxContainer2/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Current Level"
+label_settings = SubResource("LabelSettings_g1oyl")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="Accounting/VBoxContainer2/CurrentLevel"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "1"
+label_settings = SubResource("LabelSettings_q808v")
+horizontal_alignment = 1
+
+[node name="XPBar" type="ProgressBar" parent="Accounting/VBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_wfy26")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Accounting"]
+layout_mode = 2
+offset_left = 50.0
+offset_right = 894.0
+offset_bottom = 1036.0
+
+[node name="BoxContainer" type="BoxContainer" parent="Accounting/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="NewPeeps" type="GridContainer" parent="Accounting/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
 size_flags_horizontal = 4
 columns = 2
 
-[node name="Label" type="Label" parent="Accounting/NewPeeps"]
+[node name="Label" type="Label" parent="Accounting/VBoxContainer/NewPeeps"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 text = "New People To Teach:      "
-label_settings = SubResource("LabelSettings_sky0w")
+label_settings = SubResource("LabelSettings_g1oyl")
 
-[node name="Number" type="Label" parent="Accounting/NewPeeps"]
+[node name="Number" type="Label" parent="Accounting/VBoxContainer/NewPeeps"]
 layout_mode = 2
 text = "0"
-label_settings = SubResource("LabelSettings_ji82x")
+label_settings = SubResource("LabelSettings_45tlh")
+
+[node name="AtChurch" type="GridContainer" parent="Accounting/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="Accounting/VBoxContainer/AtChurch"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "People at Church:         "
+label_settings = SubResource("LabelSettings_g1oyl")
+
+[node name="Number" type="Label" parent="Accounting/VBoxContainer/AtChurch"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_45tlh")
+
+[node name="OnDate" type="GridContainer" parent="Accounting/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="Accounting/VBoxContainer/OnDate"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Scheduled Baptisms:       "
+label_settings = SubResource("LabelSettings_g1oyl")
+
+[node name="Number" type="Label" parent="Accounting/VBoxContainer/OnDate"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_45tlh")
+
+[node name="Baptized" type="GridContainer" parent="Accounting/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Label" type="Label" parent="Accounting/VBoxContainer/Baptized"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "People Baptized:          "
+label_settings = SubResource("LabelSettings_g1oyl")
+
+[node name="Number" type="Label" parent="Accounting/VBoxContainer/Baptized"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_45tlh")
+
+[node name="ContinueButton" type="Button" parent="Accounting"]
+layout_mode = 0
+offset_left = 1493.0
+offset_top = 849.0
+offset_right = 1815.0
+offset_bottom = 993.0
+theme = SubResource("Theme_icn7h")
+text = "Continue"
+
+[connection signal="pressed" from="Church/continueButton" to="." method="to_weekly_accounting"]
+[connection signal="pressed" from="Accounting/ContinueButton" to="." method="_on_continue_button_pressed"]

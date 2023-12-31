@@ -1,11 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6h4iwd2fhnwo"]
+[gd_scene load_steps=6 format=3 uid="uid://b6h4iwd2fhnwo"]
 
 [ext_resource type="Script" path="res://UI/dragable.gd" id="1_mfemt"]
-[ext_resource type="LabelSettings" uid="uid://bx1teg28se4nd" path="res://UI/text_label_settings.tres" id="2_no4eu"]
+[ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_iuem6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhlyk"]
 resource_local_to_scene = true
 size = Vector2(20, 30)
+
+[sub_resource type="Theme" id="Theme_iqtxl"]
+default_font = ExtResource("2_iuem6")
+default_font_size = 24
+/fonts/disabledlineedit = ExtResource("2_iuem6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7yor"]
+font_size = 20
 
 [node name="Dragable" type="Control"]
 process_mode = 3
@@ -37,7 +45,9 @@ offset_right = 42.0
 offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = ExtResource("2_no4eu")
+theme = SubResource("Theme_iqtxl")
+text = "test"
+label_settings = SubResource("LabelSettings_q7yor")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true

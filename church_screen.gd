@@ -1,9 +1,10 @@
-extends Node2D
+extends Control
 
 var people_present = 0
 var win = false
-
+@onready var global = get_node("/root/Game Master")
 signal continue_pressed
+
 
 func _ready():
 	pass # Replace with function body.
@@ -25,6 +26,16 @@ func set_people_present(amount):
 func _process(delta):
 	pass
 
+func to_weekly_accounting():
+	$Church.visible = false
+	$Accounting/VBoxContainer/NewPeeps/Number.set_text(str(global.newpeeps))
+	$Accounting/VBoxContainer/AtChurch/Number.set_text(str(global.atchurch))
+	$Accounting/VBoxContainer/OnDate/Number.set_text(str(global.ondate))
+	$Accounting/VBoxContainer/Baptized/Number.set_text(str(global.baptized))
+	$Accounting/VBoxContainer2/CurrentLevel/Level.set_text(str(global.level))
+	$Accounting/VBoxContainer2/XPBar.max_value = global.level_formula
+	$Accounting/VBoxContainer2/XPBar.value = global.xp
+	$Accounting.visible = true
 
 func _on_continue_button_pressed():
 	if win:

@@ -1,7 +1,7 @@
 extends Control
 
-@onready var lesson1file = "res://Scriptures/lesson1scriptures.txt"
-@onready var lesson2file = "res://Scriptures/lesson2scriptures.txt"
+@onready var lesson1file = "res://Scriptures/lesson1scriptures.json"
+@onready var lesson2file = "res://Scriptures/lesson2scriptures.json"
 var dragable = preload("res://UI/dragable.tscn")
 var dropable = preload("res://UI/dropable.tscn")
 @onready var global = get_node("/root/Game Master")
@@ -34,7 +34,7 @@ func follow_up():
 	$LessonWith.set_text("Lesson with " + global.person_taught.first_name + " " + global.person_taught.last_name)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func load_file(file):
+func load_txt_file(file):
 	visible = true
 	var f = FileAccess.open(file, FileAccess.READ)
 	var line = f.get_line()
@@ -57,6 +57,17 @@ func load_file(file):
 	$DragandDrop/TextContainer/Label2.set_text(text)
 	if f.get_position() >= f.get_length():
 		at_line = 0
+	f.close()
+
+func load_file(file):
+	#Loads JSON files
+	var f = FileAccess.open(file, FileAccess.READ)
+	var library = JSON.parse_string(f.get_as_text())
+	var rand_list = library[str(randi_range(1, library.size()))].duplicate()
+	var reference = rand_list[0]
+	var quote = rand_list[1]
+	$DragandDrop/Reference.set_text(reference)
+	$DragandDrop/TextContainer/Label2.set_text(quote)
 	f.close()
 
 func create_game():
@@ -102,12 +113,12 @@ func create_game():
 		$DragandDrop/TextContainer.add_child(new_label)
 		new_label.set_text(text)
 		new_label.visible = true
-		new_label.custom_minimum_size.x = (new_label.get_total_character_count() + .5) * 12
-		new_label.get_rect().size.x = (new_label.get_total_character_count() + .5) * 12
+		new_label.custom_minimum_size.x = (new_label.get_total_character_count() + .5) * 6
+		new_label.get_rect().size.x = (new_label.get_total_character_count() + .5) * 6
 		labels.append(new_label)
 		if text.contains("___"):
 			var new_dropable = dropable.instantiate()
-			new_dropable.position.x = (new_label.get_total_character_count()) * 6
+			new_dropable.position.x = (new_label.get_total_character_count()) * 5.5
 			Worldwide.numwrong += 1
 			new_dropable.correct_word = splittext2[i]
 			new_label.add_child(new_dropable)

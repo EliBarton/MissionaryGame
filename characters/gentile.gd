@@ -188,7 +188,7 @@ func update_record():
 func new_day():
 	newicon.play("love")
 	randomize()
-	var randnum = randf_range(0, level/2.0)
+	var randnum = randf_range(0, level)
 	if pamphletInvite == 1:
 		if randnum < 1:
 			pamphletInvite = 3
@@ -198,7 +198,7 @@ func new_day():
 			kept_last_commitment = true
 			add_xp(randi_range(15, 25))
 	elif bomInvite == 1:
-		if randnum < 2:
+		if randnum < 3:
 			kept_last_commitment = false
 			bomInvite = 3
 		else:
@@ -207,7 +207,7 @@ func new_day():
 			add_xp(randi_range(25, 35))
 	elif churchInvite == 1:
 		if global.day % 7 == 0:
-			if randnum < 3:
+			if randnum < 4:
 				kept_last_commitment = false
 				churchInvite = 3
 			else:

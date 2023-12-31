@@ -8,16 +8,18 @@ var disabled = false
 
 signal finished
 
+var wait_time = .5
+
 func initialize(text_code, pausegame):
 	var file = FileAccess.open(dialog_file, FileAccess.READ)
 	var dialog_library = JSON.parse_string(file.get_as_text())
 	selected_text = dialog_library[text_code].duplicate()
 	get_tree().paused = pausegame
-	$Timer.start(1)
+	$Timer.start(wait_time)
 	show_next_line()
 
 func show_next_line():
-	$Timer.start(1)
+	$Timer.start(wait_time)
 	if selected_text.size() > 0:
 		$Label.set_text(selected_text.pop_front())
 	else:

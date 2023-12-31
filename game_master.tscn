@@ -316,8 +316,8 @@ scale = Vector2(1.667, 1.667)
 process_mode = 3
 z_index = 0
 anchor_left = 0.697856
-offset_left = 0.115967
-offset_right = -233.002
+offset_left = 0.116455
+offset_right = -233.001
 scale = Vector2(1.667, 1.667)
 
 [node name="DayScreen" parent="UI" instance=ExtResource("3_ua1mx")]

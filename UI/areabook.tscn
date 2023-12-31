@@ -44,11 +44,13 @@ default_font_size = 22
 [node name="Areabook" type="Control"]
 z_index = 5
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1572.0
 offset_bottom = -432.0
 grow_horizontal = 0
+grow_vertical = 2
 script = ExtResource("1_k23jo")
 metadata/_edit_use_anchors_ = true
 

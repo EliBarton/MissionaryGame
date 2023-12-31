@@ -94,10 +94,9 @@ func _on_area_2d_body_entered(body):
 
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("dropzone"):
-		if body_ref:
-			body_ref.occupied = false
 		if body_ref == body:
 			is_inside_dropable = false
+			body_ref.occupied = false
 		else:
 			if not body.occupied:
 				pass

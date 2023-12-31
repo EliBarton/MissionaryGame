@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://deeyop52cptim"]
+[gd_scene load_steps=13 format=3 uid="uid://deeyop52cptim"]
 
 [ext_resource type="Script" path="res://TeachingScreen.gd" id="1_f07b8"]
 [ext_resource type="LabelSettings" uid="uid://dncpotspoqgth" path="res://UI/title_label_settings.tres" id="2_02j4s"]
@@ -13,6 +13,9 @@
 default_font = ExtResource("3_xhnxj")
 default_font_size = 24
 /fonts/disabledlineedit = ExtResource("3_xhnxj")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1gsod"]
+font_size = 20
 
 [sub_resource type="Theme" id="Theme_yqi4q"]
 default_font = ExtResource("3_xhnxj")
@@ -124,9 +127,9 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.362069
-anchor_top = 0.580247
+anchor_top = 0.725309
 anchor_right = 0.685284
-anchor_bottom = 0.85516
+anchor_bottom = 1.00022
 grow_horizontal = 2
 grow_vertical = 2
 columns = 4
@@ -138,19 +141,17 @@ anchors_preset = -1
 anchor_left = 0.066313
 anchor_top = 0.237654
 anchor_right = 0.933687
-anchor_bottom = 0.623457
-grow_horizontal = 2
-grow_vertical = 2
+anchor_bottom = 0.697531
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="DragandDrop/TextContainer"]
-custom_minimum_size = Vector2(50, 35)
+custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 theme = SubResource("Theme_gh8c2")
 text = "Men"
+label_settings = SubResource("LabelSettings_1gsod")
 horizontal_alignment = 1
-autowrap_mode = 2
 
 [node name="position" type="Marker2D" parent="DragandDrop/TextContainer/Label2"]
 
@@ -209,6 +210,7 @@ theme = SubResource("Theme_opnq8")
 text = "Be baptized and confirmed"
 
 [node name="LessonToTeach" type="Label" parent="DragandDrop"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.695988
