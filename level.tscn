@@ -14,10 +14,6 @@ scale = Vector2(2, 2)
 [node name="Missionary" parent="." instance=ExtResource("2_q6nps")]
 position = Vector2(834.5, 793.5)
 
-[node name="Camera2D" type="Camera2D" parent="Missionary"]
-editor_draw_limits = true
-metadata/_edit_lock_ = true
-
 [node name="Missionary2" parent="." instance=ExtResource("3_nvd5i")]
 position = Vector2(878.5, 824.5)
 

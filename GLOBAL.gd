@@ -8,7 +8,7 @@ var dots = []
 var church_screen = preload("res://church_screen.tscn")
 const STARTPLACE = Vector2(1450, 580)
 
-var day = 1
+var day : int = 1
 
 var level = 1
 var xp = 0
@@ -26,11 +26,30 @@ var person_taught = null
 signal update_commitments
 
 func _ready():
+	Worldwide.start_session()
+	if day > 1:
+		new_day()
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("beginning")
 	$UI/TeachingScreen.visible = false
 	$UI/DayScreen/Control/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
+	
+
+func save():
+	var save_dict = {
+		"path" : get_path(),
+		"person_records" : person_records,
+		"level" : level,
+		"xp" : xp,
+		"xp_total" : xp_total,
+		"newpeeps" : newpeeps,
+		"atchurch" : atchurch,
+		"ondate" : ondate,
+		"baptized" : baptized,
+		"day" : day
+	}
+	return save_dict
 
 func create_new_person_record(first_name, last_name, location):
 	var new_person = blank_record.instantiate()
@@ -100,6 +119,19 @@ func new_day():
 	if day % 7 == 0:
 		$UI.visible = false
 		$SubViewportContainer/SubViewport/Level.visible = false
+		print("Time to go to church Elders")
+		var newChurchScreen = church_screen.instantiate()
+		add_child(newChurchScreen)
+		newChurchScreen.set_people_present(atchurch)
+		$AnimationPlayer.pause()
+	elif day % 7 == 1:
+		$UI.visible = true
+		$SubViewportContainer/SubViewport/Level.visible = true
+		newpeeps = 0
+		atchurch = 0
+		ondate = 0
+		baptized = 0
+		print("new week")
 
 func gain_experience(amount):
 	xp_total += amount
@@ -122,6 +154,9 @@ func gain_experience(amount):
 			await level_up()
 
 func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		Worldwide.save_game()
+		print("game_saved")
 	$UI/DayScreen/Control/CurrentLevel/Level.set_text(str(level))
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/CurrentLevel/Level.set_text(str(level))
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/XPBar.value = $UI/DayScreen/Control/XPBar.value
@@ -157,14 +192,8 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "new_day":
 		if day % 7 != 0:
 			$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_INHERIT
-			$UI/Areabook/Timer.paused = false
 			$SubViewportContainer/SubViewport/Level/Missionary.new_day()
-		else:
-			print("Time to go to church Elders")
-			var newChurchScreen = church_screen.instantiate()
-			add_child(newChurchScreen)
-			newChurchScreen.set_people_present(atchurch)
-			$AnimationPlayer.pause()
+		
 		lessons = 0
 
 func wait(duration):  #Duration in seconds

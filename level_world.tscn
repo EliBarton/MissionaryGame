@@ -547,6 +547,7 @@ y_sort_enabled = true
 position = Vector2(1095, 758)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
@@ -562,6 +563,7 @@ y_sort_enabled = true
 position = Vector2(1382.91, 770.456)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree2"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
@@ -577,6 +579,7 @@ y_sort_enabled = true
 position = Vector2(1408.91, 417.456)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree3"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
@@ -592,6 +595,7 @@ y_sort_enabled = true
 position = Vector2(1140.91, 366.456)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree4"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
@@ -607,6 +611,7 @@ y_sort_enabled = true
 position = Vector2(881.909, 543.456)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree5"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(2, -24)
 region_enabled = true
@@ -622,6 +627,7 @@ y_sort_enabled = true
 position = Vector2(569, 783)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree6"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(-0.435, -35.125)
 region_enabled = true
@@ -637,6 +643,7 @@ y_sort_enabled = true
 position = Vector2(711, 783)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree7"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(-0.435, -35.125)
 region_enabled = true
@@ -652,6 +659,7 @@ y_sort_enabled = true
 position = Vector2(506, 603)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree9"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(-0.435, -35.125)
 region_enabled = true
@@ -667,6 +675,7 @@ y_sort_enabled = true
 position = Vector2(747, 604)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree10"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(-0.435, -35.125)
 region_enabled = true
@@ -682,6 +691,7 @@ y_sort_enabled = true
 position = Vector2(1473, 740)
 
 [node name="Sprite2D" type="Sprite2D" parent="Trees/Tree8"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(-0.435, -35.125)
 region_enabled = true
@@ -697,6 +707,7 @@ y_sort_enabled = true
 position = Vector2(1144, 842)
 
 [node name="Sprite2D" type="Sprite2D" parent="Mailbox"]
+y_sort_enabled = true
 texture = ExtResource("2_gktgd")
 offset = Vector2(0, -18)
 region_enabled = true
@@ -1000,6 +1011,7 @@ region_rect = Rect2(448, 16, 128, 248)
 metadata/_edit_lock_ = true
 
 [node name="Buildings" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Building" type="StaticBody2D" parent="Buildings" groups=["navigationavoid"]]
 y_sort_enabled = true

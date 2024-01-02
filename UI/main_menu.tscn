@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://6a3dyyopqbmh"]
+[gd_scene load_steps=17 format=3 uid="uid://6a3dyyopqbmh"]
 
 [ext_resource type="Script" path="res://UI/main_menu.gd" id="1_a2r4d"]
 [ext_resource type="FontFile" uid="uid://djbye0tl13oo1" path="res://fonts/bpdots.unicasesquare-bold.otf" id="1_nfssn"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_7cp34"]
 [ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="4_fcdbp"]
 [ext_resource type="Texture2D" uid="uid://dgn34qtfff0cb" path="res://Player2.png" id="5_jakhi"]
+[ext_resource type="Script" path="res://UI/loadScreen.gd" id="6_u6wya"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0bfwx"]
 font = ExtResource("1_nfssn")
@@ -119,6 +120,70 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../loadScreen:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g78ty"]
+resource_name = "main2load"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(8, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(556, 304), Vector2(556, 500)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../loadScreen:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(4, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_6iy81"]
@@ -240,6 +305,7 @@ tracks/4/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_03tbn"]
 _data = {
 "RESET": SubResource("Animation_ghncp"),
+"main2load": SubResource("Animation_g78ty"),
 "main2new": SubResource("Animation_6iy81"),
 "startnewgame": SubResource("Animation_dwscb")
 }
@@ -255,6 +321,10 @@ font_size = 20
 [sub_resource type="LabelSettings" id="LabelSettings_arilv"]
 font = ExtResource("3_7cp34")
 font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4ply"]
+font = ExtResource("3_7cp34")
+font_size = 30
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -425,6 +495,15 @@ offset_bottom = 304.292
 theme = SubResource("Theme_3tjo8")
 text = "Start Game"
 
+[node name="backButton" type="Button" parent="newScreen"]
+layout_mode = 0
+offset_left = -539.803
+offset_top = -293.202
+offset_right = -462.803
+offset_bottom = -224.202
+theme = SubResource("Theme_3tjo8")
+text = "<--"
+
 [node name="ColorRect" type="ColorRect" parent="newScreen"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -448,9 +527,54 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("6_u6wya")
 metadata/_edit_lock_ = true
 
+[node name="ScrollContainer" type="ScrollContainer" parent="loadScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -12.0
+anchor_top = -5.0
+anchor_right = -2.0
+anchor_bottom = 6.25
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="loadScreen/ScrollContainer"]
+custom_minimum_size = Vector2(400, 450)
+layout_mode = 2
+
+[node name="LoadButton" type="Button" parent="loadScreen"]
+layout_mode = 0
+offset_left = 182.452
+offset_top = -100.0
+offset_right = 456.452
+offset_bottom = 13.0003
+text = "Load Game"
+
+[node name="backButton" type="Button" parent="loadScreen"]
+layout_mode = 0
+offset_left = -539.203
+offset_top = -293.202
+offset_right = -463.203
+offset_bottom = -223.202
+theme = SubResource("Theme_3tjo8")
+text = "<--"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="loadScreen"]
+layout_mode = 0
+offset_left = 183.652
+offset_top = 20.5351
+offset_right = 433.652
+offset_bottom = 270.535
+
+[node name="DayLabel" type="Label" parent="loadScreen/VBoxContainer"]
+layout_mode = 2
+text = "Day 1"
+label_settings = SubResource("LabelSettings_l4ply")
+
 [node name="settingsScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -465,9 +589,23 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
+[node name="backButton" type="Button" parent="settingsScreen"]
+layout_mode = 0
+offset_left = -539.803
+offset_top = -293.202
+offset_right = -463.803
+offset_bottom = -223.202
+theme = SubResource("Theme_3tjo8")
+text = "<--"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Main/newGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Main/loadGame" to="." method="_on_load_game_pressed"]
 [connection signal="pressed" from="Main/quit" to="." method="_on_quit_pressed"]
 [connection signal="text_changed" from="newScreen/Label/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_changed" from="newScreen/Label2/LineEdit2" to="." method="_on_line_edit_2_text_changed"]
 [connection signal="pressed" from="newScreen/startButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="newScreen/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="loadScreen/LoadButton" to="loadScreen" method="_on_load_button_pressed"]
+[connection signal="pressed" from="loadScreen/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="settingsScreen/backButton" to="." method="_on_back_button_pressed"]

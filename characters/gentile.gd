@@ -16,11 +16,11 @@ var talkmode = false
 var teachmode = false
 var newtalkrange = null
 var level = 1
-var xp = 0
+var xp : int = 0
 var xp_total = 0
 var person_record
 var location = Vector2()
-var acceptance_factor = 0.99
+@export var acceptance_factor = 0.09
 var new_person = false
 var last_taught_day = 0
 var levelformula = (level * 10) + 7.7
@@ -43,6 +43,34 @@ func _ready():
 	connect("being_taught", global.person_being_taught)
 	connect("attended_church", global.person_at_church)
 
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"path" : get_path(),
+		"new_person" : new_person,
+		#"first_name" : first_name,
+		#"last_name" : last_name,
+		"pos_x" : position.x,
+		"pos_y" : position.y,
+		#"icon" : newicon,
+		"love" : love,
+		"talkmode" : talkmode,
+		"teachmode" : teachmode,
+		#"talkrange" : talkrange,
+		"level" : level,
+		"xp" : xp,
+		"xp_total" : xp_total,
+		#"person_record" : null,
+		"acceptance_factor" : acceptance_factor,
+		"last_taught_day" : last_taught_day,
+		"kept_last_commitment" : kept_last_commitment,
+		"pamphletInvite" : pamphletInvite,
+		"bomInvite" : bomInvite,
+		"churchInvite" : churchInvite,
+		"baptismInvite" : baptismInvite 
+	}
+	return save_dict
+
 func _process(delta):
 	if person_record:
 		var look_vector = -(global_position - player.global_position).normalized()
@@ -62,11 +90,8 @@ func received_material(type):
 		if newicon != null:
 			newicon.queue_free()
 		if type == 1:
-			newicon = icons.instantiate()
-			add_child(newicon)
-			newicon.position.y = -40
+			create_new_icon()
 			newicon.play("thinking")
-			newicon.connect("animation_finished", done_thinking)
 
 func done_thinking():
 	randomize()
@@ -113,11 +138,7 @@ func loved_it():
 	#newicon.pause()
 	love = true
 	if not person_record:
-		newtalkrange = talkrange.instantiate()
-		add_child(newtalkrange)
-		newtalkrange.connect("body_shape_entered", talk_to_player_in_range)
-		newtalkrange.connect("body_shape_exited", player_left)
-		newtalkrange.connect("input_event", _on_talkrange_input_event)
+		create_new_talk_range()
 	else:
 		teachmode = true
 		talkmode = false
@@ -147,8 +168,7 @@ func player_left(body_id, body, body_shape, area_shape):
 func _on_talkrange_input_event(viewport, event, shape_idx):
 	if talkmode:
 		if (event is InputEventMouseButton && event.pressed):
-			person_record = global.create_new_person_record(
-				first_name, last_name, position)
+			create_new_person_record()
 			talkmode = false
 			teachmode = true
 			newicon.play("teach")
@@ -256,3 +276,29 @@ func create_dialog_box(text_code):
 func on_dialog_finished():
 	global.process_mode = Node.PROCESS_MODE_ALWAYS
 	areabook._on_button_people_pressed()
+
+func create_new_person_record():
+	person_record = global.create_new_person_record(first_name, last_name, position)
+	update_record()
+
+func create_new_icon():
+	newicon = icons.instantiate()
+	add_child(newicon)
+	newicon.position.y = -40
+	
+	newicon.connect("animation_finished", done_thinking)
+
+func create_new_talk_range():
+	newtalkrange = talkrange.instantiate()
+	add_child(newtalkrange)
+	newtalkrange.connect("body_shape_entered", talk_to_player_in_range)
+	newtalkrange.connect("body_shape_exited", player_left)
+	newtalkrange.connect("input_event", _on_talkrange_input_event)
+
+func load_profile():
+	create_new_person_record()
+	create_new_icon()
+	newicon.play("love")
+	create_new_talk_range()
+	global.connect("update_commitments", new_day)
+	$Name.set_text(first_name + " " + last_name)

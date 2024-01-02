@@ -28,6 +28,9 @@ func initialize():
 	visible = true
 	$RightSide/Day.set_text("Day " + str(global.day))
 	$RightSide/CurrentLevel/Level.set_text(str(global.level))
+	$LeftSide/Cardio/ProgressBar.value = Worldwide.cardio
+	$LeftSide/GetOut/ProgressBar.value = Worldwide.getout
+	$LeftSide/Diligence/ProgressBar.value  = Worldwide.diligence
 
 func _on_cardio_button_pressed():
 	Worldwide.cardio += 1

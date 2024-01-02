@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://v4kqjl86427j"]
+
+[ext_resource type="Script" path="res://Camera.gd" id="1_68j5a"]
+
+[node name="Camera" type="Camera2D"]
+editor_draw_limits = true
+script = ExtResource("1_68j5a")
+metadata/_edit_lock_ = true

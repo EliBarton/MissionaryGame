@@ -5,13 +5,15 @@ var last_name = ""
 var location = Vector2()
 var level = 1
 var acceptance_factor = 0.8
-var xp = 0
+var xp : int = 0
 var dot = null
 
 var pamphletInvite = 0
 var bomInvite = 0
 var churchInvite = 0
 var baptismInvite = 0
+
+var load_from_file = false
 
 signal picked
 # Called when the node enters the scene tree for the first time.

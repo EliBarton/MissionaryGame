@@ -68,6 +68,8 @@ func received_material(type):
 		lose_sr(randi_range(15, 30))
 
 func lose_sr(amount):
+	if amount > 5:
+		$Camera.add_trauma(1)
 	spiritual_resilience -= amount
 	var tween = get_tree().create_tween()
 	if spiritual_resilience <= 0:

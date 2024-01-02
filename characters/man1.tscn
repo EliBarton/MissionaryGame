@@ -510,7 +510,7 @@ font_size = 10
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Man" type="CharacterBody2D" groups=["gentiles"]]
+[node name="Man" type="CharacterBody2D" groups=["gentiles", "persist"]]
 y_sort_enabled = true
 script = ExtResource("1_l248d")
 first_name = "Elder"

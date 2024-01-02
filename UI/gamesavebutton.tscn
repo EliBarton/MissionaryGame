@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb2egp02rjinb"]
+
+[ext_resource type="Script" path="res://UI/gamesavebutton.gd" id="1_3rpmt"]
+
+[node name="GameSaveButton" type="Button"]
+custom_minimum_size = Vector2(0, 50)
+text = "Elder Blah and Elder Bleh"
+script = ExtResource("1_3rpmt")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
