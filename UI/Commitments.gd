@@ -6,9 +6,6 @@ var b = "Invited"
 var c = "Keeping"
 var d = "Not Keeping"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func update_invitations(pamInvite, BoMInvite, ChurchInvite, BapInvite):
 	#Pamphlet Invitation

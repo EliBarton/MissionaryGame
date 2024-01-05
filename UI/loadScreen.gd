@@ -11,7 +11,9 @@ func _ready():
 	$LoadButton.disabled = true
 
 func load_saves():
-	for file in DirAccess.get_files_at("res://saves/"):
+	if not DirAccess.get_directories_at("user://").has("saves"):
+		DirAccess.make_dir_absolute("user://saves/")
+	for file in DirAccess.get_files_at("user://saves/"):
 		if file.ends_with(".save"):
 			var newgamesave = gamesavebutton.instantiate()
 			$ScrollContainer/VBoxContainer.add_child(newgamesave)
@@ -26,11 +28,11 @@ func save_selected(button):
 		i.disabled = false
 	button.disabled = true
 	selected_save = button.text + ".save"
-	var f = FileAccess.open("res://saves/" + selected_save, FileAccess.READ)
+	var f = FileAccess.open("user://saves/" + selected_save, FileAccess.READ)
 	while f.get_position() < f.get_length():
 		var json_string = f.get_line()
 		var json = JSON.new()
-		var parse_result = json.parse(json_string)
+		json.parse(json_string)
 		var node_data = json.get_data()
 		if node_data.keys().has("day"):
 			$VBoxContainer/DayLabel.set_text("Day " + str(node_data["day"] + 1))

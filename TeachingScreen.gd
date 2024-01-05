@@ -16,7 +16,7 @@ var checkifcorrect = false
 func _ready():
 	$Top/DialogBox.disabled = true
 
-func _process(delta):
+func _process(_delta):
 	if checkifcorrect:
 		if Worldwide.numwrong <= 0:
 			all_words_correct()

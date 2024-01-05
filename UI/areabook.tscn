@@ -462,13 +462,8 @@ z_index = -2
 [node name="Dot" parent="ColorRect/Map/SubViewport" instance=ExtResource("8_o7tap")]
 visible = false
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 40.0
-one_shot = true
-
 [connection signal="pressed" from="ColorRect/Buttons/ButtonProgress" to="." method="_on_button_progress_pressed"]
 [connection signal="pressed" from="ColorRect/Buttons/ButtonPeople" to="." method="_on_button_people_pressed"]
 [connection signal="pressed" from="ColorRect/Buttons/ButtonMap" to="." method="_on_button_map_pressed"]
 [connection signal="pressed" from="ColorRect/Buttons/ButtonToggle" to="." method="_on_button_toggle_pressed"]
 [connection signal="pressed" from="ColorRect/PersonRecord/BackToPeopleButton" to="." method="_on_back_to_people_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

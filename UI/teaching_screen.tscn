@@ -253,6 +253,7 @@ text = "Heavenly Father's
 Plan of Salvation"
 
 [node name="Gospel" type="Button" parent="DragandDrop/LessonToTeach/ButtonContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 theme = SubResource("Theme_opnq8")
@@ -260,6 +261,7 @@ text = "The Gospel of
 Jesus Christ"
 
 [node name="Becoming" type="Button" parent="DragandDrop/LessonToTeach/ButtonContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
 theme = SubResource("Theme_opnq8")

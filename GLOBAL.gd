@@ -13,7 +13,7 @@ var day : int = 1
 var level = 1
 var xp = 0
 var xp_total = 0
-var levelformula = (level * 10) + 7.7
+
 
 var lessons = 0
 var newpeeps = 0
@@ -32,6 +32,7 @@ func _ready():
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("beginning")
+	$BookTogglePlayer.play("RESET")
 	$UI/TeachingScreen.visible = false
 	$UI/DayScreen/Control/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 	
@@ -70,7 +71,6 @@ func create_new_person_record(first_name, last_name, location):
 func person_being_taught(person):
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	person_taught = person
-	$UI/Areabook.pause_day()
 	#$UI/Areabook.visible = false
 	$UI/TeachingScreen.visible = true
 	$UI/TeachingScreen.reset()
@@ -79,7 +79,6 @@ func person_being_taught(person):
 	person_taught.update_record()
 
 func person_done_being_taught(invitation):
-	$UI/Areabook.unpause_day()
 	$UI/Areabook.visible = true
 	match invitation:
 		0:
@@ -99,23 +98,18 @@ func person_done_being_taught(invitation):
 
 
 func new_day():
+	if Worldwide.autosave:
+		Worldwide.save_game()
 	day += 1
+	$UI/Areabook.visible = true
+	$UI/TeachingScreen.visible = false
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_DISABLED
 	$UI/DayScreen/Control/Lessons.set_text("Day " + str(day-1) + " Lessons: " + str(lessons))
 	$UI/Areabook/ColorRect/ProgressBar/Label.set_text("DAY " + str(day))
-	$UI/Areabook/Timer.start($UI/Areabook.BASE_DAY_LENGTH + (Worldwide.getout  * 5))
 	$SubViewportContainer/SubViewport/Level/Missionary.new_day()
-	$UI/Areabook/Timer.paused = true
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("new_day")
 	$UI/DayScreen.new_day()
-	await wait(1)
-	gain_experience(lessons*15)
-	await wait(1)
-	emit_signal("update_commitments")
-	$SubViewportContainer/SubViewport/Level/Missionary.position = STARTPLACE
-	$SubViewportContainer/SubViewport/Level/Missionary2.position = STARTPLACE
-	
 	if day % 7 == 0:
 		$UI.visible = false
 		$SubViewportContainer/SubViewport/Level.visible = false
@@ -123,8 +117,16 @@ func new_day():
 		var newChurchScreen = church_screen.instantiate()
 		add_child(newChurchScreen)
 		newChurchScreen.set_people_present(atchurch)
+		newChurchScreen.connect("continue_pressed", end_sunday)
 		$AnimationPlayer.pause()
-	elif day % 7 == 1:
+	await wait(1)
+	gain_experience(lessons*15)
+	await wait(1)
+	emit_signal("update_commitments")
+	$SubViewportContainer/SubViewport/Level/Missionary.position = STARTPLACE
+	$SubViewportContainer/SubViewport/Level/Missionary2.position = STARTPLACE
+	
+	if day % 7 == 1:
 		$UI.visible = true
 		$SubViewportContainer/SubViewport/Level.visible = true
 		newpeeps = 0
@@ -133,15 +135,25 @@ func new_day():
 		baptized = 0
 		print("new week")
 
+func calculate_level_xp(num = level):
+	var levelformula = Expression.new()
+	levelformula.parse("(x * 10) + 7.7", ["x"])
+	return levelformula.execute([num])
+
 func gain_experience(amount):
+	print("xp added: " + str(amount))
 	xp_total += amount
 	xp += amount
 	var growth_data = []
-	while xp >= levelformula:
-		xp -= levelformula
-		growth_data.append([levelformula, levelformula])
-		
-	growth_data.append([xp, levelformula])
+	var plus_what = 0
+	while xp >= calculate_level_xp(level + plus_what):
+		var to_next_level = calculate_level_xp(level + plus_what)
+		print("xp required to level up:" + str(to_next_level))
+		print("xp in bank" + str(xp))
+		xp -= to_next_level
+		growth_data.append([to_next_level, to_next_level])
+		plus_what += 1
+	growth_data.append([xp, calculate_level_xp(level + plus_what)])
 	
 	for x in growth_data:
 		var target_xp = x[0]
@@ -153,7 +165,7 @@ func gain_experience(amount):
 			$UI/DayScreen/Control/XPBar.value = $UI/DayScreen/Control/XPBar.min_value
 			await level_up()
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		Worldwide.save_game()
 		print("game_saved")
@@ -195,6 +207,7 @@ func _on_animation_player_animation_finished(anim_name):
 			$SubViewportContainer/SubViewport/Level/Missionary.new_day()
 		
 		lessons = 0
+	update_names()
 
 func wait(duration):  #Duration in seconds
 	await get_tree().create_timer(duration).timeout
@@ -204,3 +217,13 @@ func close_areabook():
 
 func open_areabook():
 	$BookTogglePlayer.play_backwards("close_areabook")
+
+func end_sunday():
+	print("Sunday over!")
+	$UI.visible = true
+	new_day()
+
+func update_names():
+	$UI/Areabook.update_names()
+	$UI/SkillScreen.update_names()
+	$UI/DayScreen.update_names()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://s31mxuoegyhi"]
+[gd_scene load_steps=13 format=3 uid="uid://s31mxuoegyhi"]
 
 [ext_resource type="FontFile" uid="uid://djbye0tl13oo1" path="res://fonts/bpdots.unicasesquare-bold.otf" id="1_4s7tf"]
 [ext_resource type="Script" path="res://UI/day_screen.gd" id="1_ipo67"]
 [ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="2_dh6if"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_d7bwl"]
 [ext_resource type="LabelSettings" uid="uid://dncpotspoqgth" path="res://UI/title_label_settings.tres" id="3_jsp6m"]
+[ext_resource type="Texture2D" uid="uid://dgn34qtfff0cb" path="res://Player2.png" id="6_686c1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gosn4"]
 font = ExtResource("1_4s7tf")
@@ -95,7 +96,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Control" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(0, 93.165)
 layout_mode = 1
 anchors_preset = 6
@@ -111,20 +111,29 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
-position = Vector2(163, 45)
+position = Vector2(143, 25.8038)
 scale = Vector2(2, 2)
 texture = ExtResource("2_dh6if")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 32)
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control"]
+position = Vector2(183, 25.8038)
+scale = Vector2(2, 2)
+texture = ExtResource("6_686c1")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 80.0
-offset_right = 226.0
+offset_left = 1.0
+offset_top = 66.0
+offset_right = 319.0
 offset_bottom = 103.0
 text = "Elder Nielson"
 label_settings = SubResource("LabelSettings_wcqke")
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="CurrentLevel" type="GridContainer" parent="Control"]
 custom_minimum_size = Vector2(320, 50)

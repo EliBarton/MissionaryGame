@@ -3,8 +3,8 @@ extends CharacterBody2D
 @onready var companion = get_parent().get_node("Missionary")
 @onready var followpoint = get_parent().get_node("Missionary/CollisionShape2D")
 
-var follow_speed = 100.0
-var stop_distance = 40.0
+var follow_speed = 140.0
+var stop_distance = 50.0
 const ACCELERATION = 800.0
 
 func _process(delta: float):
@@ -26,4 +26,5 @@ func _process(delta: float):
 		else:
 			$Sprite.frame = 0
 			$Sprite.pause()
-		move_and_slide()
+		if velocity != Vector2.ZERO:
+			move_and_slide()

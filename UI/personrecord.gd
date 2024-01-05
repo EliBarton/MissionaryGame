@@ -22,10 +22,6 @@ func _ready():
 	$AnimationPlayer.play("appear")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 
 func _on_pressed():
 	emit_signal("picked", first_name, last_name, location, level, xp, acceptance_factor, pamphletInvite, bomInvite, churchInvite, baptismInvite)

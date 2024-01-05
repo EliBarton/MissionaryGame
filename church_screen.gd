@@ -7,7 +7,7 @@ signal continue_pressed
 
 
 func _ready():
-	pass # Replace with function body.
+	$Accounting/VBoxContainer2/Missionaries/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
 func set_people_present(amount):
 	people_present = amount
@@ -22,9 +22,6 @@ func set_people_present(amount):
 		$Church/zeroLabel.visible = true
 		$Church/oneLabel.visible = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func to_weekly_accounting():
 	$Church.visible = false
@@ -33,14 +30,10 @@ func to_weekly_accounting():
 	$Accounting/VBoxContainer/OnDate/Number.set_text(str(global.ondate))
 	$Accounting/VBoxContainer/Baptized/Number.set_text(str(global.baptized))
 	$Accounting/VBoxContainer2/CurrentLevel/Level.set_text(str(global.level))
-	$Accounting/VBoxContainer2/XPBar.max_value = global.levelformula
+	$Accounting/VBoxContainer2/XPBar.max_value = global.calculate_level_xp()
 	$Accounting/VBoxContainer2/XPBar.value = global.xp
 	$Accounting.visible = true
 
 func _on_continue_button_pressed():
-	
-	if win:
-		get_tree().change_scene_to_file("res://UI/main_menu.tscn")
-	else:
-		emit_signal("continue_pressed")
-		queue_free()
+	emit_signal("continue_pressed")
+	queue_free()

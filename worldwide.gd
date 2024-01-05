@@ -14,6 +14,8 @@ var diligence = 0
 var load_from_save = false
 var save_file = null
 
+var autosave = false
+
 func _ready():
 	add_to_group("persist")
 	pass
@@ -31,12 +33,13 @@ func save():
 
 func start_session():
 	if load_from_save:
+		autosave = true
 		load_game("res://saves/" + save_file)
 		print("save loaded")
 
 func save_game():
 	var save_name = missionary1name + "_" + missionary2name
-	var game_save = FileAccess.open("res://saves/" + save_name + ".save", FileAccess.WRITE)
+	var game_save = FileAccess.open("user://saves/" + save_name + ".save", FileAccess.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("persist")
 	#save_nodes.append(self)
 	for node in save_nodes:
@@ -49,7 +52,7 @@ func load_game(file):
 	while game_save.get_position() < game_save.get_length():
 		var json_string = game_save.get_line()
 		var json = JSON.new()
-		var parse_result = json.parse(json_string)
+		json.parse(json_string)
 		var node_data = json.get_data()
 		var target_node = get_node(node_data["path"])
 		

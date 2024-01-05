@@ -18,7 +18,7 @@ func _physics_process(delta):
 	position += transform.x * speed * delta
 	$Sprite2D.rotate(speed/1000)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

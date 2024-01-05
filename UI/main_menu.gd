@@ -8,7 +8,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if is_name_picked:
 		$newScreen/startButton.disabled = false
 	else:
@@ -53,6 +53,7 @@ func _on_line_edit_text_changed(new_text):
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "startnewgame":
+		Worldwide.autosave = true
 		get_tree().change_scene_to_file("res://tutorial.tscn")
 
 

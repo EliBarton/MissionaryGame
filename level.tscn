@@ -14,6 +14,12 @@ scale = Vector2(2, 2)
 [node name="Missionary" parent="." instance=ExtResource("2_q6nps")]
 position = Vector2(834.5, 793.5)
 
+[node name="Camera" parent="Missionary" index="6"]
+limit_left = 50
+limit_top = 50
+limit_right = 3165
+limit_bottom = 2385
+
 [node name="Missionary2" parent="." instance=ExtResource("3_nvd5i")]
 position = Vector2(878.5, 824.5)
 
@@ -41,3 +47,5 @@ last_name = "Doooger"
 position = Vector2(225.5, 538.5)
 first_name = "Shrip"
 last_name = "Fisher"
+
+[editable path="Missionary"]

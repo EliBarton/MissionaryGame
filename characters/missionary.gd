@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 6000.0
-const BASE_SPIRITUAL_RESILIENCE = 70
+const SPEED = 8000.0
+const BASE_SPIRITUAL_RESILIENCE = 100
 
 var book = preload("res://book.tscn")
 var talkmode = false
@@ -11,6 +11,7 @@ var negative_sr = false
 var movable = true
 @onready var global = get_node("/root/Game Master")
 var spiritual_resilience = 0
+@export var apply_sr = true
 
 func _ready():
 	spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + 5
@@ -26,7 +27,8 @@ func _physics_process(delta):
 	var movementspeed = SPEED + (500*Worldwide.cardio)
 	if input_vector and movable:
 		velocity = input_vector * movementspeed * delta
-		lose_sr(Vector2(0, 0).distance_to(velocity)/2000.0)
+		if apply_sr:
+			lose_sr(Vector2(0, 0).distance_to(velocity)/2000.0)
 	else:
 		velocity -= velocity*10 * delta
 	

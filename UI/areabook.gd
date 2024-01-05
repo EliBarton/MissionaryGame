@@ -14,14 +14,9 @@ func _ready():
 	personrecord = $ColorRect/PersonRecord
 	progress = $ColorRect/Progress
 	map = $ColorRect/Map
-	$Timer.start(BASE_DAY_LENGTH)
-	$ColorRect/Progress/VBoxContainer/Missionaries/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
+	update_names()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	#$ColorRect/ProgressBar.value = $Timer.time_left
-	pass
 
 
 func _on_back_to_people_button_pressed():
@@ -33,7 +28,7 @@ func _on_person_record_pressed(first_name, last_name, location, level, xp, accep
 	$ColorRect/PersonRecord/TopBar/Name.set_text(first_name + " " + last_name)
 	personrecord.visible = true
 	$ColorRect/PersonRecord/PersonInfo/CurrentLevel/Level.set_text(str(level))
-	$ColorRect/PersonRecord/PersonInfo/XPBar.max_value = global.levelformula
+	$ColorRect/PersonRecord/PersonInfo/XPBar.max_value = global.calculate_level_xp()
 	$ColorRect/PersonRecord/PersonInfo/XPBar.value = xp
 	$ColorRect/PersonRecord/PersonInfo/A_Factor.set_text(str(acceptance_factor))
 	$ColorRect/PersonRecord/PersonInfo/Commitments.update_invitations(invite1, invite2, invite3, invite4)
@@ -58,18 +53,10 @@ func _on_button_map_pressed():
 	change_screen()
 	map.visible = true
 
-func _on_timer_timeout():
-	pass
-	#global.new_day()
-
-func pause_day():
-	$Timer.paused = true
-
-func unpause_day():
-	$Timer.paused = false
 
 
-
+func update_names():
+	$ColorRect/Progress/VBoxContainer/Missionaries/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
 
 func _on_button_toggle_pressed():

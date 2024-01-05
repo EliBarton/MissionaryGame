@@ -174,7 +174,7 @@ region_rect = Rect2(0, 0, 16, 32)
 [node name="Label" type="Label" parent="Accounting/VBoxContainer2/Missionaries"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
-text = "Elder Barton & Elder Anderson"
+text = "Elder  & Elder "
 label_settings = SubResource("LabelSettings_3xkkf")
 horizontal_alignment = 1
 autowrap_mode = 3

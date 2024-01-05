@@ -7,12 +7,8 @@ func _ready():
 	$RightSide/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func initialize():
-	$continueButton.disabled = true
+	#$continueButton.disabled = true
 	if Worldwide.cardio >= 5:
 		$LeftSide/Cardio/cardioButton.disabled = true
 	else:
@@ -53,7 +49,8 @@ func _on_continue_button_pressed():
 	visible = false
 	emit_signal("finished")
 
-
+func update_names():
+	$RightSide/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
 
 func _on_diligence_button_pressed():

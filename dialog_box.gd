@@ -27,7 +27,7 @@ func show_next_line():
 		emit_signal("finished")
 		queue_free()
 
-func _process(delta):
+func _process(_delta):
 	if not disabled:
 		if $Timer.is_stopped():
 			if closable:

@@ -32,3 +32,6 @@ func load_file(file):
 
 func new_day():
 	load_file(pmgfile)
+
+func update_names():
+	$Control/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)

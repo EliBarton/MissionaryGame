@@ -24,7 +24,6 @@ func _process(delta):
 	var direction_to_mouse := (mouse_position - position).normalized()
 	var distance_to_mouse = mouse_position.distance_to(position)
 	var lean = direction_to_mouse * distance_to_mouse * lean_scale
-	print(mouse_position)
 	
 	offset = lerp(offset, lean, delta * 10.0)
 	if trauma:

@@ -20,10 +20,9 @@ var xp : int = 0
 var xp_total = 0
 var person_record
 var location = Vector2()
-@export var acceptance_factor = 0.09
+@export var acceptance_factor = 0.65
 var new_person = false
 var last_taught_day = 0
-var levelformula = (level * 10) + 7.7
 var kept_last_commitment = false
 
 var dialog_box = preload("res://UI/dialog_box.tscn")
@@ -71,7 +70,7 @@ func save():
 	}
 	return save_dict
 
-func _process(delta):
+func _process(_delta):
 	if person_record:
 		var look_vector = -(global_position - player.global_position).normalized()
 		var angle = wrapi(int(look_vector.angle() / (PI/4)), 0, 8)
@@ -120,7 +119,7 @@ func done_thinking():
 				newtalkrange.queue_free()
 	newicon.disconnect("animation_finished", done_thinking)
 
-func reject_player_in_range(body_id, body, body_shape, area_shape):
+func reject_player_in_range(_body_id, body, _body_shape, _area_shape):
 	if body.is_in_group("israel"):
 		$Muzzle.rotation = ($Muzzle.global_position - body.global_position).angle() + PI
 		newrejection.disconnect("body_shape_entered", reject_player_in_range)
@@ -144,7 +143,7 @@ func loved_it():
 		talkmode = false
 	
 
-func talk_to_player_in_range(body_id, body, body_shape, area_shape):
+func talk_to_player_in_range(_body_id, body, _body_shape, _area_shape):
 	if body.is_in_group("israel"):
 		if not person_record:
 			newicon.play("talk")
@@ -156,7 +155,7 @@ func talk_to_player_in_range(body_id, body, body_shape, area_shape):
 				teachmode = true
 				talkmode = false
 
-func player_left(body_id, body, body_shape, area_shape):
+func player_left(_body_id, body, _body_shape, _area_shape):
 	if body.is_in_group("israel"):
 		if not newicon.animation == "thinking":
 			newicon.play("love")
@@ -165,7 +164,7 @@ func player_left(body_id, body, body_shape, area_shape):
 		teachmode = false
 
 
-func _on_talkrange_input_event(viewport, event, shape_idx):
+func _on_talkrange_input_event(_viewport, event, _shape_idx):
 	if talkmode:
 		if (event is InputEventMouseButton && event.pressed):
 			create_new_person_record()
@@ -225,7 +224,7 @@ func new_day():
 			bomInvite = 2
 			kept_last_commitment = true
 			add_xp(randi_range(25, 35))
-	elif churchInvite == 1:
+	if churchInvite == 1:
 		if global.day % 7 == 0:
 			if randnum < 4:
 				kept_last_commitment = false
@@ -235,19 +234,28 @@ func new_day():
 				kept_last_commitment = true
 				emit_signal("attended_church")
 				add_xp(randi_range(40, 75))
-	elif baptismInvite == 1:
+	if baptismInvite == 1:
 		pass
 	update_record()
+
+func calculate_level_xp(num = level):
+	var levelformula = Expression.new()
+	levelformula.parse("(x * 5) + 7.7", ["x"])
+	return levelformula.execute([num])
 
 func add_xp(amount):
 	xp_total += amount
 	xp += amount
 	var growth_data = []
-	while xp >= levelformula:
-		xp -= levelformula
-		growth_data.append([levelformula, levelformula])
-		
-	growth_data.append([xp, levelformula])
+	var plus_what = 0
+	while xp >= calculate_level_xp(level + plus_what):
+		var to_next_level = calculate_level_xp(level + plus_what)
+		print("xp required to level up:" + str(to_next_level))
+		print("xp in bank" + str(xp))
+		xp -= to_next_level
+		growth_data.append([to_next_level, to_next_level])
+		plus_what += 1
+	growth_data.append([xp, calculate_level_xp(level + plus_what)])
 	
 	var xp_bar = areabook.get_node("ColorRect/PersonRecord/PersonInfo/XPBar")
 	

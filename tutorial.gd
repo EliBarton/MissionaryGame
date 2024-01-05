@@ -11,10 +11,10 @@ func _ready():
 func on_dialog_finished():
 	match phase:
 		1:
-			$Missionary/Camera2D.zoom = Vector2(2, 2)
+			$Missionary/Camera.zoom = Vector2(2, 2)
 	phase += 1
 
-func _process(delta):
+func _process(_delta):
 	if $Timer.is_stopped():
 		match phase:
 			2:
@@ -26,7 +26,7 @@ func _process(delta):
 			4:
 				$Timer.start(5)
 
-func _on_plane_body_entered(body):
+func _on_plane_body_entered(_body):
 	get_tree().change_scene_to_file("res://game_master.tscn")
 
 
