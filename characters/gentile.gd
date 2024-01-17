@@ -20,10 +20,13 @@ var xp : int = 0
 var xp_total = 0
 var person_record
 var location = Vector2()
-@export var acceptance_factor = 0.65
+@export var acceptance_factor = 0.95
 var new_person = false
 var last_taught_day = 0
 var kept_last_commitment = false
+var speed = 60.0
+var stop_distance = 20.0
+const ACCELERATION = 1200.0
 
 var dialog_box = preload("res://UI/dialog_box.tscn")
 
@@ -70,16 +73,32 @@ func save():
 	}
 	return save_dict
 
-func _process(_delta):
-	if person_record:
+func _process(delta):
+	if teachmode or talkmode:
 		var look_vector = -(global_position - player.global_position).normalized()
 		var angle = wrapi(int(look_vector.angle() / (PI/4)), 0, 8)
 		$Sprite.play(str(angle))
 		$Sprite.frame = 0
+	else:
+		var direction = to_local($NavAgent.get_next_path_position()).normalized()
+		var distance = $NavAgent.distance_to_target()
+		# Move the object towards the player
+		if distance > stop_distance:
+			velocity = velocity.move_toward(direction * speed, ACCELERATION * delta)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION * delta * 0.5)
+		if velocity != Vector2.ZERO:
+			var angle = wrapi(ceil(direction.angle() / (PI/4)), 0, 8)
+			$Sprite.play(str(angle))
+		else:
+			$Sprite.frame = 0
+			$Sprite.pause()
+		move_and_slide()
+	if person_record:
 		person_record.xp = xp
 		person_record.level = level
 		person_record.acceptance_factor = acceptance_factor
-		location = global_position
+		person_record.location = global_position
 
 func received_material(type):
 	if love:
@@ -194,7 +213,7 @@ func lesson_over():
 
 func update_record():
 	if person_record:
-		person_record.location = position
+		person_record.location = global_position
 		person_record.level = level
 		person_record.xp = xp
 		person_record.acceptance_factor = acceptance_factor
@@ -286,7 +305,7 @@ func on_dialog_finished():
 	areabook._on_button_people_pressed()
 
 func create_new_person_record():
-	person_record = global.create_new_person_record(first_name, last_name, position)
+	person_record = global.create_new_person_record(first_name, last_name, global_position)
 	update_record()
 
 func create_new_icon():
@@ -310,3 +329,12 @@ func load_profile():
 	create_new_talk_range()
 	global.connect("update_commitments", new_day)
 	$Name.set_text(first_name + " " + last_name)
+
+
+func _on_timer_timeout():
+	var rand_time = randf_range(10, 35)
+	$Timer.start(rand_time)
+	var rand_x = randi_range(-500, 500)
+	var rand_y = randi_range(-500, 500)
+	$NavAgent.target_position = global_position + Vector2(rand_x, rand_y)
+	

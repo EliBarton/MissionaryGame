@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 8000.0
-const BASE_SPIRITUAL_RESILIENCE = 100
+const BASE_SPIRITUAL_RESILIENCE = 100.0
 
 var book = preload("res://book.tscn")
 var talkmode = false
@@ -10,13 +10,15 @@ var mouse_in_viewport = true
 var negative_sr = false
 var movable = true
 @onready var global = get_node("/root/Game Master")
+@onready var RSBar = get_parent().get_node("UI/RSBar")
 var spiritual_resilience = 0
 @export var apply_sr = true
 
 func _ready():
-	spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + 5
-	$RSBar.max_value = spiritual_resilience
-	$RSBar.value = spiritual_resilience
+	if apply_sr:
+		spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + 5
+		RSBar.max_value = spiritual_resilience
+		RSBar.value = spiritual_resilience
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -52,14 +54,16 @@ func _process(_delta):
 			newbook.global_transform = $Muzzle.global_transform
 		else:
 			pass
+	if apply_sr:
+		RSBar.value = lerp(RSBar.value, float(spiritual_resilience), .1)
 
 func missionary():
 	pass
 
 func new_day():
 	spiritual_resilience = BASE_SPIRITUAL_RESILIENCE + (5*global.day) + (10*Worldwide.diligence)
-	$RSBar.max_value = spiritual_resilience
-	$RSBar.value = spiritual_resilience
+	RSBar.max_value = spiritual_resilience
+	RSBar.value = spiritual_resilience
 	negative_sr = false
 	movable = true
 
@@ -70,18 +74,18 @@ func received_material(type):
 		lose_sr(randi_range(15, 30))
 
 func lose_sr(amount):
-	if amount > 5:
-		$Camera.add_trauma(1)
 	spiritual_resilience -= amount
-	var tween = get_tree().create_tween()
+	if amount > 5:
+		Worldwide.hit_stop()
+		$Camera.add_trauma(1)
 	if spiritual_resilience <= 0:
+		var tween = get_tree().create_tween()
 		movable = false
-		await tween.tween_property($RSBar, "value", 0, .5).set_ease(Tween.EASE_OUT).finished
+		await tween.tween_property(RSBar, "value", 0, .5).set_ease(Tween.EASE_OUT).finished
 		if negative_sr == false:
 			global.new_day()
 			negative_sr = true
-	else:
-		tween.tween_property($RSBar, "value", spiritual_resilience, .1*amount).set_ease(Tween.EASE_OUT)
+	
 
 
 

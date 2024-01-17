@@ -1,8 +1,7 @@
-[gd_scene load_steps=72 format=3 uid="uid://cg0norsmfpqk1"]
+[gd_scene load_steps=71 format=3 uid="uid://cg0norsmfpqk1"]
 
 [ext_resource type="Script" path="res://characters/missionary.gd" id="1_gkf5x"]
 [ext_resource type="Texture2D" uid="uid://di618ql64evix" path="res://Player1.png" id="2_mt52a"]
-[ext_resource type="Texture2D" uid="uid://8wess72yi8j1" path="res://bar.png" id="3_qsya1"]
 [ext_resource type="PackedScene" uid="uid://v4kqjl86427j" path="res://characters/character supplements/camera.tscn" id="4_um0lu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mhp3m"]
@@ -506,6 +505,7 @@ size = Vector2(8, 25)
 y_sort_enabled = true
 collision_priority = 3.0
 motion_mode = 1
+wall_min_slide_angle = 0.0523599
 script = ExtResource("1_gkf5x")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -524,19 +524,6 @@ position = Vector2(0, -19)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_2xhqn")
-
-[node name="RSBar" type="TextureProgressBar" parent="."]
-z_index = 10
-offset_left = 6.0
-offset_top = 1.0
-offset_right = 38.0
-offset_bottom = 17.0
-rotation = -1.57079
-max_value = 50.0
-value = 50.0
-texture_under = ExtResource("3_qsya1")
-texture_progress = ExtResource("3_qsya1")
-tint_under = Color(0.294118, 0.294118, 0.294118, 1)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

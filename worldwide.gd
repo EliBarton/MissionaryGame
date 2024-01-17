@@ -63,3 +63,8 @@ func load_game(file):
 				if node_data[i] != 0:
 					target_node.load_profile()
 			target_node.set(i, node_data[i])
+
+func hit_stop():
+	Engine.time_scale = 0
+	await get_tree().create_timer(0.2, true, false, true).timeout
+	Engine.time_scale = 1

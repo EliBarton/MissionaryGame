@@ -21,6 +21,8 @@ func _ready():
 	$Name.set_text(first_name + " " + last_name)
 	$AnimationPlayer.play("appear")
 
+func _process(_delta):
+	dot.update_position(location/2)
 
 
 func _on_pressed():

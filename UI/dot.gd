@@ -9,7 +9,7 @@ func _ready():
 
 
 func update_position(new_pos):
-	position = new_pos + OFFSET
+	global_position = new_pos + OFFSET
 
 func update_color(new_col):
 	modulate = new_col

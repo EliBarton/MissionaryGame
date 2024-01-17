@@ -512,6 +512,8 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Man" type="CharacterBody2D" groups=["gentiles", "persist"]]
 y_sort_enabled = true
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_l248d")
 first_name = "Elder"
 
@@ -548,3 +550,10 @@ grow_vertical = 2
 theme = SubResource("Theme_c3n2t")
 label_settings = SubResource("LabelSettings_cev8r")
 horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

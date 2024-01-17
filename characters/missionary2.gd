@@ -13,7 +13,7 @@ func _process(delta: float):
 			velocity = velocity/2
 			await get_tree().create_timer(.3).timeout
 		# Calculate the direction to the player
-		var direction = (companion.global_position - global_position).normalized()
+		var direction = to_local($NavAgent.get_next_path_position()).normalized()
 		var distance = global_position.distance_to(companion.global_position)
 		# Move the object towards the player
 		if distance > stop_distance:
@@ -28,3 +28,7 @@ func _process(delta: float):
 			$Sprite.pause()
 		if velocity != Vector2.ZERO:
 			move_and_slide()
+
+
+func _on_timer_timeout():
+	$NavAgent.target_position = companion.global_position

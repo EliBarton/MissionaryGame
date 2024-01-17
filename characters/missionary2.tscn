@@ -443,6 +443,7 @@ size = Vector2(8, 25)
 [node name="Missionary2" type="CharacterBody2D"]
 y_sort_enabled = true
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_ce0cr")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -462,3 +463,11 @@ position = Vector2(0, -19)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_2xhqn")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
