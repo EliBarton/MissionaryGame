@@ -10,6 +10,7 @@ var lean_scale = 0.2
 @export var max_roll = 0.1  # Maximum rotation in radians (use sparingly).
 var trauma = 0.0  # Current shake strength.
 var trauma_power = 2
+var mouse_position : Vector2
 
 func _ready():
 	randomize()
@@ -17,7 +18,7 @@ func _ready():
 
 func _process(delta):
 	#var mouse_position = get_viewport().get_mouse_position()
-	var mouse_position = get_global_mouse_position()
+	mouse_position = get_global_mouse_position()
 	mouse_position = to_local(mouse_position)
 	mouse_position.x = clamp(mouse_position.x, -get_viewport_rect().size.x/4, get_viewport_rect().size.x/4)
 	mouse_position.y = clamp(mouse_position.y, -get_viewport_rect().size.y/4, get_viewport_rect().size.y/4)

@@ -4,6 +4,7 @@ var blank_record = preload("res://UI/personrecord.tscn")
 var person_records = []
 var dot = preload("res://UI/dot.tscn")
 var dots = []
+var people_at_church = []
 #@onready var lesson1file = "res://Scriptures/lesson1scriptures.txt"
 var church_screen = preload("res://church_screen.tscn")
 const STARTPLACE = Vector2(1450, 580)
@@ -90,9 +91,11 @@ func person_done_being_taught(invitation):
 		3:
 			person_taught.baptismInvite = 1
 	person_taught.update_record()
-	person_taught.lesson_over()
+	if invitation != null:
+		person_taught.lesson_over()
+		lessons += 1
 	$SubViewportContainer/SubViewport/Level.process_mode = Node.PROCESS_MODE_INHERIT
-	lessons += 1
+	
 	
 	$UI/TeachingScreen.visible = false
 
@@ -116,7 +119,7 @@ func new_day():
 		print("Time to go to church Elders")
 		var newChurchScreen = church_screen.instantiate()
 		add_child(newChurchScreen)
-		newChurchScreen.set_people_present(atchurch)
+		newChurchScreen.set_people_present(atchurch, people_at_church)
 		newChurchScreen.connect("continue_pressed", end_sunday)
 		$AnimationPlayer.pause()
 	await wait(1)
@@ -192,8 +195,9 @@ func new_person_found():
 	newpeeps += 1
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/NewPeeps/Number.set_text(str(newpeeps))
 
-func person_at_church():
+func person_at_church(person):
 	atchurch += 1
+	people_at_church.append(person)
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/AtChurch/Number.set_text(str(atchurch))
 
 

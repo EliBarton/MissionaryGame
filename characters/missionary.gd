@@ -47,7 +47,7 @@ func _physics_process(delta):
 func _process(_delta):
 	#Handle the throwing of the teaching material
 	$Muzzle.look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("shoot") and get_viewport().NOTIFICATION_VP_MOUSE_ENTER:
+	if Input.is_action_just_pressed("shoot") and $Camera.mouse_position.distance_to(to_local(get_global_mouse_position())) < 5:
 		if not talkmode:
 			var newbook = book.instantiate()
 			get_parent().add_child(newbook)

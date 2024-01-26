@@ -9,9 +9,14 @@ signal continue_pressed
 func _ready():
 	$Accounting/VBoxContainer2/Missionaries/Label.set_text("Elder " + Worldwide.missionary1name + " & Elder " + Worldwide.missionary2name)
 
-func set_people_present(amount):
+func set_people_present(amount, personscenes):
 	people_present = amount
 	$Church/PeoplePresent/amount.set_text(str(amount))
+	for person in personscenes:
+		var person_file = load(person.get_filename())
+		var person_instance = person_file.instantiate()
+		$Church.add_child(person_instance)
+		print(person_instance.name)
 	if people_present > 0:
 		win = true
 	

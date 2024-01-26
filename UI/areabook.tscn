@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cr86dmeiels6i"]
+[gd_scene load_steps=19 format=3 uid="uid://cr86dmeiels6i"]
 
 [ext_resource type="Script" path="res://UI/areabook.gd" id="1_k23jo"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_g5n52"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://tpbb0vgn85j1" path="res://icon.svg" id="7_vxfbh"]
 [ext_resource type="PackedScene" uid="uid://by2uqjg3q3c37" path="res://level_world.tscn" id="7_xn8oo"]
 [ext_resource type="PackedScene" uid="uid://p5lb2wfiiu7v" path="res://UI/dot.tscn" id="8_o7tap"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_huytv"]
+font = ExtResource("2_g5n52")
+font_size = 20
+shadow_color = Color(0, 0, 0, 0.396078)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ausxq"]
 font = ExtResource("2_g5n52")
@@ -119,9 +124,10 @@ s
 e"
 
 [node name="PersonRecord" type="Control" parent="ColorRect"]
-visible = false
 layout_mode = 2
 anchors_preset = 0
+offset_top = 25.0
+offset_bottom = 25.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 
@@ -134,7 +140,7 @@ text = "<--"
 [node name="TopBar" type="ColorRect" parent="ColorRect/PersonRecord"]
 layout_mode = 0
 offset_left = 50.0
-offset_right = 348.0
+offset_right = 341.0
 offset_bottom = 50.0
 color = Color(0.156863, 0.156863, 0.156863, 1)
 
@@ -145,6 +151,7 @@ offset_top = 15.0
 offset_right = 127.0
 offset_bottom = 41.0
 text = "Testy McTester"
+label_settings = SubResource("LabelSettings_huytv")
 
 [node name="PersonInfo" type="GridContainer" parent="ColorRect/PersonRecord"]
 layout_mode = 0
@@ -275,14 +282,16 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Progress" type="Control" parent="ColorRect"]
+visible = false
 anchors_preset = 0
 offset_right = 8.0
 offset_bottom = 8.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/Progress"]
 layout_mode = 0
+offset_top = 15.0
 offset_right = 339.0
-offset_bottom = 261.0
+offset_bottom = 447.0
 
 [node name="BoxContainer" type="BoxContainer" parent="ColorRect/Progress/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -437,6 +446,7 @@ text = "Day 1"
 horizontal_alignment = 1
 
 [node name="Map" type="SubViewportContainer" parent="ColorRect"]
+visible = false
 layout_mode = 0
 offset_left = 17.0
 offset_top = 86.0
@@ -446,7 +456,7 @@ offset_bottom = 536.0
 [node name="SubViewport" type="SubViewport" parent="ColorRect/Map"]
 handle_input_locally = false
 size = Vector2i(310, 450)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="ColorRect/Map/SubViewport"]
 zoom = Vector2(0.25, 0.25)

@@ -279,6 +279,14 @@ text = "Teaching in progress..."
 label_settings = ExtResource("2_02j4s")
 horizontal_alignment = 1
 
+[node name="backButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 70.0
+text = "<--"
+
 [connection signal="pressed" from="DragandDrop/Invitation/ButtonContainer/pamphlet" to="." method="_on_pamphlet_pressed"]
 [connection signal="pressed" from="DragandDrop/Invitation/ButtonContainer/bom" to="." method="_on_bom_pressed"]
 [connection signal="pressed" from="DragandDrop/Invitation/ButtonContainer/church" to="." method="_on_church_pressed"]
@@ -287,3 +295,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="DragandDrop/LessonToTeach/ButtonContainer/PlanofSalvation" to="." method="_on_planof_salvation_pressed"]
 [connection signal="pressed" from="DragandDrop/LessonToTeach/ButtonContainer/Gospel" to="." method="_on_gospel_pressed"]
 [connection signal="pressed" from="DragandDrop/LessonToTeach/ButtonContainer/Becoming" to="." method="_on_becoming_pressed"]
+[connection signal="pressed" from="backButton" to="." method="_on_back_button_pressed"]

@@ -198,3 +198,7 @@ func _on_gospel_pressed():
 
 func _on_becoming_pressed():
 	start_lesson(3)
+
+
+func _on_back_button_pressed():
+	end_lesson(null)

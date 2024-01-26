@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://brh5b86bi1h3g"]
+[gd_scene load_steps=8 format=3 uid="uid://brh5b86bi1h3g"]
 
 [ext_resource type="PackedScene" uid="uid://by2uqjg3q3c37" path="res://level_world.tscn" id="1_6xoiv"]
 [ext_resource type="PackedScene" uid="uid://cg0norsmfpqk1" path="res://characters/missionary.tscn" id="2_q6nps"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d36x0wls3lxw0" path="res://characters/missionary2.tscn" id="3_nvd5i"]
 [ext_resource type="Texture2D" uid="uid://8wess72yi8j1" path="res://bar.png" id="5_1am5r"]
 [ext_resource type="PackedScene" uid="uid://diexg7jm4is8g" path="res://characters/man2.tscn" id="6_34flv"]
+[ext_resource type="PackedScene" uid="uid://oj886ufw3ffd" path="res://characters/woman1.tscn" id="7_f6688"]
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -35,58 +36,8 @@ position = Vector2(1146.5, 865)
 first_name = "Jarren"
 last_name = "Bearfoos"
 
-[node name="Man3" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(650, 871.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man6" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(679, 874.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man7" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(727.5, 874.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man8" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(780, 871.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man9" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(811, 869.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man10" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(836, 885.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man11" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(812, 913.5)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man12" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(762, 926)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man13" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(709, 930.5)
-first_name = "General"
-last_name = "Leefoos"
-
 [node name="Man14" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(668, 929)
-first_name = "General"
-last_name = "Leefoos"
-
-[node name="Man15" parent="." instance=ExtResource("3_fox35")]
-position = Vector2(632.5, 915.5)
+position = Vector2(823.5, 876.5)
 first_name = "General"
 last_name = "Leefoos"
 
@@ -127,8 +78,13 @@ texture_progress = ExtResource("5_1am5r")
 tint_under = Color(0.294118, 0.294118, 0.294118, 1)
 
 [node name="Man16" parent="." instance=ExtResource("6_34flv")]
-position = Vector2(1021, 870)
+position = Vector2(978, 874)
 first_name = "Cloud"
 last_name = "Romer"
+
+[node name="Woman" parent="." instance=ExtResource("7_f6688")]
+position = Vector2(894, 890)
+first_name = "Kelsie"
+last_name = "Wilker"
 
 [editable path="Missionary"]

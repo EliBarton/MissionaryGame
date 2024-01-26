@@ -251,7 +251,7 @@ func new_day():
 			else:
 				churchInvite = 2
 				kept_last_commitment = true
-				emit_signal("attended_church")
+				emit_signal("attended_church", self)
 				add_xp(randi_range(40, 75))
 	if baptismInvite == 1:
 		pass
