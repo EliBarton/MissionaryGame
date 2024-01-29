@@ -13,7 +13,7 @@ func set_people_present(amount, personscenes):
 	people_present = amount
 	$Church/PeoplePresent/amount.set_text(str(amount))
 	for person in personscenes:
-		var person_file = load(person.get_filename())
+		var person_file = load(person.filename)
 		var person_instance = person_file.instantiate()
 		$Church.add_child(person_instance)
 		print(person_instance.name)

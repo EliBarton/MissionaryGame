@@ -34,7 +34,7 @@ func save():
 func start_session():
 	if load_from_save:
 		autosave = true
-		load_game("res://saves/" + save_file)
+		load_game("user://saves/" + save_file)
 		print("save loaded")
 
 func save_game():

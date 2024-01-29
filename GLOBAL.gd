@@ -9,7 +9,7 @@ var people_at_church = []
 var church_screen = preload("res://church_screen.tscn")
 const STARTPLACE = Vector2(1450, 580)
 
-var day : int = 1
+var day : int = 5
 
 var level = 1
 var xp = 0
@@ -113,10 +113,14 @@ func new_day():
 	$UI/DayScreen/Label.set_text("DAY " + str(day))
 	$AnimationPlayer.play("new_day")
 	$UI/DayScreen.new_day()
+	emit_signal("update_commitments")
 	if day % 7 == 0:
+		#await wait(1)
 		$UI.visible = false
 		$SubViewportContainer/SubViewport/Level.visible = false
 		print("Time to go to church Elders")
+		print(atchurch)
+		print(people_at_church)
 		var newChurchScreen = church_screen.instantiate()
 		add_child(newChurchScreen)
 		newChurchScreen.set_people_present(atchurch, people_at_church)
@@ -125,7 +129,7 @@ func new_day():
 	await wait(1)
 	gain_experience(lessons*15)
 	await wait(1)
-	emit_signal("update_commitments")
+	
 	$SubViewportContainer/SubViewport/Level/Missionary.position = STARTPLACE
 	$SubViewportContainer/SubViewport/Level/Missionary2.position = STARTPLACE
 	
@@ -197,6 +201,8 @@ func new_person_found():
 
 func person_at_church(person):
 	atchurch += 1
+	print('at church signal received')
+	print(person.first_name)
 	people_at_church.append(person)
 	$UI/Areabook/ColorRect/Progress/VBoxContainer/AtChurch/Number.set_text(str(atchurch))
 

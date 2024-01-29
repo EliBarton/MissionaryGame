@@ -8,12 +8,14 @@ var personrecord
 var people
 var progress
 var map
+var menu
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	people = $ColorRect/People
 	personrecord = $ColorRect/PersonRecord
 	progress = $ColorRect/Progress
 	map = $ColorRect/Map
+	menu = $ColorRect/Menu
 	update_names()
 
 
@@ -38,6 +40,7 @@ func change_screen():
 	personrecord.visible = false
 	progress.visible = false
 	map.visible = false
+	menu.visible = false
 
 
 func _on_button_progress_pressed():
@@ -68,3 +71,12 @@ func _on_button_toggle_pressed():
 		global.open_areabook()
 		open = true
 		$ColorRect/Buttons/ButtonToggle.set_text("c\nl\no\ns\ne")
+
+
+func _on_go_home_button_pressed():
+	global.new_day()
+
+
+func _on_button_menu_pressed():
+	change_screen()
+	menu.visible = true

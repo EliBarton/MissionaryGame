@@ -15,7 +15,7 @@ var love = false
 var talkmode = false
 var teachmode = false
 var newtalkrange = null
-var level = 1
+var level = 10
 var xp : int = 0
 var xp_total = 0
 var person_record
@@ -27,6 +27,7 @@ var kept_last_commitment = false
 var speed = 60.0
 var stop_distance = 20.0
 const ACCELERATION = 1200.0
+var home_point = Vector2()
 
 var dialog_box = preload("res://UI/dialog_box.tscn")
 
@@ -44,6 +45,7 @@ signal attended_church
 func _ready():
 	connect("being_taught", global.person_being_taught)
 	connect("attended_church", global.person_at_church)
+	home_point = global_position
 
 func save():
 	var save_dict = {
@@ -245,12 +247,13 @@ func new_day():
 			add_xp(randi_range(25, 35))
 	if churchInvite == 1:
 		if global.day % 7 == 0:
-			if randnum < 4:
+			if randnum < 1:
 				kept_last_commitment = false
 				churchInvite = 3
 			else:
 				churchInvite = 2
 				kept_last_commitment = true
+				print("person came to church")
 				emit_signal("attended_church", self)
 				add_xp(randi_range(40, 75))
 	if baptismInvite == 1:
@@ -334,7 +337,9 @@ func load_profile():
 func _on_timer_timeout():
 	var rand_time = randf_range(10, 35)
 	$Timer.start(rand_time)
-	var rand_x = randi_range(-500, 500)
-	var rand_y = randi_range(-500, 500)
-	$NavAgent.target_position = global_position + Vector2(rand_x, rand_y)
-	
+	if randf() > .2:
+		var rand_x = randi_range(-500, 500)
+		var rand_y = randi_range(-500, 500)
+		$NavAgent.target_position = global_position + Vector2(rand_x, rand_y)
+	else:
+		$NavAgent.target_position = home_point
