@@ -13,6 +13,10 @@ var movable = true
 @onready var RSBar = get_parent().get_node("UI/RSBar")
 var spiritual_resilience = 0
 @export var apply_sr = true
+var target_pos = Vector2()
+var stop_distance = 30.0
+var follow_speed = 140.0
+const ACCELERATION = 800.0
 
 func _ready():
 	if apply_sr:
@@ -22,40 +26,30 @@ func _ready():
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("east") - Input.get_action_strength("west")
-	input_vector.y = Input.get_action_strength("south") - Input.get_action_strength("north")
-	input_vector = input_vector.normalized()
-	var movementspeed = SPEED + (500*Worldwide.cardio)
-	if input_vector and movable:
-		velocity = input_vector * movementspeed * delta
-		if apply_sr:
-			lose_sr(Vector2(0, 0).distance_to(velocity)/2000.0)
+	target_pos = $NavAgent.get_final_position()
+	var direction = to_local($NavAgent.get_next_path_position()).normalized()
+	var distance = global_position.distance_to(target_pos)
+	
+	if distance > stop_distance:
+		velocity = velocity.move_toward(direction * follow_speed, ACCELERATION * delta)
 	else:
-		velocity -= velocity*10 * delta
+		velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION * delta * 0.5)
 	
 	#Handle the sprite animation
-	if input_vector.length() != 0:
-		var angle = wrapi(int(input_vector.angle() / (PI/4)), 0, 8)
+	if velocity != Vector2.ZERO:
+		var angle = wrapi(ceil(direction.angle() / (PI/4)), 0, 8)
 		$Sprite.play(str(angle))
 	else:
 		$Sprite.frame = 0
 		$Sprite.pause()
+	if velocity != Vector2.ZERO:
+		move_and_slide()
+	
+	if Input.is_action_just_pressed("shoot"):
+		$NavAgent.target_position = get_global_mouse_position()
 
-	move_and_slide()
 
-func _process(_delta):
-	#Handle the throwing of the teaching material
-	$Muzzle.look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("shoot") and $Camera.mouse_position.distance_to(to_local(get_global_mouse_position())) < 5:
-		if not talkmode:
-			var newbook = book.instantiate()
-			get_parent().add_child(newbook)
-			newbook.global_transform = $Muzzle.global_transform
-		else:
-			pass
-	if apply_sr:
-		RSBar.value = lerp(RSBar.value, float(spiritual_resilience), .1)
+
 
 func missionary():
 	pass

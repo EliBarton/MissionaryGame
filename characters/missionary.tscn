@@ -531,4 +531,6 @@ autostart = true
 
 [node name="Camera" parent="." instance=ExtResource("4_um0lu")]
 
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
