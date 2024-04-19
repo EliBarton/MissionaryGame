@@ -9,7 +9,7 @@ var people_at_church = []
 var church_screen = preload("res://church_screen.tscn")
 const STARTPLACE = Vector2(1450, 580)
 
-var day : int = 5
+var day : int = 0
 
 var level = 1
 var xp = 0
