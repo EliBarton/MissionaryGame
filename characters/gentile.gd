@@ -31,6 +31,9 @@ var home_point = Vector2()
 
 var dialog_box = preload("res://UI/dialog_box.tscn")
 
+enum {STATE_STRANGER, STATE_INTERESTED, STATE_FRIEND, STATE_WAITING}
+var state : int = STATE_STRANGER
+
 var pamphletInvite = 0
 var bomInvite = 0
 var churchInvite = 0
@@ -45,7 +48,11 @@ signal attended_church
 func _ready():
 	connect("being_taught", global.person_being_taught)
 	connect("attended_church", global.person_at_church)
+	$Hitbox.connect("mouse_entered", _on_hitbox_mouse_entered)
+	$Hitbox.connect("mouse_exited", _on_hitbox_mouse_exited)
+	$Hitbox.connect("input_event", _on_hitbox_input_event)
 	home_point = global_position
+	create_new_icon()
 
 func save():
 	var save_dict = {
@@ -76,7 +83,7 @@ func save():
 	return save_dict
 
 func _process(delta):
-	if teachmode or talkmode:
+	if state > STATE_INTERESTED:
 		var look_vector = -(global_position - player.global_position).normalized()
 		var angle = wrapi(int(look_vector.angle() / (PI/4)), 0, 8)
 		$Sprite.play(str(angle))
@@ -103,7 +110,7 @@ func _process(delta):
 		person_record.location = global_position
 
 func received_material(type):
-	if love:
+	if state == STATE_INTERESTED:
 		pass
 	else:
 		rejectionInitiated = false
@@ -135,8 +142,8 @@ func done_thinking():
 			newicon.queue_free()
 			if love:
 				newtalkrange.position = Vector2(1000, 100000)
-				newtalkrange.disconnect("body_shape_entered", talk_to_player_in_range)
-				newtalkrange.disconnect("body_shape_exited", player_left)
+				newtalkrange.disconnect("body_entered", talk_to_player_in_range)
+				newtalkrange.disconnect("body_exited", player_left)
 				newtalkrange.queue_free()
 	newicon.disconnect("animation_finished", done_thinking)
 
@@ -156,48 +163,38 @@ func loved_it():
 	if person_record:
 		areabook._on_person_record_pressed(first_name, last_name, location, level, xp, acceptance_factor, pamphletInvite, bomInvite, churchInvite, baptismInvite)
 	#newicon.pause()
-	love = true
 	if not person_record:
 		create_new_talk_range()
+		state = STATE_INTERESTED
 	else:
-		teachmode = true
-		talkmode = false
+		state = STATE_FRIEND
 	
 
-func talk_to_player_in_range(_body_id, body, _body_shape, _area_shape):
-	if body.is_in_group("israel"):
-		if not person_record:
-			newicon.play("talk")
-			body.talkmode = true
-			talkmode = true
-		else:
-			if last_taught_day != global.day:
-				newicon.play("teach")
-				teachmode = true
-				talkmode = false
+func talk_to_player_in_range(body):
+	if body.has_method("missionary"):
+		print("talking to player")
+		create_dialog_box("stranger1")
+		body.stop_moving()
 
-func player_left(_body_id, body, _body_shape, _area_shape):
-	if body.is_in_group("israel"):
-		if not newicon.animation == "thinking":
-			newicon.play("love")
-		body.talkmode = false
-		talkmode = false
-		teachmode = false
+func player_left(i, body, ign, ignore):
+	if body.has_method("missionary"):
+		if state == STATE_WAITING:
+			state = STATE_STRANGER
+			newicon.visible = false
 
 
 func _on_talkrange_input_event(_viewport, event, _shape_idx):
 	if talkmode:
 		if (event is InputEventMouseButton && event.pressed):
 			create_new_person_record()
-			talkmode = false
-			teachmode = true
+			state = STATE_FRIEND
 			newicon.play("teach")
 			global.connect("update_commitments", new_day)
-			create_dialog_box("newperson1")
 			$Name.set_text(first_name + " " + last_name)
 	elif teachmode:
 		if (event is InputEventMouseButton && event.pressed):
 			emit_signal("being_taught", self)
+
 
 
 func lesson_over():
@@ -301,10 +298,10 @@ func create_dialog_box(text_code):
 	#new_dialog.scale = new_dialog.scale / $Missionary/Camera2D.zoom
 	new_dialog.connect("finished", on_dialog_finished)
 	new_dialog.initialize(text_code, true)
-	global.process_mode = Node.PROCESS_MODE_DISABLED
+	global.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 
 func on_dialog_finished():
-	global.process_mode = Node.PROCESS_MODE_ALWAYS
+	global.call_deferred("set_process_mode", Node.PROCESS_MODE_ALWAYS)
 	areabook._on_button_people_pressed()
 
 func create_new_person_record():
@@ -315,13 +312,13 @@ func create_new_icon():
 	newicon = icons.instantiate()
 	add_child(newicon)
 	newicon.position.y = -40
-	
+	newicon.visible = false
 	newicon.connect("animation_finished", done_thinking)
 
 func create_new_talk_range():
 	newtalkrange = talkrange.instantiate()
 	add_child(newtalkrange)
-	newtalkrange.connect("body_shape_entered", talk_to_player_in_range)
+	newtalkrange.connect("body_entered", talk_to_player_in_range)
 	newtalkrange.connect("body_shape_exited", player_left)
 	newtalkrange.connect("input_event", _on_talkrange_input_event)
 
@@ -343,3 +340,19 @@ func _on_timer_timeout():
 		$NavAgent.target_position = global_position + Vector2(rand_x, rand_y)
 	else:
 		$NavAgent.target_position = home_point
+
+
+func _on_hitbox_mouse_entered():
+	newicon.visible = true
+	newicon.play("talk")
+
+func _on_hitbox_mouse_exited():
+	if state != STATE_WAITING:
+		newicon.visible = false
+
+
+func _on_hitbox_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton && event.pressed):
+		state = STATE_WAITING
+		create_new_talk_range()
+		print("Waiting for player")

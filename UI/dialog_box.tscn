@@ -1,10 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://didmsr7pkxpdo"]
+[gd_scene load_steps=7 format=3 uid="uid://didmsr7pkxpdo"]
 
 [ext_resource type="Texture2D" uid="uid://dfrc3qdqwfy5o" path="res://dialogbox.png" id="1_u83m1"]
 [ext_resource type="Script" path="res://dialog_box.gd" id="2_v1hyh"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="3_pnt3y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yyofm"]
+font = ExtResource("3_pnt3y")
+font_size = 25
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.290196)
+shadow_offset = Vector2(1.42, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_368p6"]
+font = ExtResource("3_pnt3y")
+font_size = 25
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 0.290196)
+shadow_offset = Vector2(1.42, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8te5e"]
 font = ExtResource("3_pnt3y")
 font_size = 25
 outline_size = 8
@@ -50,3 +68,46 @@ autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Option1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 940.0
+offset_bottom = 67.0
+
+[node name="Label" type="Label" parent="Option1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_368p6")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Option2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 65.0
+offset_right = 940.0
+offset_bottom = 110.0
+
+[node name="Label" type="Label" parent="Option2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_8te5e")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="mouse_entered" from="Option1" to="." method="_on_option_1_mouse_entered"]
+[connection signal="mouse_exited" from="Option1" to="." method="_on_option_1_mouse_exited"]
+[connection signal="pressed" from="Option1" to="." method="_on_option_1_pressed"]
+[connection signal="mouse_entered" from="Option2" to="." method="_on_option_2_mouse_entered"]
+[connection signal="mouse_exited" from="Option2" to="." method="_on_option_2_mouse_exited"]
+[connection signal="pressed" from="Option2" to="." method="_on_option_2_pressed"]

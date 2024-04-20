@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cr86dmeiels6i"]
+[gd_scene load_steps=20 format=3 uid="uid://cr86dmeiels6i"]
 
 [ext_resource type="Script" path="res://UI/areabook.gd" id="1_k23jo"]
 [ext_resource type="FontFile" uid="uid://dnmy7ldc7vnwq" path="res://fonts/bpdots.squares-bold.otf" id="2_g5n52"]
@@ -41,6 +41,10 @@ font = ExtResource("2_g5n52")
 [sub_resource type="Theme" id="Theme_kcqk0"]
 default_font = ExtResource("2_g5n52")
 default_font_size = 20
+
+[sub_resource type="Theme" id="Theme_fqlqe"]
+default_font = ExtResource("2_g5n52")
+default_font_size = 30
 
 [sub_resource type="Theme" id="Theme_rk78g"]
 default_font = ExtResource("2_g5n52")
@@ -391,7 +395,7 @@ custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/Missionaries"]
-custom_minimum_size = Vector2(330, 0)
+custom_minimum_size = Vector2(340, 30)
 layout_mode = 2
 text = "Elder Barton & Elder Anderson"
 label_settings = SubResource("LabelSettings_5y7n6")
@@ -399,6 +403,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="CurrentLevel" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(320, 50)
 layout_mode = 2
 columns = 2
@@ -420,8 +425,31 @@ label_settings = SubResource("LabelSettings_05v3t")
 horizontal_alignment = 1
 
 [node name="XPBar" type="ProgressBar" parent="ColorRect/Progress/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = SubResource("Theme_kcqk0")
+
+[node name="Tasks" type="GridContainer" parent="ColorRect/Progress/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/Progress/VBoxContainer/Tasks"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+text = "  Tasks:"
+label_settings = SubResource("LabelSettings_5y7n6")
+
+[node name="MenuButton" type="MenuButton" parent="ColorRect/Progress/VBoxContainer/Tasks"]
+layout_mode = 2
+theme = SubResource("Theme_fqlqe")
+theme_override_font_sizes/font_size = 18
+text = "Contact Referral"
+flat = false
+item_count = 2
+popup/item_0/text = "Contact your referral Jeremy Walkerman"
+popup/item_0/checkable = 2
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/id = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
 layout_mode = 0

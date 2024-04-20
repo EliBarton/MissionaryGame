@@ -15,7 +15,7 @@ var spiritual_resilience = 0
 @export var apply_sr = true
 var target_pos = Vector2()
 var stop_distance = 30.0
-var follow_speed = 140.0
+var follow_speed = 110.0
 const ACCELERATION = 800.0
 
 func _ready():
@@ -45,7 +45,7 @@ func _physics_process(delta):
 	if velocity != Vector2.ZERO:
 		move_and_slide()
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot") and $Camera.mouse_position.distance_to(to_local(get_global_mouse_position())) < 5:
 		$NavAgent.target_position = get_global_mouse_position()
 
 
@@ -81,7 +81,8 @@ func lose_sr(amount):
 			negative_sr = true
 	
 
-
+func stop_moving():
+	$NavAgent.target_position = global_position + to_local($NavAgent.get_next_path_position()).normalized()*stop_distance
 
 
 

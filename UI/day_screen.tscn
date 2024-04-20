@@ -136,6 +136,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="CurrentLevel" type="GridContainer" parent="Control"]
+visible = false
 custom_minimum_size = Vector2(320, 50)
 layout_mode = 0
 offset_top = 98.0
@@ -160,6 +161,7 @@ label_settings = SubResource("LabelSettings_rhh28")
 horizontal_alignment = 1
 
 [node name="XPBar" type="ProgressBar" parent="Control"]
+visible = false
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 0
 offset_top = 138.0

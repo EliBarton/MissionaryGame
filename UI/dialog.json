@@ -17,9 +17,12 @@
 		"That's all for now, you will continue to learn in the field.",
 		"Get in the plane to leave for your mission. God Bless!"
 	],
-	"newperson1": [
-		"Hello! This thing that you gave me is really cool. Could you tell me more?",
-		"Here is my contact information."
+	"stranger1": [
+		"???: Hello! What is up?",
+		"$: We are sharing a message about Jesus Christ. Would you like to hear it?",
+		"???: Not today.",
+		"$: How about tomorrow?",
+		"???: No."
 	],
 	"followup1": [
 		"Hey Elders, I did that thing that you asked me to, it was great! What's next?"
