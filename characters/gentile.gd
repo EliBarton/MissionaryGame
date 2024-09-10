@@ -164,7 +164,7 @@ func loved_it():
 		areabook._on_person_record_pressed(first_name, last_name, location, level, xp, acceptance_factor, pamphletInvite, bomInvite, churchInvite, baptismInvite)
 	#newicon.pause()
 	if not person_record:
-		create_new_talk_range()
+		#create_new_talk_range()
 		state = STATE_INTERESTED
 	else:
 		state = STATE_FRIEND
@@ -173,8 +173,9 @@ func loved_it():
 func talk_to_player_in_range(body):
 	if body.has_method("missionary"):
 		print("talking to player")
-		create_dialog_box("stranger1")
+		create_dialog_box("stranger2")
 		body.stop_moving()
+		loved_it()
 
 func player_left(i, body, ign, ignore):
 	if body.has_method("missionary"):
@@ -317,7 +318,7 @@ func create_new_icon():
 
 func create_new_talk_range():
 	newtalkrange = talkrange.instantiate()
-	add_child(newtalkrange)
+	call_deferred("add_child", newtalkrange)
 	newtalkrange.connect("body_entered", talk_to_player_in_range)
 	newtalkrange.connect("body_shape_exited", player_left)
 	newtalkrange.connect("input_event", _on_talkrange_input_event)
@@ -326,7 +327,7 @@ func load_profile():
 	create_new_person_record()
 	create_new_icon()
 	newicon.play("love")
-	create_new_talk_range()
+	#create_new_talk_range()
 	global.connect("update_commitments", new_day)
 	$Name.set_text(first_name + " " + last_name)
 

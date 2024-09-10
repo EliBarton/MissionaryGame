@@ -24,6 +24,12 @@
 		"$: How about tomorrow?",
 		"???: No."
 	],
+	"stranger2": [
+		"???: Hello! What is up?",
+		"$: We are sharing a message about Jesus Christ. Would you like to hear it?",
+		"???: Yes I do.",
+		"$: Ok cool, what is your name?",
+	],
 	"followup1": [
 		"Hey Elders, I did that thing that you asked me to, it was great! What's next?"
 	],
