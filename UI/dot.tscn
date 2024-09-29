@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://p5lb2wfiiu7v"]
+[gd_scene load_steps=5 format=3 uid="uid://p5lb2wfiiu7v"]
 
 [ext_resource type="Texture2D" uid="uid://egs1th0ltsbb" path="res://dot.png" id="1_pofla"]
 [ext_resource type="Script" path="res://UI/dot.gd" id="1_rpgjm"]
+[ext_resource type="Shader" path="res://UI/ouline.gdshader" id="1_v5fpl"]
 
-[node name="Dot" type="Sprite2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bsr3"]
+shader = ExtResource("1_v5fpl")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 1.5
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[node name="CanvasGroup" type="CanvasGroup"]
 z_index = 1
+material = SubResource("ShaderMaterial_4bsr3")
+
+[node name="Dot" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_pofla")
 script = ExtResource("1_rpgjm")
