@@ -123,7 +123,7 @@ func done_thinking():
 			acceptance_factor = acceptance_factor * .5
 			if person_record:
 				areabook._on_person_record_pressed(first_name, last_name, location,
-			 level, xp, acceptance_factor)
+			 level, xp, acceptance_factor, null, null, null, null)
 			newrejection = rejectionrange.instantiate()
 			add_child(newrejection)
 			newrejection.connect("body_shape_entered", reject_player_in_range)
@@ -226,6 +226,8 @@ func update_record():
 		person_record._on_pressed()
 
 func new_day():
+	if not newicon:
+		create_new_icon()
 	newicon.play("love")
 	randomize()
 	var randnum = randf_range(0, level)
