@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhlyk"]
 resource_local_to_scene = true
-size = Vector2(20, 30)
+size = Vector2(20, 40)
 
 [sub_resource type="Theme" id="Theme_iqtxl"]
 default_font = ExtResource("2_iuem6")

@@ -15,7 +15,7 @@ var love = false
 var talkmode = false
 var teachmode = false
 var newtalkrange = null
-var level = 10
+var level = 1
 var xp : int = 0
 var xp_total = 0
 var person_record
