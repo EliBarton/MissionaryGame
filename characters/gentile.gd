@@ -20,7 +20,7 @@ var xp : int = 0
 var xp_total = 0
 var person_record
 var location = Vector2()
-@export var acceptance_factor = 0.95
+@export var acceptance_factor = 0.51
 var new_person = false
 var last_taught_day = 0
 var kept_last_commitment = false
