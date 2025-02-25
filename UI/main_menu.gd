@@ -74,3 +74,4 @@ func _on_load_game_pressed():
 func _on_back_button_pressed():
 	$AnimationPlayer.play_backwards()
 	enable_main_buttons()
+
