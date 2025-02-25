@@ -80,3 +80,7 @@ func _on_go_home_button_pressed():
 func _on_button_menu_pressed():
 	change_screen()
 	menu.visible = true
+
+
+func _on_main_menu_button_pressed():
+	get_tree().change_scene_to_file("res://UI/main_menu.tscn")

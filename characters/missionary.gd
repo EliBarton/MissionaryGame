@@ -12,7 +12,16 @@ var movable = true
 @onready var global = get_node("/root/Game Master")
 @onready var RSBar = get_parent().get_node("UI/RSBar")
 var spiritual_resilience = 0
+var target_pos = Vector2()
+var stop_distance = 30.0
+var follow_speed = 110.0
+const ACCELERATION = 800.0
 @export var apply_sr = true
+
+var is_dragging := false
+var drag_start_pos := Vector2.ZERO
+var drag_threshold := 10.0
+var drag_start_player_pos := Vector2.ZERO
 
 func _ready():
 	if apply_sr:
@@ -21,39 +30,59 @@ func _ready():
 		RSBar.value = spiritual_resilience
 
 func _physics_process(delta):
-	# Get the input direction and handle the movement/deceleration.
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("east") - Input.get_action_strength("west")
-	input_vector.y = Input.get_action_strength("south") - Input.get_action_strength("north")
-	input_vector = input_vector.normalized()
-	var movementspeed = SPEED + (500*Worldwide.cardio)
-	if input_vector and movable:
-		velocity = input_vector * movementspeed * delta
-		if apply_sr:
-			lose_sr(Vector2(0, 0).distance_to(velocity)/2000.0)
-	else:
-		velocity -= velocity*10 * delta
+	target_pos = $NavAgent.get_final_position()
+	var direction = to_local($NavAgent.get_next_path_position()).normalized()
+	var distance = global_position.distance_to(target_pos)
 	
+	if distance > stop_distance:
+		velocity = velocity.move_toward(direction * follow_speed, ACCELERATION * delta)
+		if apply_sr:
+			lose_sr(0.1)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, ACCELERATION * delta * 0.5)
 	#Handle the sprite animation
-	if input_vector.length() != 0:
-		var angle = wrapi(int(input_vector.angle() / (PI/4)), 0, 8)
+	if velocity != Vector2.ZERO:
+		var angle = wrapi(ceil(direction.angle() / (PI/4)), 0, 8)
 		$Sprite.play(str(angle))
 	else:
 		$Sprite.frame = 0
 		$Sprite.pause()
+	if velocity != Vector2.ZERO:
+		move_and_slide()
 
-	move_and_slide()
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			drag_start_pos = get_global_mouse_position()
+			drag_start_player_pos = global_position
+			is_dragging = true
+		else:
+			is_dragging = false
+			var drag_end_pos = get_global_mouse_position()
+			var player_movement = global_position - drag_start_player_pos
+			var adjusted_drag_end_pos = drag_end_pos - player_movement
+			var drag_distance = drag_start_pos.distance_to(adjusted_drag_end_pos)
+			
+			if drag_distance < drag_threshold:
+				# Short click: Move to position
+				$NavAgent.target_position = drag_end_pos
+			else:
+				# Drag: Throw projectile
+				$Muzzle.rotation = drag_start_pos.direction_to(drag_end_pos).angle()
+				throw_book()
 
-func _process(_delta):
+func throw_book():
+	if not talkmode:
+		var newbook = book.instantiate()
+		get_parent().add_child(newbook)
+		newbook.global_transform = $Muzzle.global_transform
+	else:
+		pass
+
+func _process(delta):
 	#Handle the throwing of the teaching material
 	$Muzzle.look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("shoot") and $Camera.mouse_position.distance_to(to_local(get_global_mouse_position())) < 5:
-		if not talkmode:
-			var newbook = book.instantiate()
-			get_parent().add_child(newbook)
-			newbook.global_transform = $Muzzle.global_transform
-		else:
-			pass
+	
 	if apply_sr:
 		RSBar.value = lerp(RSBar.value, float(spiritual_resilience), .1)
 
@@ -66,6 +95,7 @@ func new_day():
 	RSBar.value = spiritual_resilience
 	negative_sr = false
 	movable = true
+	stop_moving()
 
 func received_material(type):
 	if type == 1:
@@ -87,7 +117,8 @@ func lose_sr(amount):
 			negative_sr = true
 	
 
-
+func stop_moving():
+	$NavAgent.target_position = global_position + to_local($NavAgent.get_next_path_position()).normalized()*stop_distance
 
 
 

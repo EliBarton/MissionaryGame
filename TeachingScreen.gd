@@ -202,3 +202,9 @@ func _on_becoming_pressed():
 
 func _on_back_button_pressed():
 	end_lesson(null)
+
+
+func _on_reset_button_pressed():
+	Worldwide.numwrong = 0
+	reset_text()
+	create_game()
