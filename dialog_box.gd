@@ -39,17 +39,20 @@ func show_next_line():
 		emit_signal("finished")
 		queue_free()
 
-func _process(_delta):
-	if not disabled:
-		if $Timer.is_stopped():
-			if waiting_for_click:
-				if closable:
-					if Input.is_action_just_pressed("shoot"):
-						show_next_line()
-				else:
-					if Input.is_action_just_pressed("shoot"):
-						print("next screen")
-						emit_signal("finished")
+func _unhandled_input(event):
+	if disabled:
+		return
+	if not $Timer.is_stopped():
+		return
+	if not waiting_for_click:
+		return
+	if event.is_action_pressed("shoot"):
+		if closable:
+			show_next_line()
+		else:
+			print("next screen")
+			emit_signal("finished")
+		accept_event()
 
 
 func _on_option_1_mouse_entered():

@@ -15,6 +15,7 @@ var love = false
 var talkmode = false
 var teachmode = false
 var newtalkrange = null
+var dialog_active = false
 var level = 10
 var xp : int = 0
 var xp_total = 0
@@ -172,10 +173,19 @@ func loved_it():
 
 func talk_to_player_in_range(body):
 	if body.has_method("missionary"):
+		if dialog_active:
+			return
+		if state != STATE_STRANGER:
+			return
 		print("talking to player")
 		create_dialog_box("stranger2")
 		body.stop_moving()
 		loved_it()
+		if newtalkrange and is_instance_valid(newtalkrange):
+			newtalkrange.disconnect("body_entered", talk_to_player_in_range)
+			newtalkrange.disconnect("body_shape_exited", player_left)
+			newtalkrange.queue_free()
+			newtalkrange = null
 
 func player_left(i, body, ign, ignore):
 	if body.has_method("missionary"):
@@ -294,6 +304,9 @@ func level_up():
 	areabook.get_node("ColorRect/PersonRecord/PersonInfo/CurrentLevel/Level").set_text(str(level))
 
 func create_dialog_box(text_code):
+	if dialog_active:
+		return
+	dialog_active = true
 	var new_dialog = dialog_box.instantiate()
 	global.get_node("UI").add_child(new_dialog)
 	#new_dialog.scale = new_dialog.scale / $Missionary/Camera2D.zoom
@@ -302,6 +315,7 @@ func create_dialog_box(text_code):
 	global.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 
 func on_dialog_finished():
+	dialog_active = false
 	global.call_deferred("set_process_mode", Node.PROCESS_MODE_ALWAYS)
 	areabook._on_button_people_pressed()
 
@@ -317,6 +331,8 @@ func create_new_icon():
 	newicon.connect("animation_finished", done_thinking)
 
 func create_new_talk_range():
+	if newtalkrange and is_instance_valid(newtalkrange):
+		return
 	newtalkrange = talkrange.instantiate()
 	call_deferred("add_child", newtalkrange)
 	newtalkrange.connect("body_entered", talk_to_player_in_range)
@@ -354,6 +370,10 @@ func _on_hitbox_mouse_exited():
 
 func _on_hitbox_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
+		if dialog_active:
+			return
+		if newtalkrange and is_instance_valid(newtalkrange):
+			return
 		state = STATE_WAITING
 		create_new_talk_range()
 		print("Waiting for player")
