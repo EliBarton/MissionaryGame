@@ -137,7 +137,7 @@ func create_game():
 	$DragandDrop/TextContainer/Label2.visible = false
 
 func create_reference_quiz():
-	"""Reference identification game - show quote and ask for correct reference"""
+	# Reference identification game - show quote and ask for correct reference
 	# Hide drag and drop elements
 	$DragandDrop/Reference.visible = false
 	$DragandDrop/TextContainer.visible = false
@@ -213,7 +213,7 @@ func create_reference_quiz():
 		quiz_buttons.append(button)
 
 func _on_quiz_button_pressed(selected_reference):
-	"""Handle quiz button click"""
+	# Handle quiz button click
 	if selected_reference == correct_reference:
 		# Correct answer - show invitation screen
 		for btn in quiz_buttons:
