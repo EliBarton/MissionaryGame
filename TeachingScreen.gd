@@ -150,6 +150,11 @@ func create_reference_quiz():
 		return
 	
 	var scripture_keys = current_lesson_data.keys()
+	if scripture_keys.size() < 4:
+		# Not enough scriptures for quiz, fall back to fill-in-blank game
+		create_game()
+		return
+	
 	var correct_key = scripture_keys[randi_range(0, scripture_keys.size() - 1)]
 	var correct_scripture = current_lesson_data[correct_key]
 	correct_reference = correct_scripture[0]
@@ -207,30 +212,30 @@ func create_reference_quiz():
 		if question_font:
 			button.add_theme_font_override("font", question_font)
 			button.add_theme_font_size_override("font_size", 18)
+		# Store the reference in metadata for exact matching
+		button.set_meta("reference", answer_options[i])
 		$DragandDrop.add_child(button)
 		button.position = Vector2(50, button_y + i * 60)
-		button.pressed.connect(_on_quiz_button_pressed.bind(answer_options[i]))
+		button.pressed.connect(_on_quiz_button_pressed.bind(button))
 		quiz_buttons.append(button)
 
-func _on_quiz_button_pressed(selected_reference):
+func _on_quiz_button_pressed(clicked_button):
 	# Handle quiz button click
+	var selected_reference = clicked_button.get_meta("reference")
+	
 	if selected_reference == correct_reference:
-		# Correct answer - show invitation screen
+		# Correct answer - disable all buttons and show visual feedback
 		for btn in quiz_buttons:
 			btn.disabled = true
-		# Visual feedback - change color to green
-		for btn in quiz_buttons:
-			if btn.text.contains(correct_reference):
+			if btn.get_meta("reference") == correct_reference:
 				btn.modulate = Color(0.5, 1.0, 0.5)  # Green
 		await get_tree().create_timer(0.5).timeout
 		$DragandDrop/Invitation.visible = true
 	else:
-		# Wrong answer - show feedback
-		for btn in quiz_buttons:
-			if btn.text.contains(selected_reference):
-				btn.modulate = Color(1.0, 0.5, 0.5)  # Red
-				await get_tree().create_timer(0.5).timeout
-				btn.modulate = Color(1.0, 1.0, 1.0)  # Reset color
+		# Wrong answer - show feedback on clicked button only
+		clicked_button.modulate = Color(1.0, 0.5, 0.5)  # Red
+		await get_tree().create_timer(0.5).timeout
+		clicked_button.modulate = Color(1.0, 1.0, 1.0)  # Reset color
 
 func reset():
 	reset_text()
