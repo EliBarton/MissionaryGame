@@ -12,6 +12,12 @@ var labels = []
 var dropables = []
 var dragables = []
 var checkifcorrect = false
+# Quiz game variables
+var quiz_buttons = []
+var correct_reference = ""
+var quiz_question_label = null
+var quiz_quote_label = null
+var current_lesson_data = null
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Top/DialogBox.disabled = true
@@ -63,6 +69,7 @@ func load_file(file):
 	#Loads JSON files
 	var f = FileAccess.open(file, FileAccess.READ)
 	var library = JSON.parse_string(f.get_as_text())
+	current_lesson_data = library  # Store for quiz game
 	var rand_list = library[str(randi_range(1, library.size()))].duplicate()
 	var reference = rand_list[0]
 	var quote = rand_list[1]
@@ -74,6 +81,7 @@ func create_game():
 	#get_tree().paused = true
 	$DragandDrop/Reference.visible = true
 	$DragandDrop/TextContainer.visible = true
+	$DragandDrop/GridContainer.visible = true
 	$DragandDrop/Invitation.visible = false
 	checkifcorrect = true
 	difficulty = base_difficulty
@@ -128,6 +136,107 @@ func create_game():
 	
 	$DragandDrop/TextContainer/Label2.visible = false
 
+func create_reference_quiz():
+	# Reference identification game - show quote and ask for correct reference
+	# Hide drag and drop elements
+	$DragandDrop/Reference.visible = false
+	$DragandDrop/TextContainer.visible = false
+	$DragandDrop/GridContainer.visible = false
+	$DragandDrop/Invitation.visible = false
+	checkifcorrect = false
+	
+	# Get a random scripture from current lesson data
+	if current_lesson_data == null:
+		return
+	
+	var scripture_keys = current_lesson_data.keys()
+	if scripture_keys.size() < 4:
+		# Not enough scriptures for quiz, fall back to fill-in-blank game
+		create_game()
+		return
+	
+	var correct_key = scripture_keys[randi_range(0, scripture_keys.size() - 1)]
+	var correct_scripture = current_lesson_data[correct_key]
+	correct_reference = correct_scripture[0]
+	var quote = correct_scripture[1]
+	
+	# Generate wrong answers from other scriptures in same lesson
+	var wrong_references = []
+	for key in scripture_keys:
+		if key != correct_key:
+			wrong_references.append(current_lesson_data[key][0])
+	
+	# Shuffle and pick 3 wrong answers
+	wrong_references.shuffle()
+	var answer_options = [correct_reference]
+	for i in range(min(3, wrong_references.size())):
+		answer_options.append(wrong_references[i])
+	
+	# Shuffle all options
+	answer_options.shuffle()
+	
+	# Create question label
+	quiz_question_label = Label.new()
+	quiz_question_label.text = "What is the reference for this scripture?"
+	quiz_question_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	quiz_question_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	var question_font = load("res://fonts/bpdots.squares-bold.otf")
+	if question_font:
+		quiz_question_label.add_theme_font_override("font", question_font)
+		quiz_question_label.add_theme_font_size_override("font_size", 24)
+	$DragandDrop.add_child(quiz_question_label)
+	quiz_question_label.position = Vector2(50, 100)
+	quiz_question_label.size = Vector2(650, 50)
+	
+	# Create quote label
+	quiz_quote_label = Label.new()
+	quiz_quote_label.text = '"' + quote + '"'
+	quiz_quote_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	quiz_quote_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+	quiz_quote_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	if question_font:
+		quiz_quote_label.add_theme_font_override("font", question_font)
+		quiz_quote_label.add_theme_font_size_override("font_size", 20)
+	$DragandDrop.add_child(quiz_quote_label)
+	quiz_quote_label.position = Vector2(50, 160)
+	quiz_quote_label.size = Vector2(650, 240)
+	
+	# Create buttons for each option
+	var button_labels = ["A", "B", "C", "D"]
+	var button_y = 420
+	
+	for i in range(answer_options.size()):
+		var button = Button.new()
+		button.text = button_labels[i] + ". " + answer_options[i]
+		button.custom_minimum_size = Vector2(650, 50)
+		if question_font:
+			button.add_theme_font_override("font", question_font)
+			button.add_theme_font_size_override("font_size", 18)
+		# Store the reference in metadata for exact matching
+		button.set_meta("reference", answer_options[i])
+		$DragandDrop.add_child(button)
+		button.position = Vector2(50, button_y + i * 60)
+		button.pressed.connect(_on_quiz_button_pressed.bind(button))
+		quiz_buttons.append(button)
+
+func _on_quiz_button_pressed(clicked_button):
+	# Handle quiz button click
+	var selected_reference = clicked_button.get_meta("reference")
+	
+	if selected_reference == correct_reference:
+		# Correct answer - disable all buttons and show visual feedback
+		for btn in quiz_buttons:
+			btn.disabled = true
+			if btn.get_meta("reference") == correct_reference:
+				btn.modulate = Color(0.5, 1.0, 0.5)  # Green
+		await get_tree().create_timer(0.5).timeout
+		$DragandDrop/Invitation.visible = true
+	else:
+		# Wrong answer - show feedback on clicked button only
+		clicked_button.modulate = Color(1.0, 0.5, 0.5)  # Red
+		await get_tree().create_timer(0.5).timeout
+		clicked_button.modulate = Color(1.0, 1.0, 1.0)  # Reset color
+
 func reset():
 	reset_text()
 	$DragandDrop/LessonToTeach.visible = true
@@ -146,6 +255,16 @@ func reset_text():
 	labels.clear()
 	dropables.clear()
 	dragables.clear()
+	# Clean up quiz game elements
+	for btn in quiz_buttons:
+		btn.queue_free()
+	quiz_buttons.clear()
+	if quiz_question_label != null:
+		quiz_question_label.queue_free()
+		quiz_question_label = null
+	if quiz_quote_label != null:
+		quiz_quote_label.queue_free()
+		quiz_quote_label = null
 
 func all_words_correct():
 	checkifcorrect = false
@@ -184,7 +303,13 @@ func start_lesson(lesson):
 			load_file(lesson1file)
 		1:
 			load_file(lesson2file)
-	create_game()
+	
+	# Randomly choose game type (50/50 chance)
+	var game_type = randi() % 2
+	if game_type == 0:
+		create_game()  # Fill-in-the-blank
+	else:
+		create_reference_quiz()  # Reference identification
 
 func _on_restoration_pressed():
 	start_lesson(0)
